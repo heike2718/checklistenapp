@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
+import { MessagesComponent } from './messages/messages.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -19,7 +20,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

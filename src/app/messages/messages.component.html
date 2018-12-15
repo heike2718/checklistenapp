@@ -1,0 +1,18 @@
+<div class="row alert alert-info" *ngIf="(info$ | async)">
+  <div class="col-xs-10 col-sm-11">{{info$ | async}}</div>
+  <div class="col-xs-2 col-sm-1">
+    <button class="btn btn-link" (click)="closeInfo()">&times;</button>
+  </div>
+</div>
+<div class="row alert alert-warning" *ngIf="warn$ | async">
+  <div class="col-xs-10 col-sm-11">{{warn$ |async}}</div>
+  <div class="col-xs-2 col-sm-1">
+    <button class="btn btn-link" (click)="closeWarn()">&times;</button>
+  </div>
+</div>
+<div class="row alert alert-danger" *ngIf="(error$ | async)">
+  <div class="col-xs-10 col-sm-11">{{error$ | async}}</div>
+  <div class="col-xs-2 col-sm-1">
+    <button class="btn btn-link" (click)="closeErrors()">&times;</button>
+  </div>
+</div>
