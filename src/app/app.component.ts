@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'chl-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'checklistenapp';
+
+  version = environment.version;
+  envName = environment.envName;
+  showEnv = !environment.production;
+  api = environment.apiUrl;
+
 }
