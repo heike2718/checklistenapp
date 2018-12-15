@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
 import { MessagesComponent } from './messages/messages.component';
+import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -21,7 +22,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
   declarations: [
     AppComponent,
     NavbarComponent,
-    MessagesComponent
+    MessagesComponent,
+    ChecklistenListeComponent
   ],
   imports: [
     BrowserModule,

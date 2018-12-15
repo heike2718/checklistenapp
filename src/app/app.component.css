@@ -1,19 +1,4 @@
-.l-header {
-    display: block;
+.item-name {
+    font-size: 14;
 }
 
-main {
-    padding-top: 50px;
-    margin: 0 auto;
-    width: 300px;
-}
-
-.card-header {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-.card-header h3 {
-    text-align: center;
-}

@@ -1,13 +1,32 @@
 <div class="container-fluid">
   <chl-navbar></chl-navbar>
   <chl-messages></chl-messages>
-  <router-outlet></router-outlet>
-</div>
 
-<footer>
-  <div class="row">
-    <div class="col-md-4 text-md-left">&copy; Heike Winkelvo&szlig;</div>
-    <div class="col-md-4 text-xs-center">{{envName}}, API: {{api}}</div>
-    <div class="col-md-4 text-md-right">Version {{version}}</div>
-  </div>
-</footer>
+  <h1>22.12.2018 abarbeiten</h1>
+  <h3>2 von 8 erledigt</h3>
+
+
+  <table class="table table-bordered">
+    <tr *ngFor="let i of stack1">
+      <td><h5>{{i}}</h5></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <h3>fertige Punkte  <i class="fa fa-check-square fa-1x"></i></h3>
+
+  <table class="table table-bordered bg-light">
+    <tr *ngFor="let i of stack2">
+      <td><h5>{{i}}</h5></td>
+      <td>Kommentar</td>
+    </tr>
+  </table>
+
+  <router-outlet></router-outlet>
+  <footer>
+    <div class="row">
+      <div class="col-md-4 text-md-left">&copy; Heike Winkelvo&szlig;</div>
+      <div class="col-md-4 text-xs-center">{{envName}}, API: {{api}}</div>
+      <div class="col-md-4 text-md-right">Version {{version}}</div>
+    </div>
+  </footer>

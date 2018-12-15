@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  version: '1.7.0-DEV',
+  version: '1.0.0',
   envName: 'Development',
   apiUrl: 'http://localhost:9300/checklisten-api',
   isDebugMode: true
