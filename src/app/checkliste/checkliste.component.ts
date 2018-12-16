@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS } from '../../shared/model/checkliste';
+import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS } from '../shared/model/checkliste';
 
 @Component({
   selector: 'chl-checkliste',
@@ -19,10 +19,13 @@ export class ChecklisteComponent implements OnInit {
 
   get classes() {
 
+    // die styles referenzieren auf ein custom *.css-File, hier auf checkliste-component.css.
+    // Mit true werden sie im Element dem classes-Attribut hinzugefügt.
+
     const cssClasses = {};
 
     if (this.typ) {
-       switch (this.typ) {
+      switch (this.typ) {
         case EINKAUFSLISTE:
           cssClasses['card-einkaufsliste'] = true;
           break;

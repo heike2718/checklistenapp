@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 import { MessagesComponent } from './messages/messages.component';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
 import { ChecklistenitemComponent } from './checkliste-detail/checklistenitem.component';
-import { ChecklisteComponent } from './checkliste/checkliste/checkliste.component';
+import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { HttpModule } from '@angular/http';
 import { ChecklisteDetailComponent } from './checkliste-detail/checkliste-detail.component';
 
