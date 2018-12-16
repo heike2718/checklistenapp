@@ -1,3 +1,5 @@
-<p>
-  checklisten-liste works!
-</p>
+<div class="row" *ngIf="checklisten$ | async">
+  <div *ngFor="let liste of checklisten$ | async" class="col-sm-12 col-md-4 col-lg-3">
+    <chl-checkliste [checkliste]="liste" [typ]="liste.typ"></chl-checkliste>
+  </div>
+</div>

@@ -10,6 +10,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
 import { MessagesComponent } from './messages/messages.component';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
+import { ChecklistenitemComponent } from './items/checklistenitem/checklistenitem.component';
+import { ChecklisteComponent } from './checkliste/checkliste/checkliste.component';
+import { HttpModule } from '@angular/http';
+import { ChecklisteDetailComponent } from './checkliste-detail/checkliste-detail.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -23,11 +27,15 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     AppComponent,
     NavbarComponent,
     MessagesComponent,
-    ChecklistenListeComponent
+    ChecklistenListeComponent,
+    ChecklistenitemComponent,
+    ChecklisteComponent,
+    ChecklisteDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule,
     NgLoggerModule.forRoot(LOG_LEVEL),
     NgbModule.forRoot(),
     NgbCollapseModule,

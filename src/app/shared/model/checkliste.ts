@@ -15,7 +15,7 @@ export interface ChecklisteDaten {
     kuerzel?: string;
     name?: string;
     typ: string;
-    items: ChecklistenItem[];
+    items?: ChecklistenItem[];
 }
 
 
