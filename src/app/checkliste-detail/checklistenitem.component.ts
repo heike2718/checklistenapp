@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChecklistenItem } from '../../shared/model/checkliste';
+import { ChecklistenItem } from '../shared/model/checkliste';
 
 @Component({
   selector: 'chl-checklistenitem',
