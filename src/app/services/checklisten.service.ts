@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable, pipe, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, publishLast, refCount } from 'rxjs/operators';
 import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 
@@ -82,7 +82,9 @@ export class ChecklistenService {
     const url = environment.apiUrl + '/checklisten';
 
     // return this.http.get(url).pipe(
-    //   map(res => <ChecklisteDaten[]>res.json().data)
+    //   map(res => <ChecklisteDaten[]>res.json().data),
+    //   publishLast(),
+    //   refCount()
     // );
 
     return of(this.mockedChecklisten);

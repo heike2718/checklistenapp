@@ -20,9 +20,7 @@ export class MessagesService {
 
 
 
-  constructor() {
-    this.infoSubject.next('Info');
-  }
+  constructor() {}
 
   info(message: string) {
     this.infoSubject.next(message);
