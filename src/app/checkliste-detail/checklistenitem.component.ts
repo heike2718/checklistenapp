@@ -12,8 +12,16 @@ export class ChecklistenitemComponent implements OnInit {
   @Input()
   checklistenitem: ChecklistenItem;
 
+  @Input()
+  mitKommentar: boolean;
+
   constructor(private _logger: Logger) { }
 
   ngOnInit() {}
+
+  onClick(): void {
+    // TODO: event erzeugen, um parent component zu informieren
+    this._logger.debug('item ' + this.checklistenitem.name + ' geclicked');
+  }
 
 }

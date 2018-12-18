@@ -1,9 +1,7 @@
-<tr>
-  <td>
-    <p>{{checklistenitem?.name}}</p>
-  </td>
-  <td>
-    <span>{{checklistenitem?.kommentar}}</span>
-  </td>
-  <td>checkliste-detail.component.ts</td>
-</tr>
+<div *ngIf="!mitKommentar" class="row">
+  <div class="item-btn col-sm-12" (click)="onClick()">{{checklistenitem.name}}</div>
+</div>
+<div *ngIf="mitKommentar" class="row">
+  <div class="item-btn col-sm-4"  (click)="onClick()">{{checklistenitem.name}}</div>
+  <div class="item-data col-sm-8">{{checklistenitem.kommentar}}</div>
+</div>

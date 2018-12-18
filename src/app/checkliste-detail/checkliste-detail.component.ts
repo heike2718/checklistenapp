@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecklistenItem, ChecklisteDaten, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
-import { store, initialCheckliste } from '../store/app-data';
+import { store } from '../store/app-data';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'chl-checkliste-detail',
@@ -9,31 +10,18 @@ import { store, initialCheckliste } from '../store/app-data';
 })
 export class ChecklisteDetailComponent implements OnInit {
 
-  checkliste: ChecklisteDaten = initialCheckliste;
+  checkliste$: Observable<ChecklisteDaten>;
 
-  unbearbeiteteItems: ChecklistenItem[] = [];
+  bearbeiteteItems$: Observable<ChecklistenItem[]>;
 
-  bearbeiteteItems: ChecklistenItem[] = [];
+  unbearbeiteteItems$: Observable<ChecklistenItem[]>;
 
   constructor() { }
 
   ngOnInit() {
     // TODO: unsubscribe!!!!
-    store.gewaehlteCheckliste$.subscribe(
-      liste => this.checkliste = liste
-    );
-    store.unbearbeiteteItems$.subscribe(
-      items => this.unbearbeiteteItems = items
-    );
-    store.bearbeiteteItems$.subscribe(
-      items => this.bearbeiteteItems = items
-    );
-  }
-
-  isConfig(): boolean {
-    return this.checkliste.modus === MODUS_CONFIG;
-  }
-  isEdit(): boolean {
-    return this.checkliste.modus === MODUS_EDIT;
+    this.checkliste$ = store.gewaehlteCheckliste$;
+    this.bearbeiteteItems$ = store.bearbeiteteItems$;
+    this.unbearbeiteteItems$ = store.unbearbeiteteItems$;
   }
 }

@@ -16,28 +16,28 @@ export const initialCheckliste: ChecklisteDaten = {
 })
 export class DataStore {
 
-  private gewaehlteCheckliste = new BehaviorSubject<ChecklisteDaten>(initialCheckliste);
+  private gewaehlteChecklisteSubject = new BehaviorSubject<ChecklisteDaten>(initialCheckliste);
 
-  private checklisten = new BehaviorSubject<ChecklisteDaten[]>([]);
+  private checklistenSubject = new BehaviorSubject<ChecklisteDaten[]>([]);
 
-  private unbearbeiteteItems = new BehaviorSubject<ChecklistenItem[]>([]);
+  private unbearbeiteteItemsSubject = new BehaviorSubject<ChecklistenItem[]>([]);
 
-  private bearbeiteteItems = new BehaviorSubject<ChecklistenItem[]>([]);
+  private bearbeiteteItemsSubject = new BehaviorSubject<ChecklistenItem[]>([]);
 
-  gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteCheckliste.asObservable();
+  gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteChecklisteSubject.asObservable();
 
-  checklisten$: Observable<ChecklisteDaten[]> = this.checklisten.asObservable();
+  checklisten$: Observable<ChecklisteDaten[]> = this.checklistenSubject.asObservable();
 
-  unbearbeiteteItems$: Observable<ChecklistenItem[]> = this.unbearbeiteteItems.asObservable();
+  unbearbeiteteItems$: Observable<ChecklistenItem[]> = this.unbearbeiteteItemsSubject.asObservable();
 
-  bearbeiteteItems$: Observable<ChecklistenItem[]> = this.bearbeiteteItems.asObservable();
+  bearbeiteteItems$: Observable<ChecklistenItem[]> = this.bearbeiteteItemsSubject.asObservable();
 
 
 
   constructor() { }
 
   initChecklisten(alleChecklisten: ChecklisteDaten[]) {
-    this.checklisten.next(_.cloneDeep(alleChecklisten));
+    this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
   }
 
   updateCheckliste(checkliste: ChecklisteDaten) {
@@ -74,9 +74,9 @@ export class DataStore {
       }
     });
 
-    this.bearbeiteteItems.next(bearbeitet);
-    this.unbearbeiteteItems.next(unbearbeitet);
-    this.gewaehlteCheckliste.next(kopie);
+    this.bearbeiteteItemsSubject.next(bearbeitet);
+    this.unbearbeiteteItemsSubject.next(unbearbeitet);
+    this.gewaehlteChecklisteSubject.next(kopie);
   }
 }
 

@@ -1,22 +1,30 @@
 <p>checkliste-detail.component.ts</p>
 
-<h1>{{checkliste.name}}</h1>
-<h3 *ngIf="isEdit()">{{bearbeiteteItems.length}} von {{checkliste.items.length}} erledigt</h3>
-<h3 *ngIf="isConfig()">{{checkliste.items.length}} Dinge zu tun</h3>
+
+<div *ngIf="checkliste$ | async as checkliste">
+  <h1>{{checkliste.name}}
+    <span *ngIf="checkliste.modus === 'config'"> erstellen</span>
+    <span *ngIf="checkliste.modus === 'edit'"> abarbeiten</span>
+  </h1>
+
+  <div id="unbearbeitet" class="items-table" *ngIf="unbearbeiteteItems$ | async as unbearbeiteteItems else loadingCheckliste">
+    <div *ngFor="let item of unbearbeiteteItems">
+      <chl-checklistenitem *ngIf="checkliste.modus === 'edit'" [checklistenitem]="item" [mitKommentar]="true"></chl-checklistenitem>
+      <chl-checklistenitem *ngIf="checkliste.modus === 'config'" [checklistenitem]="item" [mitKommentar]="false"></chl-checklistenitem>
+    </div>
+  </div>
 
 
-<table class="table table-bordered" *ngFor="let item of unbearbeiteteItems">
-     <chl-checklistenitem [checklistenitem]="item"></chl-checklistenitem>
-</table>
+  <h3 *ngIf="checkliste.modus === 'edit'">erledigte Dinge</h3>
+  <h3 *ngIf="checkliste.modus === 'config'">vorgemerkte Dinge</h3>
 
-<h3 *ngIf="isEdit()">erledigte Dinge
-  <i class="fa fa-check-square fa-1x"></i>
-</h3>
-<h3 *ngIf="isConfig()">zu erledigende Dinge
-  <i class="fa fa-check-square fa-1x"></i>
-</h3>
+  <div id="bearbeitet" *ngIf="bearbeiteteItems$ | async as bearbeiteteItems else loadingCheckliste">
+    <div *ngFor="let item of bearbeiteteItems">
+      <chl-checklistenitem *ngIf="checkliste.modus === 'edit'" [checklistenitem]="item" [mitKommentar]="false"></chl-checklistenitem>
+      <chl-checklistenitem *ngIf="checkliste.modus === 'config'" [checklistenitem]="item" [mitKommentar]="true"></chl-checklistenitem>
+    </div>
+  </div>
 
-<table class="table table-bordered" *ngFor="let item of bearbeiteteItems">
-    <chl-checklistenitem [checklistenitem]="item"></chl-checklistenitem>
-</table>
-
+  <ng-template #loadingCheckliste>
+    <chl-loading></chl-loading>
+  </ng-template>

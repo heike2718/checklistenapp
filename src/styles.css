@@ -16,5 +16,28 @@ body {
 
 footer {
   position: relative;
-  margin-top: 100px;
+  margin-top: 150px;
+}
+
+/* === LISTE VON ITEMS === */
+#unbearbeitet,
+#bearbeitet {
+  padding: 15px 0 15px 10px;
+}
+
+/* === DIVS mit ITEM-Attributen ===*/
+.item-btn {
+  padding: 15px 10px 15px 10px;
+  background-color: bisque;
+  border  : solid 1px gray;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+.item-data {
+  padding: 15px 10px 15px 10px;
+  margin-bottom: 10px;
+  border-top: solid 1px gray;
+  border-right: solid 1px gray;
+  border-bottom: solid 1px gray;
 }

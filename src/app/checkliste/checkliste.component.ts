@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, MODUS_CONFIG } from '../shared/model/checkliste';
+import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
 import { Logger } from '@nsalaun/ng-logger';
 import { environment } from '../../environments/environment';
 
@@ -58,7 +58,7 @@ export class ChecklisteComponent implements OnInit {
   execute() {
     this.logger.debug('ChecklisteComponent.execute: this.checkliste=' + this.checkliste);
     if (this.checkliste.kuerzel) {
-      this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + this.checkliste.kuerzel);
+      this.router.navigateByUrl('/checkliste/' + MODUS_EDIT + '/' + this.checkliste.kuerzel);
     }
   }
 
