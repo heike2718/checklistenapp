@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { Message, ERROR } from '../shared/model/message';
-
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +17,6 @@ export class MessagesService {
   error$: Observable<string> = this.errorSubject.asObservable();
 
 
-
-  constructor() {}
 
   info(message: string) {
     this.infoSubject.next(message);

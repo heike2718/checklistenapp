@@ -2,6 +2,17 @@
   <div class="card-body">
     <h4 class="card-title">{{checkliste.name}}</h4>
     <p class="card-text">
-      <strong>Art: </strong>{{checkliste.typ}}</p>
+      {{checkliste.typ}}</p>
+    <p *ngIf="showFilename">checkliste.component.ts (Input: checkliste)</p>
+  </div>
+  <div class="card-footer">
+    <div class="row">
+      <div class="col-6">
+        <button class="btn-default btn-block" (click)="configure()">config</button>
+      </div>
+      <div class="col-6">
+        <button class="btn-default btn-block" (click)="execute()">exec</button>
+      </div>
+    </div>
   </div>
 </div>

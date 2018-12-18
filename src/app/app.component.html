@@ -1,10 +1,13 @@
 <div class="container-fluid">
   <chl-navbar></chl-navbar>
   <chl-messages></chl-messages>
+  <chl-loading></chl-loading>
 
   <!--TODO in route verschieben, damit es in router-outlet gepflantscht wird -->
-  <chl-checklisten-liste></chl-checklisten-liste>
-  <router-outlet></router-outlet>
+  <main>
+    <chl-checklisten-liste></chl-checklisten-liste>
+    <router-outlet></router-outlet>
+  </main>
   <footer>
     <div class="row">
       <div class="col-md-4 text-md-left">&copy; Heike Winkelvo&szlig;</div>
@@ -12,3 +15,4 @@
       <div class="col-md-4 text-md-right">Version {{version}}</div>
     </div>
   </footer>
+</div>

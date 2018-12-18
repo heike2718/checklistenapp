@@ -4,7 +4,7 @@ import { NgLoggerModule, Level } from '@nsalaun/ng-logger';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { routerConfig } from './router.config';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste
 import { ChecklistenitemComponent } from './checkliste-detail/checklistenitem.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { ChecklisteDetailComponent } from './checkliste-detail/checkliste-detail.component';
+import { LoadingComponent } from './loading/loading.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -32,7 +33,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ChecklistenListeComponent,
     ChecklistenitemComponent,
     ChecklisteComponent,
-    ChecklisteDetailComponent
+    ChecklisteDetailComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -13,11 +13,11 @@ export const routerConfig: Routes = [
     //     component: LoginComponent
     // },
     {
-        path: 'all-lessons',
+        path: 'all-listen',
         component: ChecklistenListeComponent
     },
     {
-        path: 'course/:kuerzel',
+        path: 'checkliste/:kuerzel',
         component: ChecklisteDetailComponent,
         resolve: {
             detail: ChecklisteDetailResolver

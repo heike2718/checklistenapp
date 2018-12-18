@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS } from '../shared/model/checkliste';
+import { Logger } from '@nsalaun/ng-logger';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'chl-checkliste',
@@ -11,8 +14,13 @@ export class ChecklisteComponent implements OnInit {
   @Input()
   checkliste: ChecklisteDaten;
 
-  @Input()
-  typ: string;
+  showFilename: boolean;
+
+  constructor(private router: Router, private logger: Logger) {
+    if (!environment.production) {
+      this.showFilename = true;
+    }
+  }
 
   ngOnInit(): void { }
 
@@ -24,8 +32,9 @@ export class ChecklisteComponent implements OnInit {
 
     const cssClasses = {};
 
-    if (this.typ) {
-      switch (this.typ) {
+    if (this.checkliste && this.checkliste.typ) {
+      const typ = this.checkliste.typ;
+      switch (typ) {
         case EINKAUFSLISTE:
           cssClasses['card-einkaufsliste'] = true;
           break;
@@ -39,5 +48,16 @@ export class ChecklisteComponent implements OnInit {
     }
     return cssClasses;
   }
+
+  configure() {
+    this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + this.checkliste);
+    if (this.checkliste.kuerzel) {
+      this.router.navigateByUrl('/checkliste/' + this.checkliste.kuerzel);
+    }
+  }
+  execute() {
+
+  }
+
 
 }

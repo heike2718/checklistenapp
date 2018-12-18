@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChecklistenService } from '../services/checklisten.service';
 import { Observable } from 'rxjs';
 import { ChecklisteDaten } from '../shared/model/checkliste';
+import { environment } from '../../environments/environment';
+import { store } from '../store/app-data';
 
 @Component({
   selector: 'chl-checklisten-liste',
@@ -12,9 +14,13 @@ export class ChecklistenListeComponent implements OnInit {
 
   checklisten$: Observable<ChecklisteDaten[]>;
 
-  constructor(private checklistenService: ChecklistenService) { }
+  showFilename = false;
+
+  constructor(private checklistenService: ChecklistenService) {
+    this.showFilename = !environment.production;
+  }
 
   ngOnInit() {
-    this.checklisten$ = this.checklistenService.findAllChecklisten();
+    this.checklisten$ = store.checklisten$;
   }
 }

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable, pipe, of } from 'rxjs';
 import { map, publishLast, refCount } from 'rxjs/operators';
-import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem } from '../shared/model/checkliste';
+import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODUS_SCHROEDINGER } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
+import { store } from '../store/app-data';
+import { Logger } from '@nsalaun/ng-logger';
 
 
 @Injectable({
@@ -40,44 +42,50 @@ export class ChecklistenService {
       markiert: true,
       optional: true,
       erledigt: false,
-      kommentar: 'vom Jens'
+      kommentar: 'vom Jens',
+      modus: MODUS_SCHROEDINGER
     },
     {
       name: 'Mülltüten',
       markiert: true,
       optional: false,
-      erledigt: true
+      erledigt: true,
+      modus: MODUS_SCHROEDINGER
     },
     {
       name: 'Lachs',
       markiert: true,
       optional: false,
-      erledigt: false
+      erledigt: false,
+      modus: MODUS_SCHROEDINGER
     },
     {
       name: 'Klopapier',
       markiert: true,
       optional: false,
-      erledigt: true
+      erledigt: true,
+      modus: MODUS_SCHROEDINGER
     },
     {
       name: 'Mülltüten',
       markiert: false,
       optional: false,
-      erledigt: false
+      erledigt: false,
+      modus: MODUS_SCHROEDINGER
     },
     {
       name: 'Grafikkarte',
       markiert: true,
       optional: false,
-      erledigt: false
+      erledigt: false,
+      modus: MODUS_SCHROEDINGER
     }
   ];
 
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private logger: Logger) { }
 
-  findAllChecklisten(): Observable<ChecklisteDaten[]> {
+  findAllChecklisten(): void {
 
     const url = environment.apiUrl + '/checklisten';
 
@@ -87,7 +95,13 @@ export class ChecklistenService {
     //   refCount()
     // );
 
-    return of(this.mockedChecklisten);
+    const checklisten$: Observable<ChecklisteDaten[]> = of(this.mockedChecklisten);
+
+    checklisten$.subscribe(
+      listen => {
+        store.initializeChecklisten(listen);
+        this.logger.debug('Anzahl Checklisten: ' + listen.length);
+      });
   }
 
   getChecklisteByKuerzel(kuerzel: string): Observable<ChecklisteDaten> {
