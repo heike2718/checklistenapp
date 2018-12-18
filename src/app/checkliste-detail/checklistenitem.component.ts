@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChecklistenItem } from '../shared/model/checkliste';
+import { Logger } from '@nsalaun/ng-logger';
 
 @Component({
   selector: 'chl-checklistenitem',
@@ -11,9 +12,8 @@ export class ChecklistenitemComponent implements OnInit {
   @Input()
   checklistenitem: ChecklistenItem;
 
-  constructor() { }
+  constructor(private _logger: Logger) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

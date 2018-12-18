@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark navbar-static-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark navbar-static-top bg-dark header-nav">
     <button class="navbar-toggler d-lg-none" id="navbarToggler" type="button" (click)="isCollapsed = !isCollapsed"
 		[attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
 				<span class="logo logo-large"><img src="../assets/favicon-32x32.png" alt="Logo" > Checklisten</span> </a></li>
 		</ul>
 		<ul class="navbar-nav ml-auto">
-			<li routerLinkActive="active"><a (click)="collapseNav()" class="nav-link"><span
+			<li routerLinkActive="active"><a routerLink="/listen" (click)="collapseNav()" class="nav-link"><span
 					class="fa fa-list-alt fa-1x" aria-hidden="true"> </span> alle Listen <span class="sr-only">(current)</span></a></li>
 			<li routerLinkActive="active"><a (click)="collapseNav()" class="nav-link"><span
 					class="fa fa-user-plus fa-1x" aria-hidden="true"></span> registrieren <span class="sr-only">(current)</span></a></li>

@@ -20,6 +20,6 @@ export class LoadingComponent implements OnInit {
         map(event => event instanceof NavigationStart ||
           event instanceof RoutesRecognized)
       );
-    // this.loadi ng$ = of(true);
+    // this.loading$ = of(true);
   }
 }

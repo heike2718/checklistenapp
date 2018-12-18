@@ -17,22 +17,30 @@ export class ChecklistenService {
     {
       kuerzel: '1',
       name: 'Sonntag',
-      typ: EINKAUFSLISTE
+      typ: EINKAUFSLISTE,
+      items: [],
+      modus: MODUS_SCHROEDINGER
     },
     {
       kuerzel: '2',
       name: 'Sommerurlaub',
-      typ: PACKLISTE
+      typ: PACKLISTE,
+      items: [],
+      modus: MODUS_SCHROEDINGER
     },
     {
       kuerzel: '3',
       name: 'Heiligabend',
-      typ: EINKAUFSLISTE
+      typ: EINKAUFSLISTE,
+      items: [],
+      modus: MODUS_SCHROEDINGER
     },
     {
       kuerzel: '4',
       name: 'Tasks',
-      typ: TODOS
+      typ: TODOS,
+      items: [],
+      modus: MODUS_SCHROEDINGER
     }
   ];
 
@@ -42,43 +50,37 @@ export class ChecklistenService {
       markiert: true,
       optional: true,
       erledigt: false,
-      kommentar: 'vom Jens',
-      modus: MODUS_SCHROEDINGER
+      kommentar: 'vom Jens'
     },
     {
       name: 'Mülltüten',
       markiert: true,
       optional: false,
-      erledigt: true,
-      modus: MODUS_SCHROEDINGER
+      erledigt: true
     },
     {
       name: 'Lachs',
       markiert: true,
       optional: false,
-      erledigt: false,
-      modus: MODUS_SCHROEDINGER
+      erledigt: false
     },
     {
       name: 'Klopapier',
       markiert: true,
       optional: false,
-      erledigt: true,
-      modus: MODUS_SCHROEDINGER
+      erledigt: true
     },
     {
       name: 'Mülltüten',
       markiert: false,
       optional: false,
-      erledigt: false,
-      modus: MODUS_SCHROEDINGER
+      erledigt: false
     },
     {
       name: 'Grafikkarte',
       markiert: true,
       optional: false,
-      erledigt: false,
-      modus: MODUS_SCHROEDINGER
+      erledigt: false
     }
   ];
 
@@ -99,12 +101,14 @@ export class ChecklistenService {
 
     checklisten$.subscribe(
       listen => {
-        store.initializeChecklisten(listen);
+        store.initChecklisten(listen);
         this.logger.debug('Anzahl Checklisten: ' + listen.length);
       });
   }
 
-  getChecklisteByKuerzel(kuerzel: string): Observable<ChecklisteDaten> {
+  getChecklisteByKuerzel(kuerzel: string, modus: string): void {
+
+    // TODO: http
 
     let checkliste: ChecklisteDaten;
     switch (kuerzel) {
@@ -121,10 +125,21 @@ export class ChecklistenService {
         checkliste = this.mockedChecklisten[3];
         break;
       default:
-        return of(undefined);
+        checkliste = {
+          items: [],
+          modus: MODUS_SCHROEDINGER,
+          typ: ''
+        };
     }
+    if (checkliste.modus !== MODUS_SCHROEDINGER) {
+      checkliste.items = this.mockedItems;
+    }
+    checkliste.modus = modus;
     checkliste.items = this.mockedItems;
-    return of(checkliste);
+    this.logger.debug('ChecklistenService: ' + JSON.stringify(checkliste));
+
+    store.initGewaehlteCheckliste(checkliste);
   }
 }
+
 

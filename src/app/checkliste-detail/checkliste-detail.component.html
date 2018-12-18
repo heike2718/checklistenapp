@@ -1,20 +1,22 @@
 <p>checkliste-detail.component.ts</p>
-<h1>22.12.2018 abarbeiten</h1>
-  <h3>2 von 8 erledigt</h3>
+
+<h1>{{checkliste.name}}</h1>
+<h3 *ngIf="isEdit()">{{bearbeiteteItems.length}} von {{checkliste.items.length}} erledigt</h3>
+<h3 *ngIf="isConfig()">{{checkliste.items.length}} Dinge zu tun</h3>
 
 
-  <table class="table table-bordered">
-    <tr *ngFor="let i of stack1">
-      <td><p>{{i}}</p></td>
-      <td></td>
-    </tr>
-  </table>
+<table class="table table-bordered" *ngFor="let item of unbearbeiteteItems">
+     <chl-checklistenitem [checklistenitem]="item"></chl-checklistenitem>
+</table>
 
-  <h3>fertige Punkte  <i class="fa fa-check-square fa-1x"></i></h3>
+<h3 *ngIf="isEdit()">erledigte Dinge
+  <i class="fa fa-check-square fa-1x"></i>
+</h3>
+<h3 *ngIf="isConfig()">zu erledigende Dinge
+  <i class="fa fa-check-square fa-1x"></i>
+</h3>
 
-  <table class="table table-bordered bg-light">
-    <tr *ngFor="let i of stack2">
-      <td><p>{{i}}</p></td>
-      <td>Kommentar</td>
-    </tr>
-  </table>
+<table class="table table-bordered" *ngFor="let item of bearbeiteteItems">
+    <chl-checklistenitem [checklistenitem]="item"></chl-checklistenitem>
+</table>
+
