@@ -67,7 +67,7 @@ export class ChecklistenService {
 
   getChecklisteByKuerzel(kuerzel: string, modus: string): void {
 
-    // TODO: http
+    // TODO: http + typ der Items setzen, denn die kommen nicht vom Server.
 
     let checkliste: ChecklisteDaten;
     switch (kuerzel) {
