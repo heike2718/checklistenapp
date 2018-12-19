@@ -1,0 +1,26 @@
+/* host styled das chl-checklistenitem
+:host {
+    border: solid 1px gray;
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 10px 15px 10px;
+}
+*/
+
+.item-btn, .item-data {
+  padding: 15px 10px 15px 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.item-btn {
+  background-color: bisque;
+  border  : solid 1px gray;
+}
+
+.item-data {
+  border-top: solid 1px gray;
+  border-right: solid 1px gray;
+  border-bottom: solid 1px gray;
+}
+

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
 import { Logger } from '@nsalaun/ng-logger';
 import { environment } from '../../environments/environment';
+import { getCssClassesForCheckliste } from '../shared/utils/checkliste.utils';
 
 @Component({
   selector: 'chl-checkliste',
@@ -23,31 +24,6 @@ export class ChecklisteComponent implements OnInit {
   }
 
   ngOnInit(): void { }
-
-
-  get classes() {
-
-    // die styles referenzieren auf ein custom *.css-File, hier auf checkliste-component.css.
-    // Mit true werden sie im Element dem classes-Attribut hinzugefügt.
-
-    const cssClasses = {};
-
-    if (this.checkliste && this.checkliste.typ) {
-      const typ = this.checkliste.typ;
-      switch (typ) {
-        case EINKAUFSLISTE:
-          cssClasses['card-einkaufsliste'] = true;
-          break;
-        case PACKLISTE:
-          cssClasses['card-packliste'] = true;
-          break;
-        case TODOS:
-          cssClasses['card-todos'] = true;
-          break;
-      }
-    }
-    return cssClasses;
-  }
 
   configure() {
     this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + this.checkliste);

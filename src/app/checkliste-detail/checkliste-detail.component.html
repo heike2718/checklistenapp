@@ -25,6 +25,17 @@
     </div>
   </div>
 
+  <h3>Layout mit Item-Container</h3>
+  <h4>Nur Buttons</h4>
+  <div *ngIf="unbearbeiteteItems$ | async as unbearbeitet else loadingCheckliste">
+    <chl-checklistenitemcontainer [items]="unbearbeitet" [mitKommentar]="false"></chl-checklistenitemcontainer>
+  </div>
+
+  <h4>Buttons und Input</h4>
+  <div *ngIf="bearbeiteteItems$ | async as bearbeitet else loadingCheckliste">
+    <chl-checklistenitemcontainer [items]="bearbeitet" [mitKommentar]="true"></chl-checklistenitemcontainer>
+  </div>
+
   <ng-template #loadingCheckliste>
     <chl-loading></chl-loading>
   </ng-template>

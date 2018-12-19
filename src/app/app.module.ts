@@ -13,10 +13,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
 import { MessagesComponent } from './messages/messages.component';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
-import { ChecklistenitemComponent } from './checkliste-detail/checklistenitem.component';
+import { ChecklistenitemComponent } from './checkliste-detail/checklistenitem/checklistenitem.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { ChecklisteDetailComponent } from './checkliste-detail/checkliste-detail.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ChecklistenitemcontainerComponent } from './checkliste-detail/checklistenitemcontainer/checklistenitemcontainer.component';
+import { ItemWithButtonComponent } from './checkliste-detail/checklistenitem/item-with-button/item-with-button.component';
+import { ItemWithInputComponent } from './checkliste-detail/checklistenitem/item-with-input/item-with-input.component';
+import { ChecklistentypBackgroundDirective } from './shared/directives/checklistentyp.directive';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -34,7 +38,11 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ChecklistenitemComponent,
     ChecklisteComponent,
     ChecklisteDetailComponent,
-    LoadingComponent
+    LoadingComponent,
+    ChecklistenitemcontainerComponent,
+    ItemWithButtonComponent,
+    ItemWithInputComponent,
+    ChecklistentypBackgroundDirective
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+<div *ngFor="let item of items">
+  <div *ngIf="!mitKommentar">
+    <chl-item-with-button [checklistenitem]="item"></chl-item-with-button>
+  </div>
+  <div *ngIf="mitKommentar">
+    <chl-item-with-input [checklistenitem]="item"></chl-item-with-input>
+  </div>
+</div>

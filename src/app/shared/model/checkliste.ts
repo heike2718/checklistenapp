@@ -13,6 +13,7 @@ export interface ChecklistenItem {
     optional: boolean;
     erledigt: boolean;
     kommentar?: string;
+    typ: string;
 }
 
 export interface ChecklisteDaten {
