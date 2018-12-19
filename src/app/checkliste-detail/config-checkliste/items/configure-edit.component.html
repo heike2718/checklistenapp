@@ -1,0 +1,21 @@
+<table>
+  <thead>
+    <tr>
+
+      <th>Name</th>
+      <th>optional</th>
+      <th>Bem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td chlBackgroundColor [typ]="typ">{{item.name}}</td>
+      <td>
+        <input type="checkbox">
+      </td>
+      <td>
+        <input type="text" value="{{item.kommentar}}">
+      </td>
+    </tr>
+  </tbody>
+</table>

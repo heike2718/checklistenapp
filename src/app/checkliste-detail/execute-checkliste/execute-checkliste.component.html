@@ -1,0 +1,23 @@
+<p>execute-checkliste.component.ts</p>
+
+<div *ngIf="checkliste$ | async as checkliste else loadingCheckliste">
+
+  <h3>{{checkliste.typ}} {{checkliste.name}} abarbeiten </h3>
+
+
+  <div *ngIf="unbearbeiteteItems$ | async as unbearbeiteteItems">
+    <chl-execute-itemliste [items]="unbearbeiteteItems" [typ]="checkliste.typ"></chl-execute-itemliste>
+  </div>
+
+  <h4>erledigte Dinge:</h4>
+
+  <div *ngIf="bearbeiteteItems$ | async as bearbeiteteItems">
+    <chl-execute-itemliste [items]="bearbeiteteItems" [typ]="checkliste.typ"></chl-execute-itemliste>
+  </div>
+
+
+</div>
+
+<ng-template #loadingCheckliste>
+  <chl-loading></chl-loading>
+</ng-template>

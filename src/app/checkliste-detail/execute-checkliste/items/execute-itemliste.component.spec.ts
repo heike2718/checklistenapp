@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemWithButtonComponent } from './item-with-button.component';
+import { ExecuteItemlisteComponent } from './execute-itemliste.component';
 
-describe('ItemWithButtonComponent', () => {
-  let component: ItemWithButtonComponent;
-  let fixture: ComponentFixture<ItemWithButtonComponent>;
+describe('ExecuteItemlisteComponent', () => {
+  let component: ExecuteItemlisteComponent;
+  let fixture: ComponentFixture<ExecuteItemlisteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemWithButtonComponent ]
+      declarations: [ ExecuteItemlisteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemWithButtonComponent);
+    fixture = TestBed.createComponent(ExecuteItemlisteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

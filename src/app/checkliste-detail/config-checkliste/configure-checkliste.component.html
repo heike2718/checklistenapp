@@ -1,0 +1,23 @@
+<p>configure-checkliste.component.ts</p>
+
+<div *ngIf="checkliste$ | async as checkliste else loadingCheckliste">
+
+  <h3>{{checkliste.typ}} {{checkliste.name}} erstellen </h3>
+
+
+  <div *ngIf="unbearbeiteteItems$ | async as unbearbeiteteItems">
+    <chl-configure-vorschlagsliste [items]="unbearbeiteteItems" [typ]="checkliste.typ"></chl-configure-vorschlagsliste>
+  </div>
+
+  <h4>vorgemerkte Dinge:</h4>
+
+  <div *ngIf="bearbeiteteItems$ | async as bearbeiteteItems">
+    <chl-configure-edit [items]="bearbeiteteItems" [typ]="checkliste.typ"></chl-configure-edit>
+  </div>
+
+
+</div>
+
+<ng-template #loadingCheckliste>
+  <chl-loading></chl-loading>
+</ng-template>

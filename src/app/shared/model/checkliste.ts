@@ -4,8 +4,8 @@ export const PACKLISTE = 'PACKLISTE';
 export const TODOS = 'TODOS';
 
 export const MODUS_SCHROEDINGER = 'schroedinger';
-export const MODUS_CONFIG = 'config';
-export const MODUS_EDIT = 'edit';
+export const MODUS_CONFIG = 'configuration';
+export const MODUS_EDIT = 'execution';
 
 export interface ChecklistenItem {
     name: string;
@@ -13,7 +13,6 @@ export interface ChecklistenItem {
     optional: boolean;
     erledigt: boolean;
     kommentar?: string;
-    typ: string;
 }
 
 export interface ChecklisteDaten {

@@ -8,7 +8,7 @@ import {NgbCollapse} from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavbarComponent implements OnInit {
 
-  isCollapsed = false;
+  isCollapsed = true;
 
     @ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
 

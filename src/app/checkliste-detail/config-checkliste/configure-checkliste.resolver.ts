@@ -1,14 +1,14 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ChecklisteDaten } from '../shared/model/checkliste';
+import { ChecklisteDaten, MODUS_CONFIG } from '../../shared/model/checkliste';
 import { Observable, of } from 'rxjs';
-import { ChecklistenService } from '../services/checklisten.service';
-import { store } from '../store/app-data';
+import { ChecklistenService } from '../../services/checklisten.service';
+import { store } from '../../store/app-data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChecklisteDetailResolver implements Resolve<ChecklisteDaten> {
+export class ConfigureChecklisteResolver implements Resolve<ChecklisteDaten> {
 
   constructor(private checklistenService: ChecklistenService) { }
 
@@ -19,9 +19,7 @@ export class ChecklisteDetailResolver implements Resolve<ChecklisteDaten> {
 
     let checkliste$ = store.gewaehlteCheckliste$;
 
-    const modus = route.params['modus'];
-
-    this.checklistenService.getChecklisteByKuerzel(route.params['kuerzel'], modus);
+    this.checklistenService.getChecklisteByKuerzel(route.params['kuerzel'], MODUS_CONFIG);
     store.gewaehlteCheckliste$.subscribe(
       liste => checkliste$ = of(liste)
     );

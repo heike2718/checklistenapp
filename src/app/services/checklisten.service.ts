@@ -44,6 +44,47 @@ export class ChecklistenService {
     }
   ];
 
+  private mockedItems: ChecklistenItem[] = [
+    {
+      name: 'Aprikosenschnaps',
+      markiert: true,
+      optional: true,
+      erledigt: false,
+      kommentar: 'vom Jens'
+    },
+    {
+      name: 'Mülltüten',
+      markiert: true,
+      optional: false,
+      erledigt: true
+    },
+    {
+      name: 'Lachs',
+      markiert: false,
+      optional: false,
+      erledigt: false
+    },
+    {
+      name: 'Klopapier',
+      markiert: true,
+      optional: false,
+      erledigt: true
+    },
+    {
+      name: 'Tomaten',
+      markiert: false,
+      optional: false,
+      erledigt: false
+    },
+    {
+      name: 'Grafikkarte',
+      markiert: true,
+      optional: false,
+      erledigt: false
+    }
+  ];
+
+
   constructor(private http: Http, private logger: Logger) { }
 
   findAllChecklisten(): void {
@@ -67,7 +108,7 @@ export class ChecklistenService {
 
   getChecklisteByKuerzel(kuerzel: string, modus: string): void {
 
-    // TODO: http + typ der Items setzen, denn die kommen nicht vom Server.
+    // TODO: http
 
     let checkliste: ChecklisteDaten;
     switch (kuerzel) {
@@ -91,66 +132,16 @@ export class ChecklistenService {
         };
     }
     if (checkliste.modus !== MODUS_SCHROEDINGER) {
-      checkliste.items = this.getMockedItems('');
+      checkliste.items = this.mockedItems;
     }
     checkliste.modus = modus;
-    checkliste.items = this.getMockedItems(checkliste.typ);
-
+    checkliste.items = this.mockedItems;
     this.logger.debug('ChecklistenService: ' + JSON.stringify(checkliste));
 
     store.initGewaehlteCheckliste(checkliste);
   }
-
-  private getMockedItems(theTyp: string): ChecklistenItem[] {
-    const mockedItems: ChecklistenItem[] = [
-      {
-        name: 'Aprikosenschnaps',
-        markiert: true,
-        optional: true,
-        erledigt: false,
-        kommentar: 'vom Jens',
-        typ: theTyp
-      },
-      {
-        name: 'Mülltüten',
-        markiert: true,
-        optional: false,
-        erledigt: true,
-        typ: theTyp
-      },
-      {
-        name: 'Lachs',
-        markiert: true,
-        optional: false,
-        erledigt: false,
-        typ: theTyp
-      },
-      {
-        name: 'Klopapier',
-        markiert: true,
-        optional: false,
-        erledigt: true,
-        typ: theTyp
-      },
-      {
-        name: 'Mülltüten',
-        markiert: false,
-        optional: false,
-        erledigt: false,
-        typ: theTyp
-      },
-      {
-        name: 'Grafikkarte',
-        markiert: true,
-        optional: false,
-        erledigt: false,
-        typ: theTyp
-      }
-    ];
-
-    return mockedItems;
-  }
-
 }
+
+
 
 

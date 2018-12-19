@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ItemWithInputComponent } from './item-with-input.component';
+import { EditChecklisteComponent } from './edit-checkliste.component';
 
-describe('ItemWithInputComponent', () => {
-  let component: ItemWithInputComponent;
-  let fixture: ComponentFixture<ItemWithInputComponent>;
+describe('EditChecklisteComponent', () => {
+  let component: EditChecklisteComponent;
+  let fixture: ComponentFixture<EditChecklisteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemWithInputComponent ]
+      declarations: [ EditChecklisteComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ItemWithInputComponent);
+    fixture = TestBed.createComponent(EditChecklisteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

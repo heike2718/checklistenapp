@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklistenItem, ChecklisteDaten, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
-import { store } from '../store/app-data';
+import { ChecklisteDaten, ChecklistenItem, EINKAUFSLISTE } from '../../shared/model/checkliste';
 import { Observable } from 'rxjs';
+import { store } from '../../store/app-data';
 
 @Component({
-  selector: 'chl-checkliste-detail',
-  templateUrl: './checkliste-detail.component.html',
-  styleUrls: ['./checkliste-detail.component.css']
+  selector: 'chl-configure-checkliste',
+  templateUrl: './configure-checkliste.component.html',
+  styleUrls: ['./configure-checkliste.component.css']
 })
-export class ChecklisteDetailComponent implements OnInit {
+export class ConfigureChecklisteComponent implements OnInit {
 
   checkliste$: Observable<ChecklisteDaten>;
 

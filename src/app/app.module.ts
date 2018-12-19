@@ -13,14 +13,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
 import { MessagesComponent } from './messages/messages.component';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
-import { ChecklistenitemComponent } from './checkliste-detail/checklistenitem/checklistenitem.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
-import { ChecklisteDetailComponent } from './checkliste-detail/checkliste-detail.component';
 import { LoadingComponent } from './loading/loading.component';
-import { ChecklistenitemcontainerComponent } from './checkliste-detail/checklistenitemcontainer/checklistenitemcontainer.component';
-import { ItemWithButtonComponent } from './checkliste-detail/checklistenitem/item-with-button/item-with-button.component';
-import { ItemWithInputComponent } from './checkliste-detail/checklistenitem/item-with-input/item-with-input.component';
 import { ChecklistentypBackgroundDirective } from './shared/directives/checklistentyp.directive';
+import { ConfigureChecklisteComponent } from './checkliste-detail/config-checkliste/configure-checkliste.component';
+import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checkliste/execute-checkliste.component';
+import { ConfigureVorschlagslisteComponent } from './checkliste-detail/config-checkliste/items/configure-vorschlagsliste.component';
+import { ConfigureEditComponent } from './checkliste-detail/config-checkliste/items/configure-edit.component';
+import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checkliste/items/execute-itemliste.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -35,14 +35,14 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     NavbarComponent,
     MessagesComponent,
     ChecklistenListeComponent,
-    ChecklistenitemComponent,
     ChecklisteComponent,
-    ChecklisteDetailComponent,
     LoadingComponent,
-    ChecklistenitemcontainerComponent,
-    ItemWithButtonComponent,
-    ItemWithInputComponent,
-    ChecklistentypBackgroundDirective
+    ChecklistentypBackgroundDirective,
+    ConfigureChecklisteComponent,
+    ExecuteChecklisteComponent,
+    ConfigureVorschlagslisteComponent,
+    ConfigureEditComponent,
+    ExecuteItemlisteComponent
   ],
   imports: [
     BrowserModule,

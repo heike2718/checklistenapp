@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
 import { Logger } from '@nsalaun/ng-logger';
 import { environment } from '../../environments/environment';
-import { getCssClassesForCheckliste } from '../shared/utils/checkliste.utils';
 
 @Component({
   selector: 'chl-checkliste',

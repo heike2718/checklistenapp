@@ -33,3 +33,27 @@ footer {
   background-color: aqua;
 }
 
+/* === Tabellen === */
+table {
+  margin: 20px  10px 20px 10px;
+}
+
+td {
+    margin-bottom: 10px;
+}
+
+
+td, th {
+	padding: 10px 0.75em;
+	margin: 3px 0 0;
+	border: 1px solid #666;
+	/*background-color: #f9f9f9;*/
+	text-align: center;
+}
+
+
+
+
+
+
+
