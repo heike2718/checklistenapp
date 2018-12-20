@@ -14,13 +14,15 @@ export class ChecklistenListeComponent implements OnInit {
 
   checklisten$: Observable<ChecklisteDaten[]>;
 
-  showFilename = false;
-
-  constructor(private checklistenService: ChecklistenService) {
-    this.showFilename = !environment.production;
-  }
+  constructor() {}
 
   ngOnInit() {
     this.checklisten$ = store.checklisten$;
+  }
+
+
+
+  showFilename(): boolean {
+    return !environment.production;
   }
 }

@@ -5,7 +5,12 @@ export const TODOS = 'TODOS';
 
 export const MODUS_SCHROEDINGER = 'schroedinger';
 export const MODUS_CONFIG = 'configuration';
-export const MODUS_EDIT = 'execution';
+export const MODUS_EXEC = 'execution';
+
+export const LISTE_VORSCHLAEGE = 'vorschlagsliste';
+
+export const LISTE_AUSGEWAEHLT = 'ausgewaehlt';
+
 
 export interface ChecklistenItem {
     name: string;
@@ -19,8 +24,14 @@ export interface ChecklisteDaten {
     kuerzel?: string;
     name?: string;
     typ: string;
+    anzahlErledigt: number;
     items: ChecklistenItem[];
     modus: string;
+}
+
+export interface Filterkriterium {
+    modus: string;
+    semantik: string;
 }
 
 

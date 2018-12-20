@@ -21,6 +21,8 @@ import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checklis
 import { ConfigureVorschlagslisteComponent } from './checkliste-detail/config-checkliste/items/configure-vorschlagsliste.component';
 import { ConfigureEditComponent } from './checkliste-detail/config-checkliste/items/configure-edit.component';
 import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checkliste/items/execute-itemliste.component';
+import { FilterChecklisteItemsPipe } from './shared/pipes/filter-checkliste-items.pipe';
+import { HomeComponent } from './home/home.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -42,7 +44,9 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ExecuteChecklisteComponent,
     ConfigureVorschlagslisteComponent,
     ConfigureEditComponent,
-    ExecuteItemlisteComponent
+    ExecuteItemlisteComponent,
+    FilterChecklisteItemsPipe,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

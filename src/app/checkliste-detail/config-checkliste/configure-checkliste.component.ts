@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklisteDaten } from '../../shared/model/checkliste';
+import { ChecklisteDaten, Filterkriterium, LISTE_VORSCHLAEGE } from '../../shared/model/checkliste';
 import { store } from '../../store/app-data';
-import { getUnbearbeiteteItems, getBarbeiteteItems } from '../../shared/utils/checkliste.utils';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { filterChecklisteItems } from '../../shared/utils/checkliste.utils';
 
 @Component({
   selector: 'chl-configure-checkliste',
@@ -10,21 +12,27 @@ import { getUnbearbeiteteItems, getBarbeiteteItems } from '../../shared/utils/ch
 })
 export class ConfigureChecklisteComponent implements OnInit {
 
-  checkliste: ChecklisteDaten;
+  checkliste$: Observable<ChecklisteDaten>;
 
   constructor() { }
 
   ngOnInit() {
-    store.gewaehlteCheckliste$.subscribe(
-      cl => this.checkliste = cl
-    );
+    this.checkliste$ = store.gewaehlteCheckliste$;
   }
 
-  get unbearbeiteteItems() {
-    return getUnbearbeiteteItems(this.checkliste);
+  getStatistik(checkliste: ChecklisteDaten): string {
+
+    const kriterium: Filterkriterium = {
+      modus: checkliste.modus,
+      semantik: LISTE_VORSCHLAEGE
+    };
+    const items = filterChecklisteItems(checkliste.items, kriterium);
+    const anzahlAusgewaehlt = items;
+    return anzahlAusgewaehlt + ' vorgemerkte Dinge:';
   }
 
-  get bearbeiteteItems() {
-    return getBarbeiteteItems(this.checkliste);
+
+  showFilename(): boolean {
+    return !environment.production;
   }
 }

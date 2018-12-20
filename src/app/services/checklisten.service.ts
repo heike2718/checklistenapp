@@ -6,6 +6,7 @@ import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODU
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
+import { loadCheckliste, loadChecklisten } from './mockDb';
 
 
 @Injectable({
@@ -13,82 +14,9 @@ import { Logger } from '@nsalaun/ng-logger';
 })
 export class ChecklistenService {
 
-  private mockedChecklisten: ChecklisteDaten[] = [
-    {
-      kuerzel: '1',
-      name: 'Sonntag',
-      typ: EINKAUFSLISTE,
-      items: [],
-      modus: MODUS_SCHROEDINGER
-    },
-    {
-      kuerzel: '2',
-      name: 'Sommerurlaub',
-      typ: PACKLISTE,
-      items: [],
-      modus: MODUS_SCHROEDINGER
-    },
-    {
-      kuerzel: '3',
-      name: 'Heiligabend',
-      typ: EINKAUFSLISTE,
-      items: [],
-      modus: MODUS_SCHROEDINGER
-    },
-    {
-      kuerzel: '4',
-      name: 'Tasks',
-      typ: TODOS,
-      items: [],
-      modus: MODUS_SCHROEDINGER
-    }
-  ];
-
-  private mockedItems: ChecklistenItem[] = [
-    {
-      name: 'Aprikosenschnaps',
-      markiert: true,
-      optional: true,
-      erledigt: false,
-      kommentar: 'vom Jens'
-    },
-    {
-      name: 'Mülltüten',
-      markiert: true,
-      optional: false,
-      erledigt: true
-    },
-    {
-      name: 'Lachs',
-      markiert: false,
-      optional: false,
-      erledigt: false
-    },
-    {
-      name: 'Klopapier',
-      markiert: true,
-      optional: false,
-      erledigt: true
-    },
-    {
-      name: 'Tomaten',
-      markiert: false,
-      optional: false,
-      erledigt: false
-    },
-    {
-      name: 'Grafikkarte',
-      markiert: true,
-      optional: false,
-      erledigt: false
-    }
-  ];
-
-
   constructor(private http: Http, private logger: Logger) { }
 
   findAllChecklisten(): void {
-
     const url = environment.apiUrl + '/checklisten';
 
     // return this.http.get(url).pipe(
@@ -97,7 +25,7 @@ export class ChecklistenService {
     //   refCount()
     // );
 
-    const checklisten$: Observable<ChecklisteDaten[]> = of(this.mockedChecklisten);
+    const checklisten$: Observable<ChecklisteDaten[]> = loadChecklisten();
 
     checklisten$.subscribe(
       listen => {
@@ -106,39 +34,23 @@ export class ChecklistenService {
       });
   }
 
-  loadChecklisteByKuerzel(kuerzel: string, modus: string): void {
+  loadChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
+
+    this.logger.debug('loadChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
+
+    const kuerzelAktuell = store.getKuerzelGewaehlteCheckliste();
+    if (kuerzelAktuell && kuerzelAktuell === kuerzel) {
+      return store.gewaehlteCheckliste$;
+    }
 
     // TODO: http
+    const checkliste$ = loadCheckliste(kuerzel, modus);
 
-    let checkliste: ChecklisteDaten;
-    switch (kuerzel) {
-      case '1':
-        checkliste = this.mockedChecklisten[0];
-        break;
-      case '2':
-        checkliste = this.mockedChecklisten[1];
-        break;
-      case '3':
-        checkliste = this.mockedChecklisten[2];
-        break;
-      case '4':
-        checkliste = this.mockedChecklisten[3];
-        break;
-      default:
-        checkliste = {
-          items: [],
-          modus: MODUS_SCHROEDINGER,
-          typ: ''
-        };
-    }
-    if (checkliste.modus !== MODUS_SCHROEDINGER) {
-      checkliste.items = this.mockedItems;
-    }
-    checkliste.modus = modus;
-    checkliste.items = this.mockedItems;
-    this.logger.debug('ChecklistenService: ' + JSON.stringify(checkliste));
+    checkliste$.subscribe(
+      checkliste => store.updateCheckliste(checkliste)
+    );
 
-    store.updateCheckliste(checkliste);
+    return checkliste$;
   }
 }
 

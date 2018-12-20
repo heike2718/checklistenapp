@@ -1,21 +1,23 @@
-<table>
-  <thead>
-    <tr>
+<div *ngIf="checkliste$ | async as checkliste">
+  <table>
+    <thead>
+      <tr>
 
-      <th>Name</th>
-      <th>optional</th>
-      <th>Bem</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td chlBackgroundColor [typ]="typ">{{item.name}}</td>
-      <td>
-        <input type="checkbox">
-      </td>
-      <td>
-        <input type="text" value="{{item.kommentar}}">
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <th>Name</th>
+        <th>optional</th>
+        <th>Bem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getItems(checkliste)">
+        <td class="item-btn" chlBackgroundColor [typ]="checkliste.typ" (click)="unsubscribeAusgewaehlt(checkliste.items, item)" >{{item.name}}</td>
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>
+          <input type="text" value="{{item.kommentar}}">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

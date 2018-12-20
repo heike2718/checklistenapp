@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { ChecklisteDaten, MODUS_SCHROEDINGER } from '../shared/model/checkliste';
+import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem } from '../shared/model/checkliste';
 import * as _ from 'lodash';
 
 export const initialCheckliste: ChecklisteDaten = {
   typ: '',
   modus: MODUS_SCHROEDINGER,
-  items: []
+  items: [],
+  anzahlErledigt: 0
 };
 
 
@@ -35,6 +36,19 @@ export class DataStore {
   updateCheckliste(checkliste: ChecklisteDaten) {
     const kopie: ChecklisteDaten = _.cloneDeep(checkliste);
     this.gewaehlteChecklisteSubject.next(kopie);
+  }
+
+  updateChecklisteItems(items: ChecklistenItem[]) {
+    const checkliste = this.gewaehlteChecklisteSubject.value;
+    if (checkliste) {
+      checkliste.items = items;
+      this.updateCheckliste(checkliste);
+    }
+  }
+
+  getKuerzelGewaehlteCheckliste(): string {
+    const checkliste: ChecklisteDaten = this.gewaehlteChecklisteSubject.value;
+    return checkliste ? checkliste.kuerzel : undefined;
   }
 }
 

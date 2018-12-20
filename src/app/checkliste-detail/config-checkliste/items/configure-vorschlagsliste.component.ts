@@ -1,5 +1,9 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { ChecklistenItem, ChecklisteDaten } from '../../../shared/model/checkliste';
+import { Component, OnInit } from '@angular/core';
+import { ChecklistenItem, ChecklisteDaten, Filterkriterium, MODUS_CONFIG, LISTE_VORSCHLAEGE } from '../../../shared/model/checkliste';
+import { findItemByName, filterChecklisteItems } from '../../../shared/utils/checkliste.utils';
+import { store } from '../../../store/app-data';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'chl-configure-vorschlagsliste',
@@ -8,23 +12,36 @@ import { ChecklistenItem, ChecklisteDaten } from '../../../shared/model/checklis
 })
 export class ConfigureVorschlagslisteComponent implements OnInit {
 
-  @Input()
-  items: ChecklistenItem[];
-
-  @Input()
-  typ: string;
-
-  @Input()
-  checkliste: ChecklisteDaten;
-
+  checkliste$: Observable<ChecklisteDaten>;
 
   constructor() { }
 
   ngOnInit() {
+    this.checkliste$ = store.gewaehlteCheckliste$;
   }
 
-  markAsBearbeitet(item: ChecklistenItem) {
+    getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
+    if (!checkliste) {
+      return [];
+    }
+
+    const kriterium: Filterkriterium = {
+      modus: MODUS_CONFIG,
+      semantik: LISTE_VORSCHLAEGE
+    };
+
+    return filterChecklisteItems(checkliste.items, kriterium);
+  }
+
+
+
+  subscribeAusgewaehlt(items: ChecklistenItem[], item: ChecklistenItem) {
     console.log('item ' + item.name + ' als bearbeitet markieren');
-  }
+    const markiertesItem = findItemByName(items, item.name);
 
+    if (markiertesItem) {
+      markiertesItem.markiert = true;
+    }
+    store.updateChecklisteItems(items);
+  }
 }

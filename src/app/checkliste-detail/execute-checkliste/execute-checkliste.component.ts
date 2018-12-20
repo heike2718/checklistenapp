@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklisteDaten, ChecklistenItem } from '../../shared/model/checkliste';
+import { ChecklisteDaten } from '../../shared/model/checkliste';
 import { Observable } from 'rxjs';
 import { store } from '../../store/app-data';
-import { getUnbearbeiteteItems, getBarbeiteteItems } from '../../shared/utils/checkliste.utils';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'chl-execute-checkliste',
@@ -11,23 +11,28 @@ import { getUnbearbeiteteItems, getBarbeiteteItems } from '../../shared/utils/ch
 })
 export class ExecuteChecklisteComponent implements OnInit {
 
-  checkliste: ChecklisteDaten;
+  checkliste$: Observable<ChecklisteDaten>;
 
   constructor() { }
 
   ngOnInit() {
-    store.gewaehlteCheckliste$.subscribe(
-      cl => this.checkliste = cl
+    this.checkliste$ = store.gewaehlteCheckliste$;
+  }
+
+  getStatistik(checkliste: ChecklisteDaten): string {
+
+    const anzahlGesamt = checkliste.items.length;
+    let anzahlErledigt = 0;
+    checkliste.items.forEach(
+      item => { if (item.erledigt) { anzahlErledigt++; } }
     );
+
+    return anzahlErledigt + ' von ' + anzahlGesamt + ' abgehakt';
   }
 
 
 
-  get unbearbeiteteItems() {
-    return getUnbearbeiteteItems(this.checkliste);
-  }
-
-  get bearbeiteteItems() {
-    return getBarbeiteteItems(this.checkliste);
+  showFilename(): boolean {
+    return !environment.production;
   }
 }
