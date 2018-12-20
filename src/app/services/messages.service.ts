@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { Message, INFO, WARN, ERROR } from '../shared/model/message';
 
 
 @Injectable({
@@ -28,5 +29,22 @@ export class MessagesService {
 
   error(message: string) {
     this.errorSubject.next(message);
+  }
+
+  neueMessage(message: Message) {
+    switch (message.level) {
+      case INFO:
+        this.info(message.message);
+        break;
+      case WARN:
+        this.warn(message.message);
+        break;
+      case ERROR:
+        this.error(message.message);
+        break;
+      default:
+        this.error('### OMG message ohne level ### ' + message.message);
+        break;
+    }
   }
 }

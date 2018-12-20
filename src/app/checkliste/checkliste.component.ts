@@ -26,15 +26,20 @@ export class ChecklisteComponent implements OnInit {
   ngOnInit(): void { }
 
   configure() {
-    this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + this.checkliste);
+    this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + JSON.stringify(this.checkliste));
     if (this.checkliste.kuerzel) {
       this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + this.checkliste.kuerzel);
     }
   }
   execute() {
-    this.logger.debug('ChecklisteComponent.execute: this.checkliste=' + this.checkliste);
+    this.logger.debug('ChecklisteComponent.execute: this.checkliste=' + JSON.stringify(this.checkliste));
     if (this.checkliste.kuerzel) {
       this.router.navigateByUrl('/checkliste/' + MODUS_EXEC + '/' + this.checkliste.kuerzel);
     }
+  }
+
+  delete() {
+    this.logger.debug('ChecklisteComponent.delete: this.checkliste=' + JSON.stringify(this.checkliste));
+    this.checklistenService.deleteCheckliste(this.checkliste);
   }
 }

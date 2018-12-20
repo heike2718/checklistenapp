@@ -6,7 +6,9 @@ import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODU
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { loadCheckliste, loadChecklisten } from './mockDb';
+import { loadCheckliste, loadChecklisten, removeCheckliste } from './mockDb';
+import { MessagesService } from './messages.service';
+import { INFO } from '../shared/model/message';
 
 
 @Injectable({
@@ -14,7 +16,7 @@ import { loadCheckliste, loadChecklisten } from './mockDb';
 })
 export class ChecklistenService {
 
-  constructor(private http: Http, private logger: Logger) { }
+  constructor(private http: Http, private messagesService: MessagesService, private logger: Logger) { }
 
   findAllChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
@@ -45,6 +47,23 @@ export class ChecklistenService {
     );
 
     return checkliste$;
+  }
+
+  deleteCheckliste(checkliste: ChecklisteDaten): void {
+
+    // TODO: http
+
+    const message$ = removeCheckliste(checkliste);
+
+    message$.subscribe(
+      msg => {
+        this.messagesService.neueMessage(msg);
+
+        if (INFO === msg.level) {
+          store.deleteCheckliste(checkliste.kuerzel);
+        }
+      }
+    );
   }
 }
 

@@ -33,6 +33,16 @@ export class DataStore {
     this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
   }
 
+  deleteCheckliste(kuerzel: string) {
+    const checklisten = this.checklistenSubject.value;
+
+    const restliche = _.remove(checklisten, function (chl) {
+      return chl.kuerzel !== kuerzel;
+    });
+
+    this.checklistenSubject.next(_.cloneDeep(restliche));
+  }
+
   updateCheckliste(checkliste: ChecklisteDaten) {
     const kopie: ChecklisteDaten = _.cloneDeep(checkliste);
     this.gewaehlteChecklisteSubject.next(kopie);

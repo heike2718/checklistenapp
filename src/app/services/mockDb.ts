@@ -1,5 +1,6 @@
 import { ChecklisteDaten, EINKAUFSLISTE, MODUS_SCHROEDINGER, PACKLISTE, TODOS, ChecklistenItem } from '../shared/model/checkliste';
 import { Observable, of } from 'rxjs';
+import { Message, INFO } from '../shared/model/message';
 
 const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
     {
@@ -109,4 +110,15 @@ export function loadCheckliste(kuerzel: string, modus: string): Observable<Check
     checkliste.modus = modus;
     checkliste.items = MOCKED_ITEMS;
     return of(checkliste);
+}
+
+export function removeCheckliste(checkliste: ChecklisteDaten): Observable<Message> {
+
+    const message: Message = {
+        level: INFO,
+        message: 'Löschen erfolgreich: kuerzel=' + checkliste.kuerzel
+    };
+
+    return of(message);
+
 }

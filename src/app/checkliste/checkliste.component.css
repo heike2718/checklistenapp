@@ -9,3 +9,11 @@
 .card-todos {
   background-color: aqua;
 }
+
+.card-header > .trash {
+  font-size: 2rem;
+  text-align: right;
+  display: block;
+  cursor: pointer;
+}
+
