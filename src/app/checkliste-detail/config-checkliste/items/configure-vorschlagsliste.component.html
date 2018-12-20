@@ -1,7 +1,7 @@
 <table>
   <tbody>
     <tr *ngFor="let item of items">
-      <td chlBackgroundColor [typ]="typ">{{item.name}}</td>
+      <td class="item-btn" chlBackgroundColor [typ]="typ" (click)="markAsBearbeitet(item)">{{item.name}}</td>
     </tr>
   </tbody>
 </table>

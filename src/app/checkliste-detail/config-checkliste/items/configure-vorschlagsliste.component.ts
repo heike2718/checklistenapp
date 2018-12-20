@@ -23,4 +23,8 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
   ngOnInit() {
   }
 
+  markAsBearbeitet(item: ChecklistenItem) {
+    console.log('item ' + item.name + ' als bearbeitet markieren');
+  }
+
 }

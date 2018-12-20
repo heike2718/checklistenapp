@@ -1,6 +1,6 @@
 <p>configure-checkliste.component.ts</p>
 
-<div *ngIf="checkliste else loadingCheckliste">
+<div *ngIf="checkliste && checkliste.modus !== 'schroedinger' else loadingCheckliste">
 
   <h3>{{checkliste.typ}} {{checkliste.name}} erstellen </h3>
 
