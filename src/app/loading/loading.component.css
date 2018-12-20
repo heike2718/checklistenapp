@@ -4,7 +4,9 @@
     text-align: center;
 }
 
-.loading-indicator > img {
+.loading-indicator > .img {
     height: 30px;
     width: auto;
+    font-size: 1.3rem;
 }
+
