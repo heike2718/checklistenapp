@@ -40,12 +40,7 @@ export class ExecuteItemlisteComponent implements OnInit {
     const markiertesItem = findItemByName(checkliste.items, item.name);
 
     if (markiertesItem) {
-      if (LISTE_AUSGEWAEHLT === this.semantik) {
-        item.erledigt = true;
-      } else {
-        item.erledigt = false;
-      }
-
+      item.erledigt = !item.erledigt;
       store.updateChecklisteItems(checkliste.items);
     }
   }

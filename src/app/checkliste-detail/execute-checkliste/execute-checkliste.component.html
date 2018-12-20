@@ -1,9 +1,9 @@
 <p *ngIf="showFilename()">execute-checkliste.component.ts</p>
 
-<div *ngIf="checkliste$ as checkliste else loading">
+<div *ngIf="checkliste$ | async as checkliste else loading">
 
   <h3>{{checkliste.typ}} {{checkliste.name}} abarbeiten </h3>
-  <h4>getStatistik(checkliste)</h4>
+  <h4>{{checkliste | statistikCheckliste}}</h4>
 
 
   <chl-execute-itemliste [semantik]="'vorschlagsliste'"></chl-execute-itemliste>

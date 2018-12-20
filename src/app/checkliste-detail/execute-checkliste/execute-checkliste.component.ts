@@ -19,19 +19,6 @@ export class ExecuteChecklisteComponent implements OnInit {
     this.checkliste$ = store.gewaehlteCheckliste$;
   }
 
-  getStatistik(checkliste: ChecklisteDaten): string {
-
-    const anzahlGesamt = checkliste.items.length;
-    let anzahlErledigt = 0;
-    checkliste.items.forEach(
-      item => { if (item.erledigt) { anzahlErledigt++; } }
-    );
-
-    return anzahlErledigt + ' von ' + anzahlGesamt + ' abgehakt';
-  }
-
-
-
   showFilename(): boolean {
     return !environment.production;
   }

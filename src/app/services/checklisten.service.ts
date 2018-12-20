@@ -37,12 +37,6 @@ export class ChecklistenService {
   loadChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
 
     this.logger.debug('loadChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
-
-    const kuerzelAktuell = store.getKuerzelGewaehlteCheckliste();
-    if (kuerzelAktuell && kuerzelAktuell === kuerzel) {
-      return store.gewaehlteCheckliste$;
-    }
-
     // TODO: http
     const checkliste$ = loadCheckliste(kuerzel, modus);
 

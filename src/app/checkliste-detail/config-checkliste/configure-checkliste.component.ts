@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklisteDaten, Filterkriterium, LISTE_VORSCHLAEGE } from '../../shared/model/checkliste';
+import { ChecklisteDaten } from '../../shared/model/checkliste';
 import { store } from '../../store/app-data';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { filterChecklisteItems } from '../../shared/utils/checkliste.utils';
 
 @Component({
   selector: 'chl-configure-checkliste',
@@ -18,17 +17,6 @@ export class ConfigureChecklisteComponent implements OnInit {
 
   ngOnInit() {
     this.checkliste$ = store.gewaehlteCheckliste$;
-  }
-
-  getStatistik(checkliste: ChecklisteDaten): string {
-
-    const kriterium: Filterkriterium = {
-      modus: checkliste.modus,
-      semantik: LISTE_VORSCHLAEGE
-    };
-    const items = filterChecklisteItems(checkliste.items, kriterium);
-    const anzahlAusgewaehlt = items;
-    return anzahlAusgewaehlt + ' vorgemerkte Dinge:';
   }
 
 

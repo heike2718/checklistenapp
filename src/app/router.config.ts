@@ -4,12 +4,13 @@ import { ConfigureChecklisteComponent } from './checkliste-detail/config-checkli
 import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checkliste/execute-checkliste.component';
 import { ConfigureChecklisteResolver } from './checkliste-detail/config-checkliste/configure-checkliste.resolver';
 import { ExecuteChecklisteResolver } from './checkliste-detail/execute-checkliste/execute-checkliste.resolver';
+import { HomeComponent } from './home/home.component';
 
 export const routerConfig: Routes = [
-    // {
-    //     path: 'home',
-    //     component: HomeComponent
-    // },
+    {
+        path: 'home',
+        component: HomeComponent
+    },
     // {
     //     path: 'login',
     //     component: LoginComponent
@@ -39,12 +40,12 @@ export const routerConfig: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/'
+        redirectTo: '/home'
     },
     {
         path: '**',
         pathMatch: 'full',
-        redirectTo: '/'
+        redirectTo: '/home'
     }
 ];
 

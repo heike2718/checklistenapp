@@ -108,16 +108,5 @@ export function loadCheckliste(kuerzel: string, modus: string): Observable<Check
     }
     checkliste.modus = modus;
     checkliste.items = MOCKED_ITEMS;
-
-    let anzahlErledigt = 0;
-    checkliste.items.forEach(
-        item => {
-            if (item.erledigt) {
-                anzahlErledigt++;
-            }
-        }
-    );
-
-    checkliste.anzahlErledigt = anzahlErledigt;
     return of(checkliste);
 }

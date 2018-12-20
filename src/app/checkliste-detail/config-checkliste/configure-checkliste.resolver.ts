@@ -1,7 +1,7 @@
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { ChecklisteDaten, MODUS_CONFIG } from '../../shared/model/checkliste';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ChecklistenService } from '../../services/checklisten.service';
 
 @Injectable({
@@ -15,6 +15,7 @@ export class ConfigureChecklisteResolver implements Resolve<ChecklisteDaten> {
 
     resolve(route: ActivatedRouteSnapshot,
         _state: RouterStateSnapshot): Observable<ChecklisteDaten> {
-        return this.checklistenService.loadChecklisteByKuerzel(route.params['kuerzel'], MODUS_CONFIG);
+        const kuerzel = route.params['kuerzel'];
+        return this.checklistenService.loadChecklisteByKuerzel(kuerzel, MODUS_CONFIG);
     }
 }
