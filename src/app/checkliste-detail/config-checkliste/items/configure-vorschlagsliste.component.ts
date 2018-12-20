@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ChecklistenItem } from '../../../shared/model/checkliste';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { ChecklistenItem, ChecklisteDaten } from '../../../shared/model/checkliste';
 
 @Component({
   selector: 'chl-configure-vorschlagsliste',
@@ -13,6 +13,9 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
 
   @Input()
   typ: string;
+
+  @Input()
+  checkliste: ChecklisteDaten;
 
 
   constructor() { }

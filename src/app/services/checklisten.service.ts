@@ -106,7 +106,7 @@ export class ChecklistenService {
       });
   }
 
-  getChecklisteByKuerzel(kuerzel: string, modus: string): void {
+  loadChecklisteByKuerzel(kuerzel: string, modus: string): void {
 
     // TODO: http
 
@@ -138,7 +138,7 @@ export class ChecklistenService {
     checkliste.items = this.mockedItems;
     this.logger.debug('ChecklistenService: ' + JSON.stringify(checkliste));
 
-    store.initGewaehlteCheckliste(checkliste);
+    store.updateCheckliste(checkliste);
   }
 }
 

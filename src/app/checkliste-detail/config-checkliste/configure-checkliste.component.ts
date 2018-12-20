@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklisteDaten, ChecklistenItem, EINKAUFSLISTE } from '../../shared/model/checkliste';
-import { Observable } from 'rxjs';
+import { ChecklisteDaten } from '../../shared/model/checkliste';
 import { store } from '../../store/app-data';
+import { getUnbearbeiteteItems, getBarbeiteteItems } from '../../shared/utils/checkliste.utils';
 
 @Component({
   selector: 'chl-configure-checkliste',
@@ -10,18 +10,21 @@ import { store } from '../../store/app-data';
 })
 export class ConfigureChecklisteComponent implements OnInit {
 
-  checkliste$: Observable<ChecklisteDaten>;
-
-  bearbeiteteItems$: Observable<ChecklistenItem[]>;
-
-  unbearbeiteteItems$: Observable<ChecklistenItem[]>;
+  checkliste: ChecklisteDaten;
 
   constructor() { }
 
   ngOnInit() {
-    // TODO: unsubscribe!!!!
-    this.checkliste$ = store.gewaehlteCheckliste$;
-    this.bearbeiteteItems$ = store.bearbeiteteItems$;
-    this.unbearbeiteteItems$ = store.unbearbeiteteItems$;
+    store.gewaehlteCheckliste$.subscribe(
+      cl => this.checkliste = cl
+    );
+  }
+
+  get unbearbeiteteItems() {
+    return getUnbearbeiteteItems(this.checkliste);
+  }
+
+  get bearbeiteteItems() {
+    return getBarbeiteteItems(this.checkliste);
   }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, MODUS_CONFIG, MODUS_EDIT } from '../shared/model/checkliste';
 import { Logger } from '@nsalaun/ng-logger';
 import { environment } from '../../environments/environment';
+import { ChecklistenService } from '../services/checklisten.service';
 
 @Component({
   selector: 'chl-checkliste',
@@ -16,7 +17,7 @@ export class ChecklisteComponent implements OnInit {
 
   showFilename: boolean;
 
-  constructor(private router: Router, private logger: Logger) {
+  constructor(private router: Router, private checklistenService: ChecklistenService, private logger: Logger) {
     if (!environment.production) {
       this.showFilename = true;
     }
@@ -27,15 +28,15 @@ export class ChecklisteComponent implements OnInit {
   configure() {
     this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + this.checkliste);
     if (this.checkliste.kuerzel) {
+      this.checklistenService.loadChecklisteByKuerzel(this.checkliste.kuerzel, MODUS_CONFIG);
       this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + this.checkliste.kuerzel);
     }
   }
   execute() {
     this.logger.debug('ChecklisteComponent.execute: this.checkliste=' + this.checkliste);
     if (this.checkliste.kuerzel) {
+      this.checklistenService.loadChecklisteByKuerzel(this.checkliste.kuerzel, MODUS_EDIT);
       this.router.navigateByUrl('/checkliste/' + MODUS_EDIT + '/' + this.checkliste.kuerzel);
     }
   }
-
-
 }
