@@ -2,20 +2,20 @@
 
   <!-- Dies hier soll im Dialog gezeichnet werden (Übergabe über secModalBody) -->
   <ng-template #secModalBody>
-     <p>Hier kommt die Sicherheitsabfrage</p>
+    <p>Hier kommt die Sicherheitsabfrage</p>
     <div>
       <button>Ja</button>
     </div>
   </ng-template>
 
-  <chl-modal class="sec-modal" [body]="secModalBody">
-
-  </chl-modal>
+  <ng-template [chlModalOpenOnClick]="trashButton">
+    <chl-modal class="sec-modal" [body]="secModalBody"></chl-modal>
+  </ng-template>
 
 
   <div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">
     <div class="card-header">
-      <div #trashButton class="trash" (click)="delete()">
+      <div #trashButton class="trash">
         <i class="fa fa-trash"></i>
       </div>
     </div>

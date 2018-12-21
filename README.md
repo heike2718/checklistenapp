@@ -9,3 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Notizen
+Grundgerüst Dialog mit Verwendung von *ngTemplateOutlet: im commit d2f9728890f51ab61973371dcb6b18f41a845cc7
+
