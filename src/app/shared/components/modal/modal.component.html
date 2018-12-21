@@ -1,0 +1,19 @@
+<div class="modal-overlay">
+
+  <div class="modal-body">
+
+    <!-- wrapper für *ngIf - else -->
+    <ng-container *ngIf="body else projectContent">
+
+      <!--hier das, was über die input-property vom parent element übergeben wurde -->
+      <ng-container *ngTemplateOutlet="body">
+
+      </ng-container>
+    </ng-container>
+
+    <!-- falls body nicht gefüllt, dann content von innerhalb des ch-modal-elementes hierher projezieren-->
+    <ng-template #projectContent>
+      <ng-content></ng-content>
+    </ng-template>
+  </div>
+</div>

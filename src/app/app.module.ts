@@ -25,6 +25,7 @@ import { FilterChecklisteItemsPipe } from './shared/pipes/filter-checkliste-item
 import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -49,7 +50,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ExecuteItemlisteComponent,
     FilterChecklisteItemsPipe,
     HomeComponent,
-    StatistikChecklistePipe
+    StatistikChecklistePipe,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

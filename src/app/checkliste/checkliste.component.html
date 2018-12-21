@@ -1,24 +1,40 @@
-<div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">
-  <div class="card-header">
-    <div class="trash" (click)="delete()">
-      <i class="fa fa-trash"></i>
+<div class="container">
+
+  <!-- Dies hier soll im Dialog gezeichnet werden (Übergabe über secModalBody) -->
+  <ng-template #secModalBody>
+     <p>Hier kommt die Sicherheitsabfrage</p>
+    <div>
+      <button>Ja</button>
     </div>
-  </div>
-  <div class="card-body">
-    <h4 class="card-title">{{checkliste.name}}
-      <span class="badge badge-dark">{{checkliste.anzahlErledigt}}</span>
-    </h4>
-    <p class="card-text">
-      {{checkliste.typ}}</p>
-    <p *ngIf="showFilename">checkliste.component.ts (Input: checkliste)</p>
-  </div>
-  <div class="card-footer">
-    <div class="row">
-      <div class="col-6">
-        <button class="btn-default btn-block" (click)="configure()">config</button>
+  </ng-template>
+
+  <chl-modal class="sec-modal" [body]="secModalBody">
+
+  </chl-modal>
+
+
+  <div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">
+    <div class="card-header">
+      <div #trashButton class="trash" (click)="delete()">
+        <i class="fa fa-trash"></i>
       </div>
-      <div class="col-6">
-        <button class="btn-default btn-block" (click)="execute()">exec</button>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">{{checkliste.name}}
+        <span class="badge badge-dark">{{checkliste.anzahlErledigt}}</span>
+      </h4>
+      <p class="card-text">
+        {{checkliste.typ}}</p>
+      <p *ngIf="showFilename">checkliste.component.ts (Input: checkliste)</p>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-6">
+          <button class="btn-default btn-block" (click)="configure()">config</button>
+        </div>
+        <div class="col-6">
+          <button class="btn-default btn-block" (click)="execute()">exec</button>
+        </div>
       </div>
     </div>
   </div>

@@ -17,3 +17,6 @@
   cursor: pointer;
 }
 
+::ng-deep .sec-modal  .modal-body {
+  min-width: 400px;
+}
