@@ -4,6 +4,7 @@ import { ChecklisteDaten, MODUS_CONFIG, MODUS_EXEC } from '../shared/model/check
 import { Logger } from '@nsalaun/ng-logger';
 import { environment } from '../../environments/environment';
 import { ChecklistenService } from '../services/checklisten.service';
+import { ModalService } from '../shared/components/modal/modal.service';
 
 @Component({
   selector: 'chl-checkliste',
@@ -17,7 +18,10 @@ export class ChecklisteComponent implements OnInit {
 
   showFilename: boolean;
 
-  constructor(private router: Router, private checklistenService: ChecklistenService, private logger: Logger) {
+  constructor(private router: Router,
+    private checklistenService: ChecklistenService,
+    private modalService: ModalService,
+    private logger: Logger) {
     if (!environment.production) {
       this.showFilename = true;
     }
@@ -38,4 +42,9 @@ export class ChecklisteComponent implements OnInit {
     this.logger.debug('ChecklisteComponent.delete: this.checkliste=' + JSON.stringify(this.checkliste));
     this.checklistenService.deleteCheckliste(this.checkliste);
   }
+
+  closeModalQuietly() {
+    this.modalService.close();
+  }
+
 }

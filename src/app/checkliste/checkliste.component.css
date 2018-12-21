@@ -10,13 +10,14 @@
   background-color: aqua;
 }
 
-.card-header > .trash {
+.card-header>.trash {
   font-size: 2rem;
   text-align: right;
   display: block;
   cursor: pointer;
 }
 
-::ng-deep .sec-modal  .modal-body {
+::ng-deep .sec-modal .modal-body {
   min-width: 400px;
 }
+

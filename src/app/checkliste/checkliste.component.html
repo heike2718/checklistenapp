@@ -2,19 +2,22 @@
 
   <!-- Dies hier soll im Dialog gezeichnet werden (Übergabe über secModalBody) -->
   <ng-template #secModalBody>
-    <p>Hier kommt die Sicherheitsabfrage</p>
-    <div>
-      <button>Ja</button>
+    <p>Weg ist weg. Trotzdem löschen?</p>
+    <div class="row">
+      <div class="col-6">
+        <button class="col-12" (click)="delete()"  >Jupp</button>
+      </div>
+      <div class="col-6">
+        <button class="col-12" (click)="closeModalQuietly()">Nö</button>
+      </div>
     </div>
   </ng-template>
 
-  <ng-container *ngIf="checkliste.anzahlErledigt > 0">
-    <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="secModalBody" *chlModalOpenOnClick="trashButton">
+  <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="secModalBody" *chlModalOpenOnClick="trashButton">
 
-      <i class="fa fa-times" (click)="modal.close()"></i>
+    <i class="fa fa-times" (click)="modal.close()"></i>
 
-    </chl-modal>
-  </ng-container>
+  </chl-modal>
 
   <div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">
     <div class="card-header">
