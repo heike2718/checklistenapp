@@ -32,7 +32,7 @@ const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
         typ: EINKAUFSLISTE,
         items: [],
         modus: MODUS_SCHROEDINGER,
-        anzahlErledigt: 2,
+        anzahlErledigt: 0,
         version: 2
     },
     {
