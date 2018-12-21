@@ -4,12 +4,36 @@
 
   <h3>{{checkliste.typ}} erstellen </h3>
 
+  <form id="nameForm">
+    <label for="nameInput">Name*:</label>
+    <input type="text" class="form-control" name="nameInput" [(ngModel)]="checkliste.name" required />
+  </form>
+
 
   <chl-configure-vorschlagsliste></chl-configure-vorschlagsliste>
 
-  <h4>{{checkliste | statistikCheckliste}}</h4>
+  <h4>{{checkliste | statistikCheckliste}}*</h4>
 
   <chl-configure-edit></chl-configure-edit>
+
+  <div class="row btn-container">
+    <div class="col-md-4 btn-wrapper">
+      <button class="col-md-12 btn btn-default" [disabled]="saveDisabled(checkliste)" (click)="save(checkliste)">
+        speichern
+      </button>
+    </div>
+    <div class="col-md-4 btn-wrapper">
+      <button class="col-md-12 btn btn-default" [disabled]="saveDisabled(checkliste)" (click)="saveAndClose(checkliste)">
+        speichern und schließen
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button class="col-md-12 btn btn-default" (click)="delete(checkliste)">
+        löschen
+      </button>
+    </div>
+  </div>
+
 
 </div>
 

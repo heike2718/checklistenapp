@@ -12,10 +12,10 @@
       <tr *ngFor="let item of getItems(checkliste)">
         <td class="item-btn" chlBackgroundColor [typ]="checkliste.typ" (click)="unsubscribeAusgewaehlt(checkliste.items, item)" >{{item.name}}</td>
         <td>
-          <input type="checkbox">
+          <input type="checkbox" [(ngModel)]="item.optional">
         </td>
         <td>
-          <input type="text" value="{{item.kommentar}}">
+          <input type="text" [(ngModel)]="item.kommentar">
         </td>
       </tr>
     </tbody>

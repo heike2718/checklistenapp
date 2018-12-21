@@ -24,6 +24,7 @@ import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checklist
 import { FilterChecklisteItemsPipe } from './shared/pipes/filter-checkliste-items.pipe';
 import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
+import { FormsModule } from '@angular/forms';
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -55,6 +56,7 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     AppRoutingModule,
     RouterModule.forRoot(routerConfig),
     HttpModule,
+    FormsModule,
     NgLoggerModule.forRoot(LOG_LEVEL),
     NgbModule.forRoot(),
     NgbCollapseModule,
