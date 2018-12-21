@@ -21,3 +21,18 @@
   background: rgba(51, 51, 51, 0.2);
   z-index: 10;
 }
+
+
+:host .close-icon {
+  width: 100%;
+  height: 20px;
+}
+
+/* === deep erfasst alle icons: die aus dem projected content und die, die möglicherweise aus dem modal selbst kommen === */
+:host .close-icon  ::ng-deep i {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  height: 15px;
+  cursor: pointer;
+}

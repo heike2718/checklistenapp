@@ -12,17 +12,33 @@ export class ModalComponent implements OnInit {
 
   @Input()
   body: TemplateRef<any>;
-  constructor(private modalService: ModalService,
-    private eventManager: EventManager) { }
+
+  @Input()
+  hideOnEscape = true;
+
+    @Input()
+  hideOnClickOutside = true;
+
+
+    constructor(private modalService: ModalService,
+      private eventManager: EventManager) { }
 
   ngOnInit() {
     this.eventManager.addGlobalEventListener('window', 'keyup.esc', () => {
-      this.closeModal();
+      if (this.hideOnEscape) {
+        this.close();
+      }
     });
   }
 
-  closeModal() {
+  close() {
     this.modalService.close();
+  }
+
+  onClickOutsideModal() {
+    if (this.hideOnClickOutside) {
+      this.close();
+    }
   }
 
   cancelClick(event: KeyboardEvent) {

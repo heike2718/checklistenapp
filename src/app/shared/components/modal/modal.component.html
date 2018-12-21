@@ -1,6 +1,11 @@
-<div class="modal-overlay" (click)="closeModal()">
+<div class="modal-overlay" (click)="onClickOutsideModal()">
 
   <div class="modal-body" (click)="cancelClick($event)">
+
+    <div class="close-icon">
+      <!-- projeziert nur den  durch den selector definierten Teil des contents -->
+      <ng-content select="i"></ng-content>
+    </div>
 
     <!-- wrapper für *ngIf - else -->
     <ng-container *ngIf="body else projectContent">
@@ -13,6 +18,7 @@
 
     <!-- falls body nicht gefüllt, dann content von innerhalb des ch-modal-elementes hierher projezieren-->
     <ng-template #projectContent>
+      <!-- projeziert alle Teile des contents, die nicht durch spezielle selectoren projeziert wurden -->
       <ng-content></ng-content>
     </ng-template>
   </div>
