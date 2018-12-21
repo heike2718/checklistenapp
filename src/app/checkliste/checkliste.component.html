@@ -9,9 +9,7 @@
   </ng-template>
 
   <ng-container *ngIf="checkliste.anzahlErledigt > 0">
-    <ng-container *chlModalOpenOnClick="trashButton">
-      <chl-modal class="sec-modal" [body]="secModalBody"></chl-modal>
-    </ng-container>
+    <chl-modal [body]="secModalBody" *chlModalOpenOnClick="trashButton"></chl-modal>
   </ng-container>
 
   <div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">

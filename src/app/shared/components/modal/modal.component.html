@@ -1,6 +1,6 @@
-<div class="modal-overlay">
+<div class="modal-overlay" (click)="closeModal()">
 
-  <div class="modal-body">
+  <div class="modal-body" (click)="cancelClick($event)">
 
     <!-- wrapper für *ngIf - else -->
     <ng-container *ngIf="body else projectContent">

@@ -1,13 +1,21 @@
-import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef, Input, OnInit } from '@angular/core';
+import { ModalService } from './modal.service';
 
 @Directive({
   selector: '[chlModalOpenOnClick]'
 })
-export class ModalOpenOnClickDirective {
+export class ModalOpenOnClickDirective implements OnInit {
 
   // templateRef is a handle to the template i.e <ng-template></ng-template>
-  constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {
-    // viewContainer.createEmbeddedView(templateRef);
+  constructor(private templateRef: TemplateRef<any>,
+    private viewContainer: ViewContainerRef,
+    private modalService: ModalService) {
+  }
+
+  ngOnInit() {
+    this.modalService.close$.subscribe(
+      () => this.viewContainer.clear()
+    );
   }
 
   /*
