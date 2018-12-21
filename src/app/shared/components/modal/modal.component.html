@@ -11,7 +11,7 @@
     <ng-container *ngIf="body else projectContent">
 
       <!--hier das, was über die input-property vom parent element übergeben wurde -->
-      <ng-container *ngTemplateOutlet="body">
+      <ng-container *ngTemplateOutlet="body;context:context">
 
       </ng-container>
     </ng-container>

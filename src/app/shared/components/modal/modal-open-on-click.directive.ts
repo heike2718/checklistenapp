@@ -1,10 +1,19 @@
-import { Directive, TemplateRef, ViewContainerRef, Input, OnInit } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from './modal.service';
 
 @Directive({
   selector: '[chlModalOpenOnClick]'
 })
-export class ModalOpenOnClickDirective implements OnInit {
+export class ModalOpenOnClickDirective implements OnInit, OnDestroy {
+
+  private elements: HTMLBaseElement[];
+
+  private clickHandler = (() => {
+    this.viewContainer.clear();
+    this.viewContainer.createEmbeddedView(this.templateRef);
+  }).bind(this);
+  // ^^ bind(this), damit this innerhalb des clickHandlers sich auf die Direktive bezieht.
+
 
   // templateRef is a handle to the template i.e <ng-template></ng-template>
   constructor(private templateRef: TemplateRef<any>,
@@ -18,6 +27,10 @@ export class ModalOpenOnClickDirective implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    this.elements.forEach(el => el.removeEventListener('click', this.clickHandler));
+  }
+
   /*
    * Syntax: typescript-Setter mit gleichem Namen wie der selector
    * sorgt dafür, dass in der syntax [chlModalOpenOnClick]="[domElementRef1,domElementRef2]"
@@ -26,20 +39,21 @@ export class ModalOpenOnClickDirective implements OnInit {
   @Input()
   set chlModalOpenOnClick(els) {
 
-    let elements: HTMLBaseElement[];
-
     // ein oder mehrere elemente durchreichen
     if (els.length) {
-      elements = els;
+      this.elements = els;
     } else {
-      elements = [els];
+      this.elements = [els];
     }
 
-    elements.forEach(el => {
-      el.addEventListener('click', () => {
-        this.viewContainer.clear();
-        this.viewContainer.createEmbeddedView(this.templateRef);
-      });
-    });
+    // nicht this.clickHandlet()!!! da der handler sonst sofort ausgeführt wird und die reference anschließend undefined ist.
+    this.elements.forEach(el => el.addEventListener('click', this.clickHandler));
   }
 }
+
+
+
+
+
+
+
