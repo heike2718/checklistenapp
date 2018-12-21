@@ -4,10 +4,12 @@ import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem } from '../shared/
 import * as _ from 'lodash';
 
 export const initialCheckliste: ChecklisteDaten = {
+  kuerzel: '',
   typ: '',
   modus: MODUS_SCHROEDINGER,
   items: [],
-  anzahlErledigt: 0
+  anzahlErledigt: 0,
+  version: 0
 };
 
 
@@ -31,6 +33,12 @@ export class DataStore {
 
   initChecklisten(alleChecklisten: ChecklisteDaten[]) {
     this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
+  }
+
+  addCheckliste(checkliste: ChecklisteDaten) {
+    const neueListe = _.cloneDeep(this.checklistenSubject.value);
+    neueListe.push(checkliste);
+    this.checklistenSubject.next(neueListe);
   }
 
   deleteCheckliste(kuerzel: string) {

@@ -14,17 +14,17 @@
 
 <div class="row btn-container">
   <div class="col-md-4">
-    <div chlBackgroundColor [typ]="'EINKAUFSLISTE'" class="col-md-12 btn">
+    <div chlBackgroundColor [typ]="'EINKAUFSLISTE'" class="col-md-12 btn" (click)="neueCheckliste('EINKAUFSLISTE')">
       neue EINKAUFSLISTE
     </div>
   </div>
   <div class="col-md-4">
-    <div chlBackgroundColor [typ]="'PACKLISTE'" class="col-md-12 btn">
+    <div chlBackgroundColor [typ]="'PACKLISTE'" class="col-md-12 btn" (click)="neueCheckliste('PACKLISTE')">
       neue PACKLISTE
     </div>
   </div>
   <div class="col-md-4">
-    <div chlBackgroundColor [typ]="'TODOS'" class="col-md-12 btn">
+    <div chlBackgroundColor [typ]="'TODOS'" class="col-md-12 btn" (click)="neueCheckliste('TODOS')">
       neue TODOLISTE
     </div>
   </div>

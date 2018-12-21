@@ -13,6 +13,8 @@ export class ConfigureChecklisteComponent implements OnInit {
 
   checkliste$: Observable<ChecklisteDaten>;
 
+  name: string;
+
   constructor() { }
 
   ngOnInit() {

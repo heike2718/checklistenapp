@@ -27,15 +27,11 @@ export class ChecklisteComponent implements OnInit {
 
   configure() {
     this.logger.debug('ChecklisteComponent.configure: this.checkliste=' + JSON.stringify(this.checkliste));
-    if (this.checkliste.kuerzel) {
-      this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + this.checkliste.kuerzel);
-    }
+    this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + this.checkliste.kuerzel);
   }
   execute() {
     this.logger.debug('ChecklisteComponent.execute: this.checkliste=' + JSON.stringify(this.checkliste));
-    if (this.checkliste.kuerzel) {
-      this.router.navigateByUrl('/checkliste/' + MODUS_EXEC + '/' + this.checkliste.kuerzel);
-    }
+    this.router.navigateByUrl('/checkliste/' + MODUS_EXEC + '/' + this.checkliste.kuerzel);
   }
 
   delete() {

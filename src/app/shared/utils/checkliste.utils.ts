@@ -25,9 +25,9 @@ function getListeExecution(items: ChecklistenItem[], semantik: string): Checklis
   }
   switch (semantik) {
     case LISTE_VORSCHLAEGE:
-      return items.filter(it => !it.erledigt);
+      return items.filter(it => it.markiert && !it.erledigt);
     case LISTE_AUSGEWAEHLT:
-      return items.filter(it => it.erledigt);
+      return items.filter(it => it.markiert && it.erledigt);
     default: return [];
   }
 }

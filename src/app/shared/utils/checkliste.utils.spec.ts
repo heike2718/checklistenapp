@@ -54,7 +54,7 @@ describe('ChecklisteUtils', () => {
             checkliste => {
                 const erledigte: ChecklistenItem[] = filterChecklisteItems(checkliste.items, kriterium);
                 // Assert
-                expect(erledigte.length).toEqual(2);
+                expect(erledigte.length).toEqual(3);
             }
         );
     });
@@ -72,7 +72,7 @@ describe('ChecklisteUtils', () => {
             checkliste => {
                 const vorgemerkte: ChecklistenItem[] = filterChecklisteItems(checkliste.items, kriterium);
                 // Assert
-                expect(vorgemerkte.length).toEqual(4);
+                expect(vorgemerkte.length).toEqual(6);
             }
         );
     });

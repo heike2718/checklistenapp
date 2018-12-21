@@ -6,7 +6,7 @@ import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODU
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { loadCheckliste, loadChecklisten, removeCheckliste } from './mockDb';
+import { loadCheckliste, loadChecklisten, removeCheckliste, neueCheckliste } from './mockDb';
 import { MessagesService } from './messages.service';
 import { INFO } from '../shared/model/message';
 
@@ -47,6 +47,10 @@ export class ChecklistenService {
     );
 
     return checkliste$;
+  }
+
+  createNewCheckliste(typ: string): Observable<ChecklisteDaten> {
+    return neueCheckliste(typ);
   }
 
   deleteCheckliste(checkliste: ChecklisteDaten): void {
