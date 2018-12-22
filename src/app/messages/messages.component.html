@@ -1,15 +1,24 @@
 <div *ngIf="(info$ | async) as info">
-  <div class="row alert alert-info btn btn-block">
-    <div class="col-xs-10 col-sm-11" (click)="closeInfo()">{{info}}</div>
+  <div class="container-fluid">
+    <button class="alert alert-info msg-btn" (click)="closeInfo()">
+      <p>{{info}}</p>
+      <p>(zum Schließen klicken)</p>
+    </button>
   </div>
 </div>
 <div *ngIf="(warn$ | async) as warn">
-  <div class="row alert alert-warning btn btn-block">
-    <div class="col-xs-10 col-sm-11" (click)="closeWarn()">{{warn}}</div>
+  <div class="container-fluid">
+    <button class="alert alert-warning msg-btn" (click)="closeWarn()">
+      <p>{{warn}}</p>
+      <p>(zum Schließen klicken)</p>
+    </button>
   </div>
 </div>
 <div *ngIf="(error$ | async) as error">
-  <div class="row alert alert-danger btn btn-block">
-    <div class="col-xs-10 col-sm-11" (click)="closeErrors()">{{error}}</div>
+  <div class="container-fluid">
+    <button class="alert alert-danger msg-btn" (click)="closeErrors()">
+      <p>{{error}}</p>
+      <p>(zum Schließen klicken)</p>
+    </button>
   </div>
 </div>

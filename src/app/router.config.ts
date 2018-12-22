@@ -5,6 +5,7 @@ import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checklis
 import { ConfigureChecklisteResolver } from './checkliste-detail/config-checkliste/configure-checkliste.resolver';
 import { ExecuteChecklisteResolver } from './checkliste-detail/execute-checkliste/execute-checkliste.resolver';
 import { HomeComponent } from './home/home.component';
+import { ErrorComponent } from './error/error.component';
 
 export const routerConfig: Routes = [
     {
@@ -33,10 +34,10 @@ export const routerConfig: Routes = [
             detail: ExecuteChecklisteResolver
         }
     },
-    // {
-    //     path: 'lesson/new',
-    //     component: CreateLessonComponent
-    // },
+    {
+        path: 'error',
+        component: ErrorComponent
+    },
     {
         path: '',
         pathMatch: 'full',

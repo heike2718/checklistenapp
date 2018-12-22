@@ -18,6 +18,11 @@ export class MessagesService {
   error$: Observable<string> = this.errorSubject.asObservable();
 
 
+  constructor() {
+    console.log('messagesService instanziiert');
+  }
+
+
 
   info(message: string) {
     this.infoSubject.next(message);

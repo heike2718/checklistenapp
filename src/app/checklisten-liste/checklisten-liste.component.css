@@ -12,3 +12,15 @@
 :host .btn-wrapper  {
     margin-bottom: 10px;
 }
+
+
+
+::ng-deep .modal-body {
+  min-width: 400px;
+}
+
+::ng-deep .btn-container {
+    margin-top: 20px;
+    font-size: 0.8rem;
+}
+

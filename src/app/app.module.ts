@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { NgLoggerModule, Level } from '@nsalaun/ng-logger';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +27,9 @@ import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pip
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { ModalOpenOnClickDirective } from './shared/components/modal/modal-open-on-click.directive';
+import { GlobalErrorHandler } from './error/error-handler.service';
+import { ErrorComponent } from './error/error.component';
+
 
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
@@ -53,7 +56,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     HomeComponent,
     StatistikChecklistePipe,
     ModalComponent,
-    ModalOpenOnClickDirective
+    ModalOpenOnClickDirective,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,11 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     NgbCollapseModule,
 
   ],
-  providers: [],
+  providers: [
+    GlobalErrorHandler,
+    ,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

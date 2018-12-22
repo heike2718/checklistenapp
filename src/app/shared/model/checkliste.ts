@@ -27,7 +27,7 @@ export interface ChecklisteDaten {
     anzahlErledigt: number;
     items: ChecklistenItem[];
     version: number;
-    modus: string;
+    modus?: string;
 }
 
 export interface Filterkriterium {

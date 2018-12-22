@@ -6,27 +6,29 @@
 
 
   <!-- Dialog zum Anlegen eines neuen Items -->
-  <ng-template #itemNeuBody let-closeImmediate="closeImmediate">
-    <form id="itemForm">
-      <div class="group">
-        <label for="inputItemName">Name*:</label>
-        <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem" required aria-describedby="itemNameHelp"
-          placeholder="Name">
-      </div>
-      <div class="group">
-        <label for="inputItemKommentar">Kommentar:</label>
-        <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar" [(ngModel)]="kommentarItem" required
-          aria-describedby="itemKommentarHelp" placeholder="Kommentar">
-      </div>
-      <div class="row btn-container">
-        <div class="col-6 btn-wrapper">
-          <button class="col-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
+  <ng-template #itemNeuBody>
+    <div class="container-fluid">
+      <form id="itemForm">
+        <div class="group">
+          <label for="inputItemName">Name*:</label>
+          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem" required aria-describedby="itemNameHelp"
+            placeholder="Name">
         </div>
-        <div class="col-6 btn-wrapper">
-          <button class="col-12" (click)="closeModalQuietly()">doch nicht</button>
+        <div class="group">
+          <label for="inputItemKommentar">Kommentar:</label>
+          <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar" [(ngModel)]="kommentarItem" required
+            aria-describedby="itemKommentarHelp" placeholder="Kommentar">
         </div>
-      </div>
-    </form>
+        <div class="row btn-container">
+          <div class="col-6 btn-wrapper">
+            <button class="col-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
+          </div>
+          <div class="col-6 btn-wrapper">
+            <button class="col-12" (click)="closeModalQuietly()">doch nicht</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </ng-template>
 
   <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="itemNeuBody" *chlModalOpenOnClick="addItemButton">
@@ -49,7 +51,7 @@
   <div class="row btn-container">
     <div class="col-md-4 btn-wrapper">
       <button #addItemButton class="col-md-12 btn btn-outline-dark">
-        <i class="fa fa-plus"></i> neues  Teil
+        <i class="fa fa-plus"></i> neues Teil
       </button>
     </div>
   </div>

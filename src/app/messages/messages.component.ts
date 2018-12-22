@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MessagesService } from '../services/messages.service';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'chl-messages',
-  templateUrl: './messages.component.html'
+  templateUrl: './messages.component.html',
+  styles: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit {
 
   info$: Observable<string>;
-
   warn$: Observable<string>;
   error$: Observable<string>;
 

@@ -2,7 +2,59 @@
 
 <div *ngIf="checklisten$ | async as checklisten else loading">
 
+  <!-- Dialog zum Anlegen einer neuen Liste -->
+  <ng-template #itemNeuBody>
+    <div class="container-fluid">
+      <form id="itemForm">
+        <div class="group">
+          <label for="inputItemName">Name*:</label>
+          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameListe" required aria-describedby="itemNameHelp"
+            placeholder="Name">
+        </div>
+        <div class="row btn-container">
+          <div class="col-md-6 btn-wrapper">
+            <button chlBackgroundColor [typ]="'EINKAUFSLISTE'" class="col-md-12 btn" [disabled]="addListeDisabled()" (click)="neueCheckliste('EINKAUFSLISTE')">
+              Einkaufen
+            </button>
+          </div>
+          <div class="col-md-6 btn-wrapper">
+            <button chlBackgroundColor [typ]="'PACKLISTE'" class="col-md-12 btn" [disabled]="addListeDisabled()" (click)="neueCheckliste('PACKLISTE')">
+              Packen
+            </button>
+          </div>
+        </div>
+        <div class="row btn-container">
+          <div class="col-md-6 btn-wrapper">
+            <button chlBackgroundColor [typ]="'TODOS'" class="col-md-12 btn" [disabled]="addListeDisabled()" (click)="neueCheckliste('TODOS')">
+              Todo
+            </button>
+          </div>
+          <div class="col-md-6 btn-wrapper">
+            <div class="col-md-12 btn btn-outline-dark" (click)="closeModalQuietly()">
+              doch nicht
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="itemNeuBody" *chlModalOpenOnClick="addListeButton">
+
+    <i class="fa fa-times" (click)="modal.close()"></i>
+
+  </chl-modal>
+
   <h3>Anzahl Checklisten: {{checklisten.length}}</h3>
+
+  <div *ngIf="checklisten.length === 0" class="row btn-container">
+  <div class="col-md-4 btn-wrapper">
+    <button class="col-md-12 btn btn-outline-dark" (click)="loadChecklisten()" >
+      <i class="fa fa-server"></i> Checklisten laden
+    </button>
+  </div>
+</div>
+
 
   <div class="row">
     <div *ngFor="let liste of checklisten" class="col-sm-12 col-md-4 col-lg-3">
@@ -14,19 +66,9 @@
 
 <div class="row btn-container">
   <div class="col-md-4 btn-wrapper">
-    <div chlBackgroundColor [typ]="'EINKAUFSLISTE'" class="col-md-12 btn" (click)="neueCheckliste('EINKAUFSLISTE')">
-      neue EINKAUFSLISTE
-    </div>
-  </div>
-  <div class="col-md-4 btn-wrapper">
-    <div chlBackgroundColor [typ]="'PACKLISTE'" class="col-md-12 btn" (click)="neueCheckliste('PACKLISTE')">
-      neue PACKLISTE
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div chlBackgroundColor [typ]="'TODOS'" class="col-md-12 btn" (click)="neueCheckliste('TODOS')">
-      neue TODOLISTE
-    </div>
+    <button #addListeButton class="col-md-12 btn btn-outline-dark">
+      <i class="fa fa-plus"></i> neues Checkliste
+    </button>
   </div>
 </div>
 

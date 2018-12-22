@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
-import { ChecklistenService } from './services/checklisten.service';
-import { Logger } from '@nsalaun/ng-logger';
 
 
 @Component({
@@ -17,11 +15,7 @@ export class AppComponent implements OnInit {
   showEnv = !environment.production;
   api = environment.apiUrl;
 
-  constructor(private checklistenService: ChecklistenService, private logger: Logger) {
-    this.logger.debug('vor Laden der Checklisten');
-    this.checklistenService.findAllChecklisten();
+  constructor() { }
 
-  }
-
-  ngOnInit() {}
+  ngOnInit() { }
 }
