@@ -53,6 +53,10 @@ export class ChecklistenService {
     return neueCheckliste(typ);
   }
 
+  saveCheckliste(checkliste: ChecklisteDaten): Observable<ChecklisteDaten> {
+    return of(checkliste);
+  }
+
   deleteCheckliste(checkliste: ChecklisteDaten): void {
 
     // TODO: http
