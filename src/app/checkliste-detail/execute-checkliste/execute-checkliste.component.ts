@@ -3,6 +3,8 @@ import { ChecklisteDaten } from '../../shared/model/checkliste';
 import { Observable } from 'rxjs';
 import { store } from '../../store/app-data';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
+import { ChecklistenService } from '../../services/checklisten.service';
 
 @Component({
   selector: 'chl-execute-checkliste',
@@ -13,7 +15,7 @@ export class ExecuteChecklisteComponent implements OnInit {
 
   checkliste$: Observable<ChecklisteDaten>;
 
-  constructor() { }
+  constructor(private router: Router, private checklistenService: ChecklistenService) { }
 
   ngOnInit() {
     this.checkliste$ = store.gewaehlteCheckliste$;
@@ -22,4 +24,13 @@ export class ExecuteChecklisteComponent implements OnInit {
   showFilename(): boolean {
     return !environment.production;
   }
+
+  save(checkliste: ChecklisteDaten) {
+
+  }
+
+  saveAndClose(checkliste: ChecklisteDaten) {
+    this.router.navigateByUrl('/listen');
+  }
+
 }

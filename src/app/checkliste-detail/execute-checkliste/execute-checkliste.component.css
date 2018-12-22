@@ -1,0 +1,8 @@
+:host .btn-wrapper  {
+    margin-bottom: 10px;
+}
+
+:host .btn-wrapper > button {
+    padding: 10px 0 10px 0;
+}
+

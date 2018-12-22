@@ -1,3 +1,16 @@
 :host .btn-wrapper  {
     margin-bottom: 10px;
 }
+
+:host .btn-wrapper > button {
+    padding: 10px 0 10px 0;
+}
+
+::ng-deep .modal-body {
+  min-width: 800px;
+}
+
+::ng-deep .btn-container {
+    margin-top: 20px;
+}
+
