@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable, pipe, of } from 'rxjs';
-import { map, publishLast, refCount, catchError } from 'rxjs/operators';
-import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODUS_SCHROEDINGER } from '../shared/model/checkliste';
+import { Observable, of } from 'rxjs';
+import { map, publishLast, refCount } from 'rxjs/operators';
+import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { loadCheckliste, loadChecklisten, removeCheckliste, neueCheckliste } from './mockDb';
 import { MessagesService } from './messages.service';
-import { INFO, Message, WARN, ERROR } from '../shared/model/message';
+import { Message, WARN, ERROR, ResponsePayload } from '../shared/model/message';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -22,83 +21,132 @@ export class ChecklistenService {
   findAllChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
 
-    // const checklisten$: Observable<ChecklisteDaten[]> = loadChecklisten();
-
     const checklisten$ = this.http.get(url).pipe(
-      map(res => <ChecklisteDaten[]>res.json().data),
+      map(res => <ResponsePayload>res.json()),
       publishLast(),
       refCount()
     );
 
     checklisten$.subscribe(
-      listen => {
-        store.initChecklisten(listen);
-        this.logger.debug('Anzahl Checklisten: ' + listen.length);
+      payload => {
+        if (payload.data) {
+          const listen = payload.data;
+          store.initChecklisten(listen);
+          this.logger.debug('Anzahl Checklisten: ' + listen.length);
+        }
       },
       (error => {
-        this.handleError(error, 'Checklisten laden');
-        // throw(error);
+        this.handleError(error, 'findAllChecklisten');
+      }));
+  }
+
+
+  createNewCheckliste(typ: string, name: string): void {
+
+    const url = environment.apiUrl + '/checklisten';
+
+    const checkliste: ChecklisteDaten = {
+      kuerzel: 'neu',
+      name: name,
+      items: [],
+      typ: typ,
+      version: 0
+    };
+
+    this.logger.debug('vor dem Anlegen der Checkliste ' + JSON.stringify(checkliste));
+
+    // const checkliste$ = this.http.post(url, checkliste).pipe(
+    //   map(res => <ResponsePayload>res.json()),
+    //   publishLast(),
+    //   refCount()
+    // );
+
+    let neueListe: ChecklisteDaten;
+    this.http.post(url, checkliste).pipe(
+      map(res => <ResponsePayload>res.json()),
+      publishLast(),
+      refCount()
+    ).subscribe(
+      resp => {
+        neueListe = resp.data;
+        store.addCheckliste(neueListe);
+      },
+      (error => {
+        this.handleError(error, 'createNewCheckliste');
+      }));
+
+    // return of(neueListe);
+  }
+
+  saveCheckliste(checkliste: ChecklisteDaten, modus: string): void {
+
+    this.logger.debug('saveCheckliste: ' + JSON.stringify(checkliste));
+
+    const url = environment.apiUrl + '/checklisten/' + checkliste.kuerzel;
+
+    // Modus ist transient fürs Backend
+    checkliste.modus = undefined;
+    const potentielleCheckliste$ = this.http.put(url, checkliste).pipe(
+      map(res => <ResponsePayload>res.json()),
+      publishLast(),
+      refCount()
+    );
+
+    potentielleCheckliste$.subscribe(
+      resp => {
+        if (resp.data) {
+          const persistierte = resp.data;
+          persistierte.modus = modus;
+          store.updateCheckliste(persistierte);
+        }
+      },
+      (error => {
+        this.handleError(error, 'saveCheckliste');
+      }));
+  }
+
+  deleteCheckliste(checkliste: ChecklisteDaten): void {
+
+    // TODO: http
+    const url = environment.apiUrl + '/checklisten/' + checkliste.kuerzel;
+
+    const observable$ = this.http.delete(url).pipe(
+      map(res => <Message>res.json().message),
+      publishLast(),
+      refCount()
+    );
+
+    observable$.subscribe(
+      message => {
+        store.deleteCheckliste(checkliste.kuerzel);
+      },
+      (error => {
+        this.handleError(error, 'deleteCheckliste');
       }));
   }
 
   loadChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
 
     this.logger.debug('loadChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
-    // TODO: http
-    const checkliste$ = loadCheckliste(kuerzel, modus);
 
-    checkliste$.subscribe(
-      checkliste => store.updateCheckliste(checkliste)
-    );
 
-    return checkliste$;
+    const checkliste = store.findChecklisteByKuerzel(kuerzel);
+    if (checkliste) {
+      checkliste.modus = modus;
+      store.updateCheckliste(checkliste);
+      return of(checkliste);
+    }
+
+    return undefined;
   }
 
-  createNewCheckliste(typ: string, name: string): Observable<ChecklisteDaten> {
-
-    const url = environment.apiUrl + '/checklisten';
-
-    const checkliste: ChecklisteDaten = {
-      kuerzel: '8',
-      name: name,
-      anzahlErledigt: 0,
-      items: [],
-      typ: typ,
-      version: 0
-    };
-
-
-
-    return neueCheckliste(typ);
-  }
-
-  saveCheckliste(checkliste: ChecklisteDaten): Observable<ChecklisteDaten> {
-    return of(checkliste);
-  }
-
-  deleteCheckliste(checkliste: ChecklisteDaten): void {
-
-    // TODO: http
-
-    const message$ = removeCheckliste(checkliste);
-
-    message$.subscribe(
-      msg => {
-        this.messagesService.neueMessage(msg);
-
-        if (INFO === msg.level) {
-          store.deleteCheckliste(checkliste.kuerzel);
-        }
-      }
-    );
-  }
 
 
   private handleError(error: HttpErrorResponse, context: string) {
 
     if (error instanceof ErrorEvent) {
       this.logger.error(context + ': ErrorEvent occured - ' + JSON.stringify(error));
-      throw(error);
+      throw (error);
     } else {
       switch (error.status) {
         case 0:

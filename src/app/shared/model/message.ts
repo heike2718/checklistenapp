@@ -9,3 +9,9 @@ export interface Message {
     message: string;
 }
 
+
+export interface ResponsePayload {
+    message: Message;
+    data?: any;
+}
+

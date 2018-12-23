@@ -21,10 +21,9 @@ export interface ChecklistenItem {
 }
 
 export interface ChecklisteDaten {
-    kuerzel: string;
+    kuerzel?: string;
     name?: string;
     typ: string;
-    anzahlErledigt: number;
     items: ChecklistenItem[];
     version: number;
     modus?: string;

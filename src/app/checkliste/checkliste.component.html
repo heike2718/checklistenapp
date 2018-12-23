@@ -29,7 +29,7 @@
     </div>
     <div class="card-body">
       <h4 class="card-title">{{checkliste.name}}
-        <span class="badge badge-dark">{{checkliste.anzahlErledigt}}</span>
+        <span class="badge badge-dark">{{getAnzahlOffeneItems(checkliste)}}</span>
       </h4>
       <p class="card-text">
         {{checkliste.typ}}</p>
@@ -41,7 +41,7 @@
           <button class="btn-default btn-block" (click)="configure()">config</button>
         </div>
         <div class="col-6">
-          <button class="btn-default btn-block" (click)="execute()">exec</button>
+          <button class="btn-default btn-block" [disabled]="executeDisabled(checkliste)"  (click)="execute()">exec</button>
         </div>
       </div>
     </div>

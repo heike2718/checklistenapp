@@ -3,12 +3,11 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem } from '../shared/model/checkliste';
 import * as _ from 'lodash';
 
-export const initialCheckliste: ChecklisteDaten = {
+const initialCheckliste: ChecklisteDaten = {
   kuerzel: '',
   typ: '',
   modus: MODUS_SCHROEDINGER,
   items: [],
-  anzahlErledigt: 0,
   version: 0
 };
 
@@ -67,6 +66,16 @@ export class DataStore {
   getKuerzelGewaehlteCheckliste(): string {
     const checkliste: ChecklisteDaten = this.gewaehlteChecklisteSubject.value;
     return checkliste ? checkliste.kuerzel : undefined;
+  }
+
+  findChecklisteByKuerzel(kuerzel: string): ChecklisteDaten {
+    const treffer = _.find(this.checklistenSubject.value, ['kuerzel', kuerzel]);
+    if (treffer) {
+      return <ChecklisteDaten>treffer;
+    }
+
+    return undefined;
+
   }
 }
 

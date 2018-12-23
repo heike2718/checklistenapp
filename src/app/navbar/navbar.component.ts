@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {NgbCollapse} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

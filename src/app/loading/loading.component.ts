@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, pipe, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router, NavigationStart, RoutesRecognized } from '@angular/router';
 import { map } from 'rxjs/operators';
 

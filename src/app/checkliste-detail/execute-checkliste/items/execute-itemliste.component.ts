@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChecklistenItem, ChecklisteDaten, LISTE_AUSGEWAEHLT, Filterkriterium, MODUS_EXEC } from '../../../shared/model/checkliste';
+import { ChecklistenItem, ChecklisteDaten, Filterkriterium, MODUS_EXEC } from '../../../shared/model/checkliste';
 import { Observable } from 'rxjs';
 import { store } from '../../../store/app-data';
 import { filterChecklisteItems, findItemByName } from '../../../shared/utils/checkliste.utils';

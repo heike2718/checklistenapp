@@ -71,17 +71,12 @@ export class ConfigureChecklisteComponent implements OnInit {
     }
 
     save(checkliste: ChecklisteDaten) {
-        this.checklistenService.saveCheckliste(checkliste).subscribe(
-            chl => store.updateCheckliste(chl)
-        );
+        this.checklistenService.saveCheckliste(checkliste, MODUS_CONFIG);
     }
 
     saveAndClose(checkliste: ChecklisteDaten) {
-        this.checklistenService.saveCheckliste(checkliste).subscribe(
-            chl => {
-                store.updateCheckliste(chl); this.router.navigateByUrl('/listen');
-            }
-        );
+        this.save(checkliste);
+        this.router.navigateByUrl('/listen');
     }
 
     delete(checkliste: ChecklisteDaten) {

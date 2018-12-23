@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecklistenService } from '../services/checklisten.service';
 import { Observable } from 'rxjs';
-import { ChecklisteDaten, MODUS_CONFIG } from '../shared/model/checkliste';
+import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
-import { Router } from '@angular/router';
 import { ModalService } from '../shared/components/modal/modal.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class ChecklistenListeComponent implements OnInit {
 
   nameListe: string;
 
-  constructor(private router: Router, private checklistenService: ChecklistenService, private modalService: ModalService) { }
+  constructor(private checklistenService: ChecklistenService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.checklisten$ = store.checklisten$;
@@ -36,14 +35,8 @@ export class ChecklistenListeComponent implements OnInit {
   }
 
   neueCheckliste(typ: string) {
-
-    const checkliste$ = this.checklistenService.createNewCheckliste(typ, this.nameListe);
-    checkliste$.subscribe(
-      chl => {
-        store.addCheckliste(chl);
-        this.router.navigateByUrl('/checkliste/' + MODUS_CONFIG + '/' + chl.kuerzel);
-      }
-    );
+    this.modalService.close();
+    this.checklistenService.createNewCheckliste(typ, this.nameListe);
   }
 
   loadChecklisten() {

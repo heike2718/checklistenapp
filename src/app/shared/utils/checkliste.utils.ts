@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 // tslint:disable-next-line:max-line-length
-import { ChecklisteDaten, EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODUS_CONFIG, MODUS_EXEC, Filterkriterium, LISTE_VORSCHLAEGE, LISTE_AUSGEWAEHLT } from '../model/checkliste';
+import { EINKAUFSLISTE, PACKLISTE, TODOS, ChecklistenItem, MODUS_CONFIG, MODUS_EXEC, Filterkriterium, LISTE_VORSCHLAEGE, LISTE_AUSGEWAEHLT } from '../model/checkliste';
 
 
 // === private functions ==/

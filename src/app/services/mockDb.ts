@@ -2,7 +2,6 @@
 import { ChecklisteDaten, EINKAUFSLISTE, MODUS_SCHROEDINGER, PACKLISTE, TODOS, ChecklistenItem, MODUS_EXEC, MODUS_CONFIG } from '../shared/model/checkliste';
 import { Observable, of } from 'rxjs';
 import { Message, INFO } from '../shared/model/message';
-import { initialCheckliste } from '../store/app-data';
 import * as _ from 'lodash';
 
 
@@ -14,7 +13,6 @@ const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
         typ: EINKAUFSLISTE,
         items: [],
         modus: MODUS_SCHROEDINGER,
-        anzahlErledigt: 2,
         version: 3
     },
     {
@@ -23,7 +21,6 @@ const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
         typ: PACKLISTE,
         items: [],
         modus: MODUS_SCHROEDINGER,
-        anzahlErledigt: 2,
         version: 1
     },
     {
@@ -32,7 +29,6 @@ const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
         typ: EINKAUFSLISTE,
         items: [],
         modus: MODUS_SCHROEDINGER,
-        anzahlErledigt: 0,
         version: 2
     },
     {
@@ -41,7 +37,6 @@ const MOCKED_CHECKLISTEN: ChecklisteDaten[] = [
         typ: TODOS,
         items: [],
         modus: MODUS_SCHROEDINGER,
-        anzahlErledigt: 2,
         version: 6
     }
 ];
@@ -113,7 +108,6 @@ const items = _.cloneDeep(MOCKED_ITEMS);
             it.markiert = false;
             it.erledigt = false;
             it.kommentar = undefined;
-            it.typ = typ;
         }
     );
 
@@ -121,7 +115,6 @@ const items = _.cloneDeep(MOCKED_ITEMS);
     const checkliste: ChecklisteDaten = {
         kuerzel: '8',
         name: 'neu',
-        anzahlErledigt: 0,
         modus: MODUS_CONFIG,
         items: items,
         typ: typ,

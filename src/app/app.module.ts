@@ -21,7 +21,6 @@ import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checklis
 import { ConfigureVorschlagslisteComponent } from './checkliste-detail/config-checkliste/items/configure-vorschlagsliste.component';
 import { ConfigureEditComponent } from './checkliste-detail/config-checkliste/items/configure-edit.component';
 import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checkliste/items/execute-itemliste.component';
-import { FilterChecklisteItemsPipe } from './shared/pipes/filter-checkliste-items.pipe';
 import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
 import { FormsModule } from '@angular/forms';
@@ -52,7 +51,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ConfigureVorschlagslisteComponent,
     ConfigureEditComponent,
     ExecuteItemlisteComponent,
-    FilterChecklisteItemsPipe,
     HomeComponent,
     StatistikChecklistePipe,
     ModalComponent,

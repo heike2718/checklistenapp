@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChecklisteDaten } from '../../shared/model/checkliste';
+import { ChecklisteDaten, MODUS_EXEC } from '../../shared/model/checkliste';
 import { Observable } from 'rxjs';
 import { store } from '../../store/app-data';
 import { environment } from '../../../environments/environment';
@@ -26,16 +26,11 @@ export class ExecuteChecklisteComponent implements OnInit {
   }
 
   save(checkliste: ChecklisteDaten) {
-    this.checklistenService.saveCheckliste(checkliste).subscribe(
-      chl => store.updateCheckliste(chl)
-    );
+    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC);
   }
 
   saveAndClose(checkliste: ChecklisteDaten) {
-    this.checklistenService.saveCheckliste(checkliste).subscribe(
-      chl => {
-        store.updateCheckliste(chl); this.router.navigateByUrl('/listen');
-      }
-    );
+    this.save(checkliste);
+    this.router.navigateByUrl('/listen');
   }
 }
