@@ -22,6 +22,7 @@ export class ChecklistenListeComponent implements OnInit {
 
   ngOnInit() {
     this.checklisten$ = store.checklisten$;
+    this.loadChecklisten();
   }
 
 

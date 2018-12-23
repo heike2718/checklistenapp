@@ -47,14 +47,15 @@
 
   <h3>Anzahl Checklisten: {{checklisten.length}}</h3>
 
+  <!--
   <div *ngIf="checklisten.length === 0" class="row btn-container">
-  <div class="col-md-4 btn-wrapper">
-    <button class="col-md-12 btn btn-outline-dark" (click)="loadChecklisten()" >
-      <i class="fa fa-server"></i> Checklisten laden
-    </button>
+    <div class="col-md-4 btn-wrapper">
+      <button class="col-md-12 btn btn-outline-dark" (click)="loadChecklisten()" >
+        <i class="fa fa-server"></i> Checklisten laden
+      </button>
+    </div>
   </div>
-</div>
-
+  -->
 
   <div class="row">
     <div *ngFor="let liste of checklisten" class="col-sm-12 col-md-4 col-lg-3">
