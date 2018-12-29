@@ -8,8 +8,6 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'checklistenapp';
-
   version = environment.version;
   envName = environment.envName;
   showEnv = !environment.production;
