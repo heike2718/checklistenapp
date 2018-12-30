@@ -28,6 +28,8 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { ModalOpenOnClickDirective } from './shared/components/modal/modal-open-on-click.directive';
 import { GlobalErrorHandler } from './error/error-handler.service';
 import { ErrorComponent } from './error/error.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 // Set different log level depending on environment.
@@ -71,7 +73,12 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
   providers: [
     GlobalErrorHandler,
     ,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
