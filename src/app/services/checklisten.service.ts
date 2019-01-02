@@ -18,7 +18,7 @@ export class ChecklistenService {
 
   constructor(private http: Http, private messagesService: MessagesService, private logger: Logger) { }
 
-  findAllChecklisten(): void {
+  loadChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
 
     const checklisten$ = this.http.get(url).pipe(
@@ -125,7 +125,7 @@ export class ChecklistenService {
       }));
   }
 
-  loadChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
+  findChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
 
     this.logger.debug('loadChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
 

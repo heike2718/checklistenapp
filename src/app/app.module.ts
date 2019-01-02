@@ -30,6 +30,7 @@ import { GlobalErrorHandler } from './error/error-handler.service';
 import { ErrorComponent } from './error/error.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 // Set different log level depending on environment.
@@ -57,7 +58,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     StatistikChecklistePipe,
     ModalComponent,
     ModalOpenOnClickDirective,
-    ErrorComponent
+    ErrorComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { filter, shareReplay, tap, map, catchError } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { Http } from '@angular/http';
 import { ResponsePayload } from '../shared/model/message';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,17 @@ export class AuthService {
   }
 
   parseHash(hash: string): void {
-
-
     this.loadUserInfo();
     // Am ende nach success:
     window.location.hash = '';
+  }
 
+  signIn(): void {
+
+    console.log('vor redirect');
+    const authUrl = environment.authUrl + '/signin/' + environment.clientId;
+
+    window.location.href = authUrl;
 
   }
 
@@ -51,11 +57,11 @@ export class AuthService {
   loadUserInfo() {
 
     // TODO: ist nur grobes gerüst.
-    this.http.put('/url', { property: 'property' }).pipe(
-      shareReplay(),
-      map(resp => <ResponsePayload>resp.json()),
-      tap(payload => this.subject.next(payload.data)),
-      catchError(err => of('error caught'))
-    ).subscribe();
+    // this.http.put('/url', { property: 'property' }).pipe(
+    //   shareReplay(),
+    //   map(resp => <ResponsePayload>resp.json()),
+    //   tap(payload => this.subject.next(payload.data)),
+    //   catchError(err => of('error caught'))
+    // ).subscribe();
   }
 }

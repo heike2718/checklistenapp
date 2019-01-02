@@ -40,7 +40,7 @@ export class ChecklistenListeComponent implements OnInit {
   }
 
   loadChecklisten() {
-    this.checklistenService.findAllChecklisten();
+    this.checklistenService.loadChecklisten();
   }
 
   closeModalQuietly() {
