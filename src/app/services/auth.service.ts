@@ -5,6 +5,7 @@ import { User } from '../shared/model/user';
 import { Http } from '@angular/http';
 import { ResponsePayload } from '../shared/model/message';
 import { environment } from '../../environments/environment';
+import { Logger } from '@nsalaun/ng-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
     filter(_user => !!undefined)
   );
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private loggger: Logger) {
     if (this.isLoggedIn()) {
       this.loadUserInfo();
     }
@@ -32,8 +33,8 @@ export class AuthService {
 
   signIn(): void {
 
-    console.log('vor redirect');
-    const authUrl = environment.authUrl + '/signin?clientId=' + environment.clientId;
+    const authUrl = environment.authUrl + '/signin?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
+    this.loggger.debug('signIn: authUrl=' + authUrl);
 
     window.location.href = authUrl;
 

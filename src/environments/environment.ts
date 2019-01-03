@@ -10,5 +10,7 @@ export const environment = {
   apiUrl: 'http://localhost:9300/checklisten-api',
   authUrl: 'http://localhost:4300',
   isDebugMode: true,
-  clientId: 'OdqqnVBej+0i6ibueRQSDKrrfp4jYhMWd8Zyy3kmtHI='
+  clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
+  signinRedirectUrl: 'http://localhost:4200',
+  loginRedirectUrl: 'http://localhost:4200/listen',
 };
