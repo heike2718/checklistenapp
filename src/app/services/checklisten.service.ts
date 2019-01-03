@@ -9,6 +9,7 @@ import { Logger } from '@nsalaun/ng-logger';
 import { MessagesService } from './messages.service';
 import { Message, WARN, ERROR, ResponsePayload } from '../shared/model/message';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ChecklistenService {
 
-  constructor(private http: Http, private messagesService: MessagesService, private logger: Logger) { }
+  constructor(private http: Http, private messagesService: MessagesService, private router: Router, private logger: Logger) { }
 
   loadChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
@@ -127,7 +128,7 @@ export class ChecklistenService {
 
   findChecklisteByKuerzel(kuerzel: string, modus: string): Observable<ChecklisteDaten> {
 
-    this.logger.debug('loadChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
+    this.logger.debug('findChecklisteByKuerzel called - [kuerzel=' + kuerzel + ', modus=' + modus + ']');
 
 
     const checkliste = store.findChecklisteByKuerzel(kuerzel);
@@ -135,9 +136,30 @@ export class ChecklistenService {
       checkliste.modus = modus;
       store.updateCheckliste(checkliste);
       return of(checkliste);
+    } else {
+      const checkliste$ = this.loadCheckliste(kuerzel);
+      checkliste$.subscribe(
+        cl => {
+          cl.modus = modus;
+          store.updateCheckliste(cl);
+        },
+        (error => {
+          this.handleError(error, 'findChecklisteByKuerzel');
+        }));
     }
 
     return undefined;
+  }
+
+  private loadCheckliste(kuerzel: string): Observable<ChecklisteDaten> {
+    const url = environment.apiUrl + '/checklisten/' + kuerzel;
+
+    return this.http.get(url).pipe(
+      map(res => <ChecklisteDaten>res.json()),
+      publishLast(),
+      refCount()
+    );
+
   }
 
 
@@ -153,10 +175,15 @@ export class ChecklistenService {
           this.messagesService.error(context +
             ': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
           break;
+        case 401:
+          this.showServerResponseMessage({
+            level: 'ERROR',
+            message: 'OMG - Not Found'
+          });
+          this.router.navigateByUrl('/listen');
+          break;
         default:
-
           if (error['_body']) {
-
             // so bekommt man den body als nettes kleines JSON-Objekt :)
             const body = JSON.parse(error['_body']);
             if (body['message']) {
