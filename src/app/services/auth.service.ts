@@ -33,7 +33,7 @@ export class AuthService {
   signIn(): void {
 
     console.log('vor redirect');
-    const authUrl = environment.authUrl + '/signin/' + environment.clientId;
+    const authUrl = environment.authUrl + '/signin?clientId=' + environment.clientId;
 
     window.location.href = authUrl;
 
