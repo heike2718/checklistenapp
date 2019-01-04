@@ -56,12 +56,6 @@ export class ChecklistenService {
 
     this.logger.debug('vor dem Anlegen der Checkliste ' + JSON.stringify(checkliste));
 
-    // const checkliste$ = this.http.post(url, checkliste).pipe(
-    //   map(res => <ResponsePayload>res.json()),
-    //   publishLast(),
-    //   refCount()
-    // );
-
     let neueListe: ChecklisteDaten;
     this.http.post(url, checkliste).pipe(
       map(res => <ResponsePayload>res.json()),

@@ -13,9 +13,9 @@ import { Logger } from '@nsalaun/ng-logger';
 export class AuthService {
 
   // hier könnte userInformation als Observable gehalten werden, wenn erforderlich.
-  private subject = new BehaviorSubject<User>(undefined);
+  private userSubject = new BehaviorSubject<User>(undefined);
 
-  user$: Observable<User> = this.subject.asObservable().pipe(
+  user$: Observable<User> = this.userSubject.asObservable().pipe(
     filter(_user => !!undefined)
   );
 
@@ -27,7 +27,7 @@ export class AuthService {
 
   parseHash(hash: string): void {
     this.loadUserInfo();
-    // Am ende nach success:
+    // Am ende nach success: (das wird in der URL hinter # zurückegeben)
     window.location.hash = '';
   }
 
@@ -61,7 +61,7 @@ export class AuthService {
     // this.http.put('/url', { property: 'property' }).pipe(
     //   shareReplay(),
     //   map(resp => <ResponsePayload>resp.json()),
-    //   tap(payload => this.subject.next(payload.data)),
+    //   tap(payload => this.userSubject.next(payload.data)),
     //   catchError(err => of('error caught'))
     // ).subscribe();
   }
