@@ -6,10 +6,9 @@ import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { MessagesService } from './messages.service';
-import { Message, WARN, ERROR, ResponsePayload } from '../shared/model/message';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Message, ResponsePayload } from '../shared/model/message';
 import { Router } from '@angular/router';
+import { HttpErrorService } from '../error/http-error.service';
 
 
 @Injectable({
@@ -17,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ChecklistenService {
 
-  constructor(private http: Http, private messagesService: MessagesService, private router: Router, private logger: Logger) { }
+  constructor(private http: Http, private httpErrorService: HttpErrorService, private router: Router, private logger: Logger) { }
 
   loadChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
@@ -37,7 +36,7 @@ export class ChecklistenService {
         }
       },
       (error => {
-        this.handleError(error, 'findAllChecklisten');
+        this.httpErrorService.handleError(error, 'findAllChecklisten');
       }));
   }
 
@@ -67,7 +66,7 @@ export class ChecklistenService {
         store.addCheckliste(neueListe);
       },
       (error => {
-        this.handleError(error, 'createNewCheckliste');
+        this.httpErrorService.handleError(error, 'createNewCheckliste');
       }));
 
     // return of(neueListe);
@@ -96,7 +95,7 @@ export class ChecklistenService {
         }
       },
       (error => {
-        this.handleError(error, 'saveCheckliste');
+        this.httpErrorService.handleError(error, 'saveCheckliste');
       }));
   }
 
@@ -116,7 +115,7 @@ export class ChecklistenService {
         store.deleteCheckliste(checkliste.kuerzel);
       },
       (error => {
-        this.handleError(error, 'deleteCheckliste');
+        this.httpErrorService.handleError(error, 'deleteCheckliste');
       }));
   }
 
@@ -138,7 +137,7 @@ export class ChecklistenService {
           store.updateCheckliste(cl);
         },
         (error => {
-          this.handleError(error, 'findChecklisteByKuerzel');
+          this.httpErrorService.handleError(error, 'findChecklisteByKuerzel');
         }));
     }
 
@@ -153,59 +152,6 @@ export class ChecklistenService {
       publishLast(),
       refCount()
     );
-
-  }
-
-
-
-  private handleError(error: HttpErrorResponse, context: string) {
-
-    if (error instanceof ErrorEvent) {
-      this.logger.error(context + ': ErrorEvent occured - ' + JSON.stringify(error));
-      throw (error);
-    } else {
-      switch (error.status) {
-        case 0:
-          this.messagesService.error(context +
-            ': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
-          break;
-        case 401:
-          this.showServerResponseMessage({
-            level: 'ERROR',
-            message: 'OMG - Not Found'
-          });
-          this.router.navigateByUrl('/listen');
-          break;
-        default:
-          if (error['_body']) {
-            // so bekommt man den body als nettes kleines JSON-Objekt :)
-            const body = JSON.parse(error['_body']);
-            if (body['message']) {
-              const msg = <Message>body['message'];
-              this.showServerResponseMessage(msg);
-            } else {
-              this.messagesService.error(context + ' status=' + error.status
-                + ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
-            }
-          } else {
-            this.messagesService.error(context + ' status=' + error.status
-              + ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
-          }
-      }
-    }
-  }
-
-  private showServerResponseMessage(msg: Message) {
-    switch (msg.level) {
-      case WARN:
-        this.messagesService.error(msg.message);
-        break;
-      case ERROR:
-        this.messagesService.error(msg.message);
-        break;
-      default:
-        this.messagesService.error('Unbekanntes message.level ' + msg.level + ' vom Server bekommen.');
-    }
   }
 }
 

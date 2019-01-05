@@ -6,6 +6,9 @@ import { Http } from '@angular/http';
 import { ResponsePayload } from '../shared/model/message';
 import { environment } from '../../environments/environment';
 import { Logger } from '@nsalaun/ng-logger';
+import { AuthResult, parseHash, AUTH_STATE_SIGNIN, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
+import { MessagesService } from './messages.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,31 +22,46 @@ export class AuthService {
     filter(_user => !!undefined)
   );
 
-  constructor(private http: Http, private loggger: Logger) {
+  constructor(private http: Http, private messagesService: MessagesService, private logger: Logger) {
     if (this.isLoggedIn()) {
       this.loadUserInfo();
     }
   }
 
   parseHash(hash: string): void {
-    this.loadUserInfo();
+
     // Am ende nach success: (das wird in der URL hinter # zurückegeben)
     window.location.hash = '';
+
+    const authResult: AuthResult = parseHash(hash);
+    if (authResult.state) {
+      switch (authResult.state) {
+        case AUTH_STATE_EMPTY: break;
+        case AUTH_STATE_SIGNIN:
+          this.setSession(authResult);
+          this.messagesService.info('Jetzt erstmal Benutzerkonto aktivieren. Guckstu ins Mailpostfach.');
+          break;
+        case AUTH_STATE_LOGIN: this.loadUserInfo(); break;
+        default: break;
+      }
+    }
   }
+
+
 
   signIn(): void {
 
     const authUrl = environment.authUrl + '/signin?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
-    this.loggger.debug('signIn: authUrl=' + authUrl);
+    this.logger.debug('signIn: authUrl=' + authUrl);
 
     window.location.href = authUrl;
 
   }
 
-  setSession(authResult) {
+  setSession(authResult: AuthResult) {
     // packen authResult ins LocalStorage, damit es ein refresh überlebt!
-    // localStorage.setItem('id_token', JSON.stringify(authResult.idToken));
-    localStorage.setItem('id_token', JSON.stringify(authResult));
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_in', authResult.expiresIn);
   }
 
   isLoggedIn(): boolean {
@@ -65,4 +83,5 @@ export class AuthService {
     //   catchError(err => of('error caught'))
     // ).subscribe();
   }
+
 }

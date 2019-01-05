@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
-        // TODO: hier muss der Response oder die URL des authproviders ausgewertet werden evtl mittels router oder so?
-        this.authService.parseHash(window.location.hash);
+         this.authService.parseHash(window.location.hash);
     }
 }
