@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { MessagesService } from 'hewi-ng-lib';
 
 @Component({
   selector: 'chl-sign-in',
@@ -8,10 +9,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private messagesService: MessagesService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   redirect(): void {
 

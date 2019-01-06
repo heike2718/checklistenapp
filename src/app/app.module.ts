@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { environment } from '../environments/environment';
-import { MessagesComponent } from './messages/messages.component';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { LoadingComponent } from './loading/loading.component';
@@ -31,6 +30,8 @@ import { ErrorComponent } from './error/error.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { HewiNgLibModule } from 'hewi-ng-lib';
+
 
 
 // Set different log level depending on environment.
@@ -44,7 +45,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
   declarations: [
     AppComponent,
     NavbarComponent,
-    MessagesComponent,
     ChecklistenListeComponent,
     ChecklisteComponent,
     LoadingComponent,
@@ -70,6 +70,7 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     NgLoggerModule.forRoot(LOG_LEVEL),
     NgbModule.forRoot(),
     NgbCollapseModule,
+    HewiNgLibModule
 
   ],
   providers: [

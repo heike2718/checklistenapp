@@ -3,11 +3,11 @@ import { BehaviorSubject, Observable, pipe, of } from 'rxjs';
 import { filter, shareReplay, tap, map, catchError } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { Http } from '@angular/http';
-import { ResponsePayload } from '../shared/model/message';
 import { environment } from '../../environments/environment';
 import { Logger } from '@nsalaun/ng-logger';
 import { AuthResult, parseHash, AUTH_STATE_SIGNIN, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
-import { MessagesService } from '../messages/messages.service';
+import { MessagesService, ResponsePayload } from 'hewi-ng-lib';
+
 
 
 @Injectable({
