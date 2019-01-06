@@ -53,6 +53,16 @@ export class DataStore {
   updateCheckliste(checkliste: ChecklisteDaten) {
     const kopie: ChecklisteDaten = _.cloneDeep(checkliste);
     this.gewaehlteChecklisteSubject.next(kopie);
+
+    const geaenderteChecklisten = [];
+    this.checklistenSubject.value.forEach(element => {
+      if (element.kuerzel !== checkliste.kuerzel) {
+        geaenderteChecklisten.push(element);
+      } else {
+        geaenderteChecklisten.push(checkliste);
+      }
+    });
+    this.checklistenSubject.next(geaenderteChecklisten);
   }
 
   updateChecklisteItems(items: ChecklistenItem[]) {
