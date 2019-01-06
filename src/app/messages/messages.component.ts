@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MessagesService } from '../services/messages.service';
+import { Component, OnInit } from '@angular/core';
+import { MessagesService } from './messages.service';
 import { Observable } from 'rxjs';
 
 @Component({

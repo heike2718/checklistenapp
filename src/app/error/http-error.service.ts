@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MessagesService } from '../services/messages.service';
+import { MessagesService } from '../messages/messages.service';
 import { Logger } from '@nsalaun/ng-logger';
 import { Router } from '@angular/router';
 import { Message, WARN, ERROR, ResponsePayload } from '../shared/model/message';

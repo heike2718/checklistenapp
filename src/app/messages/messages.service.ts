@@ -52,4 +52,11 @@ export class MessagesService {
         break;
     }
   }
+
+  clearMessages() {
+    this.infoSubject.next('');
+    this.warnSubject.next('');
+    this.errorSubject.next('');
+  }
+
 }
