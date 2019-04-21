@@ -5,7 +5,7 @@ import { User } from '../shared/model/user';
 import { Http } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { Logger } from '@nsalaun/ng-logger';
-import { AuthResult, parseHash, AUTH_STATE_SIGNIN, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
+import { AuthResult, parseHash, AUTH_STATE_SIGNUP, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
 import { MessagesService, ResponsePayload } from 'hewi-ng-lib';
 
 
@@ -37,7 +37,7 @@ export class AuthService {
     if (authResult.state) {
       switch (authResult.state) {
         case AUTH_STATE_EMPTY: break;
-        case AUTH_STATE_SIGNIN:
+        case AUTH_STATE_SIGNUP:
           this.setSession(authResult);
           this.messagesService.info('Jetzt erstmal Benutzerkonto aktivieren. Guckstu ins Mailpostfach.');
           break;
@@ -48,10 +48,10 @@ export class AuthService {
   }
 
 
-  signIn(): void {
+  signUp(): void {
 
-    const authUrl = environment.authUrl + '/signin?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
-    this.logger.debug('signIn: authUrl=' + authUrl);
+    const authUrl = environment.authUrl + '/signup?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
+    this.logger.debug('signUp: authUrl=' + authUrl);
 
     window.location.href = authUrl;
 
@@ -59,6 +59,7 @@ export class AuthService {
 
   setSession(authResult: AuthResult) {
     // packen authResult ins LocalStorage, damit es ein refresh überlebt!
+    localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_in', authResult.expiresIn);
   }

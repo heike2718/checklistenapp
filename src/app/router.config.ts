@@ -6,7 +6,7 @@ import { ConfigureChecklisteResolver } from './checkliste-detail/config-checklis
 import { ExecuteChecklisteResolver } from './checkliste-detail/execute-checkliste/execute-checkliste.resolver';
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 export const routerConfig: Routes = [
     {
@@ -14,8 +14,8 @@ export const routerConfig: Routes = [
         component: HomeComponent
     },
     {
-        path: 'signin',
-        component: SignInComponent
+        path: 'signup',
+        component: SignUpComponent
     },
     {
         path: 'listen',

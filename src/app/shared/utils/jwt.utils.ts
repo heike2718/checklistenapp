@@ -1,4 +1,4 @@
-export const AUTH_STATE_SIGNIN = 'signin';
+export const AUTH_STATE_SIGNUP = 'signup';
 export const AUTH_STATE_LOGIN = 'login';
 
 export const AUTH_STATE_EMPTY = 'empty';

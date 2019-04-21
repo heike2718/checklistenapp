@@ -29,7 +29,7 @@ import { GlobalErrorHandler } from './error/error-handler.service';
 import { ErrorComponent } from './error/error.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
 
 
@@ -59,7 +59,7 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ModalComponent,
     ModalOpenOnClickDirective,
     ErrorComponent,
-    SignInComponent
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
