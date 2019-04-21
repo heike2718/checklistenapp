@@ -75,7 +75,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
   ],
   providers: [
     GlobalErrorHandler,
-    ,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     {
       provide: HTTP_INTERCEPTORS,

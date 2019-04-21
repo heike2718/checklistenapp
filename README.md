@@ -4,7 +4,7 @@ Kleines Spielprojekt mit praktischem Hintergrund zum Organisieren von Dingen. Im
 authentication provider, damit nicht jeder Mensch unsere Listen sehen kann.
 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6 and upgraded to version 7.3.8
 
 ## Dependencies
 

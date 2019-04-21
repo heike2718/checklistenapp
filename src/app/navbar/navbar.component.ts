@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {NgbCollapse} from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'chl-navbar',
@@ -10,10 +11,10 @@ export class NavbarComponent implements OnInit {
 
   isCollapsed = true;
 
-    @ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
+  @ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
 
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,14 @@ export class NavbarComponent implements OnInit {
     if (this.navbarToggler) {
       this.isCollapsed = true;
     }
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  isLoggerOut(): boolean {
+    return !this.authService.isLoggedIn();
   }
 
 
