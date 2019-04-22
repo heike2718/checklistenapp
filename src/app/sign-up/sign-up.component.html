@@ -1,1 +1,32 @@
-<button class="col-md-12 btn btn-outline-dark"  (click)="redirect()">registrieren</button>
+<div class="row">
+    <div class="col-sm-12 col-md-9 h3">Sprich Freund und tritt ein.</div>
+</div>
+
+<div class="container-fluid">
+    <form id="checkForm">
+        <div class="group">
+            <label for="inputItemName">Geheimnis*:</label>
+            <input type="text" class="form-control" id="inputGeheimnis" name="inputGeheimnis" [(ngModel)]="secret"
+                required aria-describedby="geheimnisHelp" placeholder="Geheimnis">
+        </div>
+        <div class="group kleber">
+            <label for="inputItemKommentar">Kommentar:</label>
+            <input type="text" class="form-control" id="kleberInput" name="kleberInput" [(ngModel)]="kleber" required
+                aria-describedby="kleberInputHelp" placeholder="leer lassen!!!!">
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 btn-wrapper">
+                <button class="col-md-12 btn btn-primary" (click)="submit()">
+                    absenden
+                </button>
+            </div>
+            <div class="col-md-2 btn-wrapper">
+                <button class="col-md-12 btn btn-primary">
+                    abbrechen
+                </button>
+            </div>
+        </div>
+
+    </form>
+</div>

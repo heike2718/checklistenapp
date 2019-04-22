@@ -24,13 +24,6 @@ export class HttpErrorService {
           this.messagesService.error(context +
             ': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
           break;
-        case 401:
-          this.showServerResponseMessage({
-            level: 'ERROR',
-            message: 'OMG - Not Found'
-          });
-          this.router.navigateByUrl('/listen');
-          break;
         default:
           if (error['_body']) {
             // so bekommt man den body als nettes kleines JSON-Objekt :)

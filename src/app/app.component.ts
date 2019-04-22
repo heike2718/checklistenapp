@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
-import { MessagesService, MessagesComponent } from 'hewi-ng-lib';
 
 
 @Component({
@@ -18,6 +17,8 @@ export class AppComponent implements OnInit {
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
-         this.authService.parseHash(window.location.hash);
+        // nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
+        // Daher hier redirect-URL parsen
+        this.authService.parseHash(window.location.hash);
     }
 }

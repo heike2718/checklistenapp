@@ -6,7 +6,8 @@ export const AUTH_STATE_EMPTY = 'empty';
 
 export interface AuthResult {
     accessToken?: string;
-    expiresIn?: string;
+    refreshToken?: string;
+    expiresAt?: number;
     tokenType?: string;
     state: string;
     idToken?: string;
@@ -28,7 +29,8 @@ export function parseHash(hashStr: string): AuthResult {
                 const keyVal = token.split('=');
                 switch (keyVal[0]) {
                     case 'accessToken': result.accessToken = keyVal[1]; break;
-                    case 'expiresIn': result.expiresIn = keyVal[1]; break;
+                    case 'refreshToken': result.refreshToken = keyVal[1]; break;
+                    case 'expiresAt': result.expiresAt = JSON.parse(keyVal[1]); break;
                     case 'tokenType': result.tokenType = keyVal[1]; break;
                     case 'state': result.state = keyVal[1]; break;
                     case 'idToken': result.idToken = keyVal[1]; break;

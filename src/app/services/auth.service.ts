@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from 'moment'
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, pipe, of } from 'rxjs';
@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { Logger } from '@nsalaun/ng-logger';
 import { AuthResult, parseHash, AUTH_STATE_SIGNUP, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
 import { MessagesService, ResponsePayload } from 'hewi-ng-lib';
+import { SignUpPayload } from '../shared/model/signup-payload';
 
 
 
@@ -51,6 +52,11 @@ export class AuthService {
     }
   }
 
+  checkMaySignUp(signUpPayload: SignUpPayload): Observable<ResponsePayload> {
+    const url = environment.apiUrl + '/signup/secret';
+    return this.httpClient.post<ResponsePayload>(url, signUpPayload);
+  }
+
 
   signUp(): void {
 
@@ -62,14 +68,24 @@ export class AuthService {
 
   }
 
+  logIn(): void {
+
+    // TODO
+    const authUrl = environment.authUrl + '/login?clientId=' + environment.clientId + '&redirectUrl=' + environment.loginRedirectUrl;
+    this.logger.debug('logIn: authUrl=' + authUrl);
+
+    window.location.href = authUrl;
+
+  }
+
   setSession(authResult: AuthResult) {
     // packen authResult ins LocalStorage, damit es ein refresh überlebt!
-    localStorage.setItem('access_token', authResult.accessToken);
+    // das accessToken wird in der Checklisten-App nicht benötigt
+    if (authResult.refreshToken) {
+      localStorage.setItem('refresh_token', authResult.refreshToken);
+    }
     localStorage.setItem('id_token', authResult.idToken);
-
-    // Minuten oder Sekunden?
-    const expiresAt = moment().add(authResult.expiresIn, 'minute');
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('expires_at', JSON.stringify(authResult.expiresAt));
   }
 
   private getExpiration() {
@@ -83,7 +99,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
