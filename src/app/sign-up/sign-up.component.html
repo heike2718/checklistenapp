@@ -15,14 +15,14 @@
                 aria-describedby="kleberInputHelp" placeholder="leer lassen!!!!">
         </div>
 
-        <div class="row">
+        <div class="row btn-container">
             <div class="col-md-2 btn-wrapper">
-                <button class="col-md-12 btn btn-primary" (click)="submit()">
+                <button class="col-md-12 btn btn-primary" [disabled]="secret === ''" (click)="submit()">
                     absenden
                 </button>
             </div>
             <div class="col-md-2 btn-wrapper">
-                <button class="col-md-12 btn btn-primary">
+                <button class="col-md-12 btn btn-primary" (click)= "cancel()">
                     abbrechen
                 </button>
             </div>
@@ -30,3 +30,4 @@
 
     </form>
 </div>
+

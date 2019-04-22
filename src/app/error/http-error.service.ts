@@ -25,22 +25,33 @@ export class HttpErrorService {
             ': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
           break;
         default:
-          if (error['_body']) {
-            // so bekommt man den body als nettes kleines JSON-Objekt :)
-            const body = JSON.parse(error['_body']);
-            if (body['message']) {
-              const msg = <Message>body['message'];
-              this.showServerResponseMessage(msg);
-            } else {
-              this.messagesService.error(context + ' status=' + error.status
-                + ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
-            }
+          const msg = this.extractMessageObject(error);
+          if (msg !== null) {
+            this.showServerResponseMessage(msg);
           } else {
             this.messagesService.error(context + ' status=' + error.status
               + ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
           }
       }
     }
+  }
+
+  private extractMessageObject(error: HttpErrorResponse): Message {
+
+    if (error['_body']) {
+      // so bekommt man den body als nettes kleines JSON-Objekt :)
+      const body = JSON.parse(error['_body']);
+      if (body['message']) {
+        return <Message>body['message'];
+      }
+    }
+
+    if (error['error']) {
+      const err = error['error'];
+      return <Message>err['message'];
+    }
+
+    return null;
   }
 
   private showServerResponseMessage(msg: Message) {

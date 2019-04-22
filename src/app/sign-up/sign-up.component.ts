@@ -5,6 +5,7 @@ import { SignUpPayload } from '../shared/model/signup-payload';
 import { publishLast, refCount } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { HttpErrorService } from '../error/http-error.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'chl-sign-up',
@@ -23,6 +24,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService
     , private httpErrorService: HttpErrorService
+    , private router: Router
     , private messagesService: MessagesService) { }
 
   ngOnInit() {
@@ -59,6 +61,14 @@ export class SignUpComponent implements OnInit, OnDestroy {
       (error => {
         this.httpErrorService.handleError(error, 'submitSecret');
       }));
+  }
+
+
+  cancel(): void {
+    this.secret = '';
+    this.kleber = '';
+    this.messagesService.clear();
+    this.router.navigateByUrl('/home');
   }
 
 }
