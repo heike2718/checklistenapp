@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, publishLast, refCount } from 'rxjs/operators';
 import { ChecklisteDaten } from '../shared/model/checkliste';
@@ -16,13 +16,13 @@ import { HttpErrorService } from '../error/http-error.service';
 })
 export class ChecklistenService {
 
-  constructor(private http: Http, private httpErrorService: HttpErrorService, private router: Router, private logger: Logger) { }
+  constructor(private http: HttpClient, private httpErrorService: HttpErrorService, private router: Router, private logger: Logger) { }
 
   loadChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
 
     const checklisten$ = this.http.get(url).pipe(
-      map(res => <ResponsePayload>res.json()),
+      map(res => <ResponsePayload>res),
       publishLast(),
       refCount()
     );
@@ -57,7 +57,7 @@ export class ChecklistenService {
 
     let neueListe: ChecklisteDaten;
     this.http.post(url, checkliste).pipe(
-      map(res => <ResponsePayload>res.json()),
+      map(res => <ResponsePayload>res),
       publishLast(),
       refCount()
     ).subscribe(
@@ -81,7 +81,7 @@ export class ChecklistenService {
     // Modus ist transient fürs Backend
     checkliste.modus = undefined;
     const potentielleCheckliste$ = this.http.put(url, checkliste).pipe(
-      map(res => <ResponsePayload>res.json()),
+      map(res => <ResponsePayload>res),
       publishLast(),
       refCount()
     );
@@ -105,7 +105,7 @@ export class ChecklistenService {
     const url = environment.apiUrl + '/checklisten/' + checkliste.kuerzel;
 
     const observable$ = this.http.delete(url).pipe(
-      map(res => <Message>res.json().message),
+      map(res => <Message>res),
       publishLast(),
       refCount()
     );
@@ -148,7 +148,7 @@ export class ChecklistenService {
     const url = environment.apiUrl + '/checklisten/' + kuerzel;
 
     return this.http.get(url).pipe(
-      map(res => <ChecklisteDaten>res.json()),
+      map(res => <ChecklisteDaten>res),
       publishLast(),
       refCount()
     );

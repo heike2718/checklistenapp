@@ -3,7 +3,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { NgLoggerModule, Level } from '@nsalaun/ng-logger';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -66,7 +65,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(routerConfig),
-    HttpModule,
     HttpClientModule,
     FormsModule,
     NgLoggerModule.forRoot(LOG_LEVEL),
