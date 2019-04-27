@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { NgLoggerModule, Level } from '@nsalaun/ng-logger';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { routerConfig } from './router.config';
@@ -27,7 +27,6 @@ import { ModalComponent } from './shared/components/modal/modal.component';
 import { ModalOpenOnClickDirective } from './shared/components/modal/modal-open-on-click.directive';
 import { GlobalErrorHandler } from './error/error-handler.service';
 import { ErrorComponent } from './error/error.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';

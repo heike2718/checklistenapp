@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Logger } from '@nsalaun/ng-logger';
-import { Router } from '@angular/router';
-import { MessagesService, Message, INFO, WARN, ERROR } from 'hewi-ng-lib';
+import { MessagesService, Message, WARN, ERROR } from 'hewi-ng-lib';
 
 
 @Injectable({
@@ -10,7 +9,7 @@ import { MessagesService, Message, INFO, WARN, ERROR } from 'hewi-ng-lib';
 })
 export class HttpErrorService {
 
-  constructor(private messagesService: MessagesService, private router: Router, private logger: Logger) { }
+  constructor(private messagesService: MessagesService, private logger: Logger) { }
 
 
   handleError(error: HttpErrorResponse, context: string) {
