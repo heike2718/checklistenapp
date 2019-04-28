@@ -22,9 +22,17 @@ export class DataStore {
 
   private checklistenSubject = new BehaviorSubject<ChecklisteDaten[]>([]);
 
+  private authSignUpOutcomeSubject = new BehaviorSubject<boolean>(false);
+
+  private authLogInOutcomeSubject = new BehaviorSubject<boolean>(false);
+
   gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteChecklisteSubject.asObservable();
 
   checklisten$: Observable<ChecklisteDaten[]> = this.checklistenSubject.asObservable();
+
+  authSignUpOutcome$: Observable<boolean> = this.authSignUpOutcomeSubject.asObservable();
+
+  authLogInOutcome$: Observable<boolean> = this.authLogInOutcomeSubject.asObservable();
 
 
 
@@ -87,6 +95,16 @@ export class DataStore {
     return undefined;
 
   }
+
+  updateAuthSignUpOutcome(success: boolean) {
+    this.authLogInOutcomeSubject.next(success);
+  }
+
+  updateAuthLogInOutcome(success: boolean) {
+    this.authLogInOutcomeSubject.next(success);
+  }
+
+
 }
 
 export const store = new DataStore();

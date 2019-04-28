@@ -10,6 +10,8 @@ import { Logger } from '@nsalaun/ng-logger';
 import { AuthResult, parseHash, AUTH_STATE_SIGNUP, AUTH_STATE_LOGIN, AUTH_STATE_EMPTY } from '../shared/utils/jwt.utils';
 import { MessagesService, ResponsePayload } from 'hewi-ng-lib';
 import { SignUpPayload } from '../shared/model/signup-payload';
+import { HttpErrorService } from '../error/http-error.service';
+import { DataStore } from '../store/app-data';
 
 
 
@@ -25,7 +27,12 @@ export class AuthService {
     filter(_user => !!undefined)
   );
 
-  constructor(private httpClient: HttpClient, private router: Router, private messagesService: MessagesService, private logger: Logger) {
+  constructor(private httpClient: HttpClient
+    , private httpErrorService: HttpErrorService
+    , private appData: DataStore
+    , private router: Router
+    , private messagesService: MessagesService
+    , private logger: Logger) {
     if (this.isLoggedIn()) {
       this.loadLocalUserInfo();
     }
@@ -42,7 +49,9 @@ export class AuthService {
         case AUTH_STATE_EMPTY: break;
         case AUTH_STATE_SIGNUP:
           this.setSession(authResult);
-          this.messagesService.info('Jetzt erstmal Benutzerkonto aktivieren. Guckstu ins Mailpostfach.');
+          // this.messagesService.info('Jetzt erstmal Benutzerkonto aktivieren. Guckstu ins Mailpostfach.');
+          // this.router.navigateByUrl('/home');
+          this.createUser();
           break;
         case AUTH_STATE_LOGIN:
           this.setSession(authResult);
@@ -59,33 +68,43 @@ export class AuthService {
 
 
   signUp(): void {
-
     // TODO
     const authUrl = environment.authUrl + '/signup#clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
     this.logger.debug('signUp: authUrl=' + authUrl);
 
     window.location.href = authUrl;
-
   }
 
-  logIn(): void {
 
+
+  logIn(): void {
     // TODO
     const authUrl = environment.authUrl + '/login?clientId=' + environment.clientId + '&redirectUrl=' + environment.loginRedirectUrl;
     this.logger.debug('logIn: authUrl=' + authUrl);
 
     window.location.href = authUrl;
-
   }
 
   setSession(authResult: AuthResult) {
     // packen authResult ins LocalStorage, damit es ein refresh überlebt!
-    // das accessToken wird in der Checklisten-App nicht benötigt
     if (authResult.refreshToken) {
       localStorage.setItem('refresh_token', authResult.refreshToken);
     }
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(authResult.expiresAt));
+  }
+
+  private createUser() {
+    const url = environment.apiUrl + '/signup/user';
+    this.httpClient.post<ResponsePayload>(url, {}).
+      subscribe(() => {
+        this.appData.updateAuthSignUpOutcome(true);
+        this.router.navigateByUrl('/home');
+      },
+        (error => {
+          this.httpErrorService.handleError(error, 'findChecklisteByKuerzel');
+        }));
+
   }
 
   private getExpiration() {
