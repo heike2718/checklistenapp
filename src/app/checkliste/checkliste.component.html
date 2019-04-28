@@ -14,12 +14,12 @@
     </div>
   </ng-template>
 
-  <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="secModalBody" [context]="{closeImmediate: checkliste.anzahlErledigt === 0}"
-    *chlModalOpenOnClick="trashButton">
+  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="secModalBody" [context]="{closeImmediate: checkliste.anzahlErledigt === 0}"
+    *hewiModalOpenOnClick="trashButton">
 
     <i class="fa fa-times" (click)="modal.close()"></i>
 
-  </chl-modal>
+  </hewi-modal>
 
   <div chlBackgroundColor [typ]="checkliste.typ" class="card mb-3">
     <div class="card-header">

@@ -23,8 +23,6 @@ import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checklist
 import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
 import { FormsModule } from '@angular/forms';
-import { ModalComponent } from './shared/components/modal/modal.component';
-import { ModalOpenOnClickDirective } from './shared/components/modal/modal-open-on-click.directive';
 import { GlobalErrorHandler } from './error/error-handler.service';
 import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
@@ -55,8 +53,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ExecuteItemlisteComponent,
     HomeComponent,
     StatistikChecklistePipe,
-    ModalComponent,
-    ModalOpenOnClickDirective,
     ErrorComponent,
     SignUpComponent
   ],

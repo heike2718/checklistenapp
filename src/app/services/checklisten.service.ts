@@ -6,7 +6,7 @@ import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { Message, ResponsePayload } from 'hewi-ng-lib/lib/models/message.model';
+import { Message, ResponsePayload } from 'hewi-ng-lib/lib/messages/models/message.model';
 import { Router } from '@angular/router';
 import { HttpErrorService } from '../error/http-error.service';
 

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ChecklisteDaten, MODUS_CONFIG, MODUS_EXEC, Filterkriterium, LISTE_VORSCHLAEGE } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { ChecklistenService } from '../services/checklisten.service';
-import { ModalService } from '../shared/components/modal/modal.service';
 import { filterChecklisteItems } from '../shared/utils/checkliste.utils';
+import { ModalService } from 'hewi-ng-lib';
 
 @Component({
   selector: 'chl-checkliste',

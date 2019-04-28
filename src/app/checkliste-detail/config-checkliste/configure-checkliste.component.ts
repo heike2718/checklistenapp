@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { ChecklistenService } from '../../services/checklisten.service';
 import { filterChecklisteItems } from '../../shared/utils/checkliste.utils';
-import { ModalService } from '../../shared/components/modal/modal.service';
+import { ModalService } from 'hewi-ng-lib';
 
 @Component({
     selector: 'chl-configure-checkliste',

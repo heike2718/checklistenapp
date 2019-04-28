@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
-import { ModalService } from '../shared/components/modal/modal.service';
+import { ModalService } from 'hewi-ng-lib';
 
 @Component({
   selector: 'chl-checklisten-liste',

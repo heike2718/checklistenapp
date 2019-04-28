@@ -39,11 +39,11 @@
     </div>
   </ng-template>
 
-  <chl-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="itemNeuBody" *chlModalOpenOnClick="addListeButton">
+  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="itemNeuBody" *hewiModalOpenOnClick="addListeButton">
 
     <i class="fa fa-times" (click)="modal.close()"></i>
 
-  </chl-modal>
+  </hewi-modal>
 
   <h3>Anzahl Checklisten: {{checklisten.length}}</h3>
 
