@@ -18,6 +18,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=Bearer&state=signup&idToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIzYTg2Njk5Mi01ZjE4LTRlMjItODg2OC05MGRhYzBjNzk0N2EiLCJpc3MiOiJoZWlrZTI3MTgvYXV0aHByb3ZpZGVyIiwiZXhwIjoxNTg4MDE0NzYyLCJpYXQiOjE1NTY0Nzg3NjJ9.NxoyNGaKYT0l9svhRj8BmL6JBC7aSSANKHG1zPLtpaXjLycXh19CTFNKn2Qdc5aThB8jnLrdc2s2UKRLcbB1UDApuB9yz5HUIm5_8TPKBgnEWFwBUsjQ4Y7vH5jEeRgbGTwXg2SVCyAmSrdIZRa9TB7qpXMvFl236VlArAOqTzkgF_m_45VG9JkkWt_DZwRxvz7GzWX-xY8uU2n_kl_f2NEGCmmakfVmcVIEhphXdGye6sqY65B-QpA2YXKjMzFQJo-z2wrYJVorpl7IVCkc4DC-nCTa3KJOThqeS587vi0CFmAKf4RzkqeCWTNJ5T82MpH7l80rA4_yIye4C5YTwg
 
+(checklistenapp, checklistenserver und authprovider müssen laufen)
 
 ## Notizen (chronologisch absteigend)
 
