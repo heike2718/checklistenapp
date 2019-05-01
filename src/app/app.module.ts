@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { LoadingComponent } from './loading/loading.component';
+import { LoggedInGuard } from './shared/logged-in.guard';
 import { ChecklistentypBackgroundDirective } from './shared/directives/checklistentyp.directive';
 import { ConfigureChecklisteComponent } from './checkliste-detail/config-checkliste/configure-checkliste.component';
 import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checkliste/execute-checkliste.component';
@@ -63,7 +64,7 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     HttpClientModule,
     FormsModule,
     NgLoggerModule.forRoot(LOG_LEVEL),
-    NgbModule.forRoot(),
+    NgbModule,
     NgbCollapseModule,
     HewiNgLibModule
 
@@ -75,7 +76,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

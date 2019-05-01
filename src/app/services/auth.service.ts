@@ -1,8 +1,8 @@
 import * as moment from 'moment'
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, pipe, of } from 'rxjs';
-import { filter, shareReplay, tap, map, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -11,7 +11,7 @@ import { AuthResult, parseHash, AUTH_STATE_SIGNUP, AUTH_STATE_LOGIN, AUTH_STATE_
 import { MessagesService, ResponsePayload } from 'hewi-ng-lib';
 import { SignUpPayload } from '../shared/model/signup-payload';
 import { HttpErrorService } from '../error/http-error.service';
-import { DataStore } from '../store/app-data';
+import { store } from '../store/app-data';
 
 
 
@@ -29,7 +29,6 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient
     , private httpErrorService: HttpErrorService
-    , private appData: DataStore
     , private router: Router
     , private messagesService: MessagesService
     , private logger: Logger) {
@@ -92,13 +91,14 @@ export class AuthService {
     }
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', JSON.stringify(authResult.expiresAt));
+    localStorage.setItem('auth_state', authResult.state);
   }
 
   private createUser() {
     const url = environment.apiUrl + '/signup/user';
     this.httpClient.post<ResponsePayload>(url, {}).
       subscribe(() => {
-        this.appData.updateAuthSignUpOutcome(true);
+        store.updateAuthSignUpOutcome(true);
         this.router.navigateByUrl('/home');
       },
         (error => {
@@ -114,18 +114,25 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    const authState = localStorage.getItem('auth_state');
+    if (!authState || authState !== AUTH_STATE_LOGIN) {
+      return false;
+    }
     return moment().isBefore(this.getExpiration());
   }
 
-  logout() {
+  clearSession() {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('auth_state');
     // TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
+    store.updateAuthSignUpOutcome(false);
+    store.updateAuthLogInOutcome(false);
     this.router.navigateByUrl('/home');
   }
 
-  loadUserProfile(authResult: AuthResult) {
+  loadUserProfile(_authResult: AuthResult) {
     // TODO: hier könnte man vom AuthProvider mit Hilfe des accessToken noch die Mailadresse abholen oder sowas.
   }
 

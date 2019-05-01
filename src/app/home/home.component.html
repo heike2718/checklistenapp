@@ -1,2 +1,41 @@
-<p>Einloggen oder registrieren, um die Checklisten zu sehen.</p>
+<!-- Falls die authModalOpenOnClick-Direktive verwendet wird, Dialog zum Anzeigen des SignUp-Erfolgs inside *ngIf, weil sie sonst keine Elemente bekommt -->
+<div>
+    <!-- Dialog mit Hinweis auf Mailpostfach -->
+    <ng-template #successDialogBody>
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Benutzerkonto angelegt</h4>
+                </div>
+                <div class="card-body">
+                    <p>Dein Benutzerkonto muss noch aktiviert werden.</p>
+                    <p>Gugstu im Postfach nach. Dann kannst Du Dich einloggen</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row btn-container">
+                        <div class="col-md-12 btn-wrapper">
+                            <div class="col-md-12 btn btn-outline-dark" (click)="closeModal()">
+                                OK
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
 
+<hewi-modal *ngIf="showDialog()" #modal [hideOnEscape]="false" [hideOnClickOutside]="false" [body]="successDialogBody">
+    <!-- === kein close-icon, da unbedingt redirect ausgelöst werden muss -->
+    <!--<i class="fa fa-times" (click)="modal.close()"></i>-->
+</hewi-modal>
+
+<div *ngIf="isLoggedIn() else loginSignupMessage">
+    <p>Jetzt darfst Du die Checklisten sehen.</p>
+    <chl-checklisten-liste></chl-checklisten-liste>
+</div>
+
+
+<ng-template #loginSignupMessage>
+    <p>Du musst Dich einloggen oder registrieren, um die Checklisten zu sehen.</p>
+</ng-template>

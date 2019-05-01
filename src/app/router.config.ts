@@ -7,6 +7,7 @@ import { ExecuteChecklisteResolver } from './checkliste-detail/execute-checklist
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './error/error.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoggedInGuard } from './shared/logged-in.guard';
 
 export const routerConfig: Routes = [
     {
@@ -19,21 +20,25 @@ export const routerConfig: Routes = [
     },
     {
         path: 'listen',
-        component: ChecklistenListeComponent
+        component: ChecklistenListeComponent,
+        canActivate: [LoggedInGuard]
     },
     {
         path: 'checkliste/configuration/:kuerzel',
         component: ConfigureChecklisteComponent,
         resolve: {
             detail: ConfigureChecklisteResolver
-        }
+        },
+        canActivate: [LoggedInGuard]
+
     },
     {
         path: 'checkliste/execution/:kuerzel',
         component: ExecuteChecklisteComponent,
         resolve: {
             detail: ExecuteChecklisteResolver
-        }
+        },
+        canActivate: [LoggedInGuard]
     },
     {
         path: 'error',
