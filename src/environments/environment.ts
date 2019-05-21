@@ -12,5 +12,5 @@ export const environment = {
   isDebugMode: true,
   clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
   signinRedirectUrl: 'http://localhost:4200',
-  loginRedirectUrl: 'http://localhost:4200/listen',
+  loginRedirectUrl: 'http://localhost:4200#/listen',
 };

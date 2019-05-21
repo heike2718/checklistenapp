@@ -68,7 +68,7 @@ export class AuthService {
 
   signUp(): void {
     // TODO
-    const authUrl = environment.authUrl + '/signup?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
+    const authUrl = environment.authUrl + '#/signup?clientId=' + environment.clientId + '&redirectUrl=' + environment.signinRedirectUrl;
     this.logger.debug('signUp: authUrl=' + authUrl);
 
     window.location.href = authUrl;
@@ -78,7 +78,7 @@ export class AuthService {
 
   logIn(): void {
     // TODO
-    const authUrl = environment.authUrl + '/login?clientId=' + environment.clientId + '&redirectUrl=' + environment.loginRedirectUrl;
+    const authUrl = environment.authUrl + '#/login?clientId=' + environment.clientId + '&redirectUrl=' + environment.loginRedirectUrl;
     this.logger.debug('logIn: authUrl=' + authUrl);
 
     window.location.href = authUrl;
