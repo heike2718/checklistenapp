@@ -5,3 +5,7 @@
 .logo-large {
     font-size: 200%;
 }
+
+.nav-link {
+    cursor: pointer;
+}
