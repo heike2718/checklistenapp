@@ -60,7 +60,7 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routerConfig),
+    RouterModule.forRoot(routerConfig, {useHash: true}),
     HttpClientModule,
     FormsModule,
     NgLoggerModule.forRoot(LOG_LEVEL),
