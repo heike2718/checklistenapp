@@ -23,8 +23,8 @@
               "src/assets"
             ],
             "styles": [
-	          "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-		      "./node_modules/font-awesome/css/font-awesome.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -53,6 +53,40 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "qs": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qs.ts"
+                }
+              ]
             }
           }
         },
@@ -64,6 +98,12 @@
           "configurations": {
             "production": {
               "browserTarget": "checklistenapp:build:production"
+            },
+            "dev": {
+              "browserTarget": "app:build:dev"
+            },
+            "qs": {
+              "browserTarget": "app:build:test"
             }
           }
         },
