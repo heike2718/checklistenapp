@@ -9,6 +9,7 @@ export const environment = {
   envName: 'Development',
   apiUrl: 'http://localhost:9300/checklisten-api',
   authUrl: 'http://localhost:4300',
+  assetsUrl: 'assets',
   isDebugMode: true,
   clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
   signinRedirectUrl: 'http://localhost:4200',
