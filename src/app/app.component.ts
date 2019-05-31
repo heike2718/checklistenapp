@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
     envName = environment.envName;
     showEnv = !environment.production;
     api = environment.apiUrl;
+    logo = environment.assetsUrl + '/favicon-32x32.png';
 
     constructor(private authService: AuthService) { }
 
