@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 1.1.0:__ assets werden jetzt immer gefunden
 * __Erstes Release ist produktiv__: noch ein workaround mit #-routing, bis der webserver für Html5 konfiguriert ist
 * __Global error handler und HttpResponseErrors:__ commit 30734335bdf98cd901ffd11d92483ba9ce871329
 * __Open on Click Funktionalität:__ commit 0283a357378ead8a8129d60c5253c78eb37883f7 (hierfür click-Handler auf trash-Button entfernt)
