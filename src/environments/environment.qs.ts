@@ -6,12 +6,12 @@
 export const environment = {
   production: false,
   version: '1.1.0',
-  envName: 'Development',
+  envName: 'Test',
   apiUrl: 'http://localhost:9300/checklisten-api',
-  authUrl: 'http://localhost:4300',
-  assetsUrl: 'assets',
+  authUrl: 'http://localhost:8080/auth-app',
+  assetsUrl: 'checklistenapp/assets',
   isDebugMode: true,
   clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
-  signinRedirectUrl: 'http://localhost:4200',
-  loginRedirectUrl: 'http://localhost:4200#/listen',
+  signinRedirectUrl: 'http://localhost:8080/checklistenapp',
+  loginRedirectUrl: 'http://localhost:8080/checklistenapp#/listen',
 };
