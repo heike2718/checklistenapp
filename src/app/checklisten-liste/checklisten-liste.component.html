@@ -39,7 +39,7 @@
     </div>
   </ng-template>
 
-  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="itemNeuBody" *hewiModalOpenOnClick="addListeButton">
+  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="false" [body]="itemNeuBody" *hewiModalOpenOnClick="addListeButton">
 
     <i class="fa fa-times" (click)="modal.close()"></i>
 

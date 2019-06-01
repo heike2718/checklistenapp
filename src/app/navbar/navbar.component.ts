@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'chl-navbar',
@@ -10,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class NavbarComponent implements OnInit {
 
   isCollapsed = true;
+  logo = environment.assetsUrl + '/favicon-32x32.png';
 
   @ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
 
