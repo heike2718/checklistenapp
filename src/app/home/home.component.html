@@ -31,7 +31,6 @@
 </hewi-modal>
 
 <div *ngIf="isLoggedIn() else loginSignupMessage">
-    <p>Jetzt darfst Du die Checklisten sehen.</p>
     <chl-checklisten-liste></chl-checklisten-liste>
 </div>
 
@@ -39,3 +38,4 @@
 <ng-template #loginSignupMessage>
     <p>Du musst Dich einloggen oder registrieren, um die Checklisten zu sehen.</p>
 </ng-template>
+
