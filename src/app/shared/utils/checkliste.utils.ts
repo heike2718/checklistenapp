@@ -41,10 +41,11 @@ export function getBackgroundColorByChecklistentyp(typ: string) {
     case PACKLISTE:
       return 'lavender';
     case TODOS:
-      return 'aqua';
+      //return 'aqua';
+      return '#c6ffb3';
   }
 
-  return 'green';
+  return 'aqua';
 }
 
 
