@@ -4,18 +4,18 @@
   <!-- let-Syntax: das was nach let- kommt, ist der Name einer context-Property (siehe Inpot context in ModalComponent -->
   <ng-template #secModalBody let-closeImmediate="closeImmediate">
     <p>Weg ist weg. Trotzdem löschen?</p>
-    <div class="row">
-      <div class="col-6">
+    <div class="row btn-container">
+      <div class="col-sm-12 col-md-6 btn-wrapper">
         <button class="col-12" (click)="delete()">Jupp</button>
       </div>
-      <div class="col-6">
+     <div class="col-sm-12 col-md-6 btn-wrapper">
         <button class="col-12" (click)="closeModalQuietly()">Nö</button>
       </div>
     </div>
   </ng-template>
 
-  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="true" [body]="secModalBody" [context]="{closeImmediate: checkliste.anzahlErledigt === 0}"
-    *hewiModalOpenOnClick="trashButton">
+  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="false" [body]="secModalBody"
+    [context]="{closeImmediate: checkliste.anzahlErledigt === 0}" *hewiModalOpenOnClick="trashButton">
 
     <i class="fa fa-times" (click)="modal.close()"></i>
 
@@ -41,7 +41,8 @@
           <button class="btn-default btn-block" (click)="configure()">config</button>
         </div>
         <div class="col-6">
-          <button class="btn-default btn-block" [disabled]="executeDisabled(checkliste)"  (click)="execute()">exec</button>
+          <button class="btn-default btn-block" [disabled]="executeDisabled(checkliste)"
+            (click)="execute()">exec</button>
         </div>
       </div>
     </div>

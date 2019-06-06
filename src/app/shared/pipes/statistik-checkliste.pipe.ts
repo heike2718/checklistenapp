@@ -29,7 +29,7 @@ export class StatistikChecklistePipe implements PipeTransform {
     };
     const items = filterChecklisteItems(checkliste.items, kriterium);
     const anzahlAusgewaehlt = items.length;
-    return anzahlAusgewaehlt + ' vorgemerkte Dinge:';
+    return 'vorgemerkte Dinge: ' + anzahlAusgewaehlt;
   }
 
   private getStatistikExecution(checkliste: ChecklisteDaten): string {

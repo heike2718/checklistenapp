@@ -17,7 +17,23 @@
   cursor: pointer;
 }
 
-::ng-deep .modal-body {
-  min-width: 400px;
+:host .btn-container {
+  margin: 10px 0 10px 0;
 }
 
+:host .btn-wrapper  {
+    margin-bottom: 10px;
+}
+
+:host .btn {
+  border: 1pt solid gray;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  ::ng-deep .modal-body {
+    max-width: 300px;
+  }
+}

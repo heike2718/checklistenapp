@@ -7,35 +7,8 @@
 
   <!-- Dialog zum Anlegen eines neuen Items -->
   <ng-template #itemNeuBody>
-    <div class="container-fluid">
-      <form id="itemForm">
-        <div class="group">
-          <label for="inputItemName">Name*:</label>
-          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem" required aria-describedby="itemNameHelp"
-            placeholder="Name">
-        </div>
-        <div class="group">
-          <label for="inputItemKommentar">Kommentar:</label>
-          <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar" [(ngModel)]="kommentarItem" required
-            aria-describedby="itemKommentarHelp" placeholder="Kommentar">
-        </div>
-        <div class="row btn-container">
-          <div class="col-6 btn-wrapper">
-            <button class="col-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
-          </div>
-          <div class="col-6 btn-wrapper">
-            <button class="col-12" (click)="closeModalQuietly()">doch nicht</button>
-          </div>
-        </div>
-      </form>
-    </div>
+
   </ng-template>
-
-  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="false" [body]="itemNeuBody" *hewiModalOpenOnClick="addItemButton">
-
-    <i class="fa fa-times" (click)="modal.close()"></i>
-
-  </hewi-modal>
 
   <h3>{{checkliste.typ}} erstellen </h3>
 
@@ -48,11 +21,36 @@
 
   <chl-configure-vorschlagsliste></chl-configure-vorschlagsliste>
 
-  <div class="row btn-container">
+  <div *ngIf="!formNeuesTeilVisible" class="row btn-container">
     <div class="col-md-4 btn-wrapper">
-      <button #addItemButton class="col-md-12 btn btn-outline-dark">
+      <button class="col-md-12 btn btn-outline-dark" (click)="toggleFormNeuesTeilVisible()" >
         <i class="fa fa-plus"></i> neues Teil
       </button>
+    </div>
+  </div>
+
+  <div *ngIf="formNeuesTeilVisible">
+    <div class="container-fluid dialog col-sm-12 col-md-6">
+      <form id="itemForm">
+        <div class="group">
+          <label for="inputItemName">Name*:</label>
+          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem" required aria-describedby="itemNameHelp"
+            placeholder="Name">
+        </div>
+        <div class="group">
+          <label for="inputItemKommentar">Kommentar:</label>
+          <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar" [(ngModel)]="kommentarItem" required
+            aria-describedby="itemKommentarHelp" placeholder="Kommentar">
+        </div>
+        <div class="row btn-container">
+          <div class="col-md-4 btn-wrapper">
+            <button class="col-sm-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
+          </div>
+          <div class="col-md-4 btn-wrapper">
+            <button class="col-sm-12" (click)="toggleFormNeuesTeilVisible()">doch nicht</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 

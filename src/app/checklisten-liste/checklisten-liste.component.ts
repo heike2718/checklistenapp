@@ -17,16 +17,17 @@ export class ChecklistenListeComponent implements OnInit {
 
   nameListe: string;
 
+  formNeueChecklisteVisible: boolean;
+
   constructor(private checklistenService: ChecklistenService,
     private modalService: ModalService,
     private messagesService: MessagesService) { }
 
   ngOnInit() {
+    this.formNeueChecklisteVisible = false;
     this.checklisten$ = store.checklisten$;
     this.loadChecklisten();
   }
-
-
 
   showFilename(): boolean {
     return !environment.production;
@@ -36,9 +37,13 @@ export class ChecklistenListeComponent implements OnInit {
     return !this.nameListe || this.nameListe.trim().length <= 2;
   }
 
+  toggleFormNeueCheckliste() {
+    this.formNeueChecklisteVisible = !this.formNeueChecklisteVisible;
+  }
+
   neueCheckliste(typ: string) {
     this.messagesService.clear();
-    this.modalService.close();
+    this.toggleFormNeueCheckliste();
     this.checklistenService.createNewCheckliste(typ, this.nameListe);
   }
 
@@ -50,6 +55,6 @@ export class ChecklistenListeComponent implements OnInit {
   closeModalQuietly() {
     this.messagesService.clear();
     this.nameListe = undefined;
-    this.modalService.close();
+    this.toggleFormNeueCheckliste();
   }
 }

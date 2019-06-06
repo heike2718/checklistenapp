@@ -1,26 +1,14 @@
-:host .btn-container {
-  margin: 60px 0 20px 0;
+.btn-container {
+  margin: 10px 0 10px 0;
 }
 
-:host .btn {
+.btn-wrapper  {
+    margin-bottom: 10px;
+}
+
+.btn {
   border: 1pt solid gray;
   padding-top: 15px;
   padding-bottom: 15px;
   font-size: 1.2rem;
 }
-
-:host .btn-wrapper  {
-    margin-bottom: 10px;
-}
-
-
-
-::ng-deep .modal-body {
-  min-width: 400px;
-}
-
-::ng-deep .btn-container {
-    margin-top: 20px;
-    font-size: 0.8rem;
-}
-
