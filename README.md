@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 1.1.3:__ dialogs replaced in new checklist and new item
 * __Release 1.1.2:__ fix-fstream-cve
 * __Release 1.1.1:__ valid name, color
 * __Release 1.1.0:__ assets werden jetzt immer gefunden
