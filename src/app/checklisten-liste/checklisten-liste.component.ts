@@ -45,6 +45,7 @@ export class ChecklistenListeComponent implements OnInit {
     this.messagesService.clear();
     this.toggleFormNeueCheckliste();
     this.checklistenService.createNewCheckliste(typ, this.nameListe);
+    this.nameListe = '';
   }
 
   loadChecklisten() {

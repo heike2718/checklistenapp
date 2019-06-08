@@ -64,6 +64,8 @@ export class ConfigureChecklisteComponent implements OnInit {
             optional: false
         };
         checkliste.items.push(item);
+        this.nameItem = '';
+        this.kommentarItem = '';
         this.toggleFormNeuesTeilVisible();
     }
 
