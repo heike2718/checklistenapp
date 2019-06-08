@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
-import { MessagesService, ModalService } from 'hewi-ng-lib';
+import { MessagesService } from 'hewi-ng-lib';
 
 @Component({
   selector: 'chl-checklisten-liste',
@@ -20,7 +20,6 @@ export class ChecklistenListeComponent implements OnInit {
   formNeueChecklisteVisible: boolean;
 
   constructor(private checklistenService: ChecklistenService,
-    private modalService: ModalService,
     private messagesService: MessagesService) { }
 
   ngOnInit() {

@@ -23,11 +23,13 @@ export class ConfigureChecklisteComponent implements OnInit {
 
     formNeuesTeilVisible: boolean;
 
-    constructor(private router: Router, private modalService: ModalService, private checklistenService: ChecklistenService) { }
+    constructor(private router: Router, private checklistenService: ChecklistenService, private modalService: ModalService) { }
 
     ngOnInit() {
         this.formNeuesTeilVisible = false;
         this.checkliste$ = store.gewaehlteCheckliste$;
+        this.nameItem = '';
+        this.kommentarItem = '';
     }
 
     toggleFormNeuesTeilVisible() {
@@ -73,21 +75,19 @@ export class ConfigureChecklisteComponent implements OnInit {
         return !this.nameItem || this.nameItem.length === 0;
     }
 
-    closeModalQuietly() {
-        this.nameItem = undefined;
-        this.kommentarItem = undefined;
-        this.formNeuesTeilVisible = false;
-        this.modalService.close();
-    }
-
     save(checkliste: ChecklisteDaten) {
         this.formNeuesTeilVisible = false;
-        this.checklistenService.saveCheckliste(checkliste, MODUS_CONFIG);
+        this.checklistenService.saveCheckliste(checkliste, MODUS_CONFIG, true);
     }
 
     saveAndClose(checkliste: ChecklisteDaten) {
-        this.save(checkliste);
+        this.formNeuesTeilVisible = false;
+        this.checklistenService.saveCheckliste(checkliste, MODUS_CONFIG, false);
         this.router.navigateByUrl('/listen');
+    }
+
+    closeModalQuietly() {
+        this.modalService.close();
     }
 
     delete(checkliste: ChecklisteDaten) {
