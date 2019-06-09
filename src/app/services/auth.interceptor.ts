@@ -8,8 +8,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const idToken = localStorage.getItem('id_token');
+        if (req.url === 'http://api.icndb.com/jokes/random/') {
+            return next.handle(req);
+        }
 
+        const idToken = localStorage.getItem('id_token');
         if (idToken) {
             const cloned = req.clone({
                 headers: req.headers.set('Authorization', 'Bearer ' + idToken)
