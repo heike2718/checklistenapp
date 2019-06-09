@@ -19,6 +19,8 @@ import { ChecklistentypBackgroundDirective } from './shared/directives/checklist
 import { ConfigureChecklisteComponent } from './checkliste-detail/config-checkliste/configure-checkliste.component';
 import { ExecuteChecklisteComponent } from './checkliste-detail/execute-checkliste/execute-checkliste.component';
 import { ConfigureVorschlagslisteComponent } from './checkliste-detail/config-checkliste/items/configure-vorschlagsliste.component';
+import { ItemButtonComponent } from './checkliste-detail/config-checkliste/item-button/item-button.component';
+import { EditableItemButtonComponent } from './checkliste-detail/config-checkliste/editable-item-button/editable-item-button.component';
 import { ConfigureEditComponent } from './checkliste-detail/config-checkliste/items/configure-edit.component';
 import { ExecuteItemlisteComponent } from './checkliste-detail/execute-checkliste/items/execute-itemliste.component';
 import { HomeComponent } from './home/home.component';
@@ -29,8 +31,6 @@ import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
-import { ItemButtonComponent } from './shared/components/item-button/item-button.component';
-import { EditableItemButtonComponent } from './shared/components/editable-item-button/editable-item-button.component';
 
 
 
