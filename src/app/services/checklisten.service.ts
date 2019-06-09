@@ -6,7 +6,7 @@ import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
-import { Message, ResponsePayload } from 'hewi-ng-lib/lib/messages/models/message.model';
+import { Message, ResponsePayload, MessagesService } from 'hewi-ng-lib';
 import { Router } from '@angular/router';
 import { HttpErrorService } from '../error/http-error.service';
 
@@ -16,7 +16,11 @@ import { HttpErrorService } from '../error/http-error.service';
 })
 export class ChecklistenService {
 
-  constructor(private http: HttpClient, private httpErrorService: HttpErrorService, private router: Router, private logger: Logger) { }
+  constructor(private http: HttpClient
+    , private httpErrorService: HttpErrorService
+    , private messagesService: MessagesService
+    , private router: Router
+    , private logger: Logger) { }
 
   loadChecklisten(): void {
     const url = environment.apiUrl + '/checklisten';
@@ -72,7 +76,7 @@ export class ChecklistenService {
     // return of(neueListe);
   }
 
-  saveCheckliste(checkliste: ChecklisteDaten, modus: string): void {
+  saveCheckliste(checkliste: ChecklisteDaten, modus: string, showMessage: boolean): void {
 
     this.logger.debug('saveCheckliste: ' + JSON.stringify(checkliste));
 
@@ -92,6 +96,9 @@ export class ChecklistenService {
           const persistierte = resp.data;
           persistierte.modus = modus;
           store.updateCheckliste(persistierte);
+          if (showMessage) {
+            this.messagesService.info(resp.message.message);
+          }
         }
       },
       (error => {

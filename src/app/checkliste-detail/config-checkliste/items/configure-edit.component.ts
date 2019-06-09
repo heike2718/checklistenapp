@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChecklisteDaten, ChecklistenItem, Filterkriterium, MODUS_CONFIG, LISTE_AUSGEWAEHLT } from '../../../shared/model/checkliste';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { store } from '../../../store/app-data';
 import { findItemByName, filterChecklisteItems } from '../../../shared/utils/checkliste.utils';
 
@@ -9,14 +9,25 @@ import { findItemByName, filterChecklisteItems } from '../../../shared/utils/che
   templateUrl: './configure-edit.component.html',
   styleUrls: ['./configure-edit.component.css']
 })
-export class ConfigureEditComponent implements OnInit {
+export class ConfigureEditComponent implements OnInit, OnDestroy {
 
   checkliste$: Observable<ChecklisteDaten>;
+
+  private checkliste: ChecklisteDaten;
+
+  private checklisteSubscription: Subscription;
 
   constructor() { }
 
   ngOnInit() {
     this.checkliste$ = store.gewaehlteCheckliste$;
+
+    this.checklisteSubscription = this.checkliste$.subscribe(chl => this.checkliste = chl);
+
+  }
+
+  ngOnDestroy() {
+    this.checklisteSubscription.unsubscribe();
   }
 
   getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
@@ -42,4 +53,14 @@ export class ConfigureEditComponent implements OnInit {
     }
     store.updateChecklisteItems(items);
   }
+
+  onDeselected(item: ChecklistenItem) {
+    const markiertesItem = findItemByName(this.checkliste.items, item.name);
+
+    if (markiertesItem) {
+      markiertesItem.markiert = false;
+    }
+  }
 }
+
+

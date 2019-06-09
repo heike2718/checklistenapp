@@ -26,11 +26,11 @@ export class ExecuteChecklisteComponent implements OnInit {
   }
 
   save(checkliste: ChecklisteDaten) {
-    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC);
+    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, true);
   }
 
   saveAndClose(checkliste: ChecklisteDaten) {
-    this.save(checkliste);
+    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, false);
     this.router.navigateByUrl('/listen');
   }
 }
