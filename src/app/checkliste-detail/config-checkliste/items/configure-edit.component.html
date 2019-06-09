@@ -1,7 +1,7 @@
 <div *ngIf="checkliste$ | async as checkliste">
     <div class="row">
       <div *ngFor="let item of getItems(checkliste)" class="col-sm-12 col-md-3 col-lg-4">
-        <chl-editable-item-button [item]="item" [checklisteTyp]="checkliste.typ" (deselected)="onDeselected($event)" ></chl-editable-item-button>
+        <chl-editable-item-button [item]="item" [checklisteTyp]="checkliste.typ" (deselected)="onDeselected($event)"></chl-editable-item-button>
       </div>
     </div>
 </div>
