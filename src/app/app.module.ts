@@ -31,6 +31,7 @@ import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
+import { JokeComponent } from './joke/joke.component';
 
 
 
@@ -59,7 +60,8 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     ErrorComponent,
     SignUpComponent,
     ItemButtonComponent,
-    EditableItemButtonComponent
+    EditableItemButtonComponent,
+    JokeComponent
   ],
   imports: [
     BrowserModule,
