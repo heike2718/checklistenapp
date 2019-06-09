@@ -21,6 +21,8 @@ export class ConfigureChecklisteComponent implements OnInit {
 
     kommentarItem: string;
 
+    optinalItem: boolean;
+
     formNeuesTeilVisible: boolean;
 
     constructor(private router: Router, private checklistenService: ChecklistenService, private modalService: ModalService) { }
@@ -30,6 +32,7 @@ export class ConfigureChecklisteComponent implements OnInit {
         this.checkliste$ = store.gewaehlteCheckliste$;
         this.nameItem = '';
         this.kommentarItem = '';
+        this.optinalItem = false;
     }
 
     toggleFormNeuesTeilVisible() {
@@ -63,7 +66,7 @@ export class ConfigureChecklisteComponent implements OnInit {
             kommentar: this.kommentarItem,
             erledigt: false,
             markiert: true,
-            optional: false
+            optional: this.optinalItem
         };
         checkliste.items.push(item);
         this.nameItem = '';

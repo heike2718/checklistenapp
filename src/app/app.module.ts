@@ -29,6 +29,8 @@ import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
+import { ItemButtonComponent } from './shared/components/item-button/item-button.component';
+import { EditableItemButtonComponent } from './shared/components/editable-item-button/editable-item-button.component';
 
 
 
@@ -55,7 +57,9 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
     HomeComponent,
     StatistikChecklistePipe,
     ErrorComponent,
-    SignUpComponent
+    SignUpComponent,
+    ItemButtonComponent,
+    EditableItemButtonComponent
   ],
   imports: [
     BrowserModule,

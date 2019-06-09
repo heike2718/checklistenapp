@@ -5,12 +5,12 @@
   <!-- Dies hier soll im Dialog gezeichnet werden (Übergabe über secModalBody) -->
   <ng-template #secModalBody>
     <p>Weg ist weg. Trotzdem löschen?</p>
-    <div class="row  btn-container">
-      <div class="col-sm-12 col-md-4 btn-wrapper">
-        <button class="col-md-12" (click)="delete(checkliste)">Jupp</button>
+    <div class="row btn-container">
+      <div class="col-sm-12 col-md-6">
+        <button class="col-sm-12" (click)="delete(checkliste)">Jupp</button>
       </div>
-      <div class="col-sm-12 col-md-4 btn-wrapper">
-        <button class="col-md-12" (click)="closeModalQuietly()">Nö</button>
+      <div class="col-sm-12 col-md-6">
+        <button class="col-sm-12" (click)="closeModalQuietly()">Nö</button>
       </div>
     </div>
   </ng-template>
@@ -58,11 +58,16 @@
           <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar"
             [(ngModel)]="kommentarItem" required aria-describedby="itemKommentarHelp" placeholder="Kommentar">
         </div>
+        <div class="group">
+          <input type="checkbox" class="form-check-inline" id="inputItemOptional" name="inputItemOptional"
+            [(ngModel)]="optinalItem" required aria-describedby="itemKommentarOptional">
+          <label for="inputItemOptional">optional</label>
+        </div>
         <div class="row btn-container">
-          <div class="col-md-4 btn-wrapper">
+          <div class="col-sm-12 col-md-6 btn-wrapper">
             <button class="col-sm-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
           </div>
-          <div class="col-md-4 btn-wrapper">
+          <div class="col-sm-12 col-md-6 btn-wrapper">
             <button class="col-sm-12" (click)="toggleFormNeuesTeilVisible()">doch nicht</button>
           </div>
         </div>
