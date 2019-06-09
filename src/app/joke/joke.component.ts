@@ -18,18 +18,19 @@ export class JokeComponent implements OnInit, OnDestroy {
   constructor(private jokeService: JokesService) { }
 
   ngOnInit() {
-    this.jokeResponse$ = this.jokeService.nextJoke();
+    // this.jokeResponse$ = this.jokeService.nextJoke();
 
-    this.jokeSubscription = this.jokeResponse$.subscribe(res => {
-      if (res.type && res.type === 'success' && res.value && res.value.joke) {
-        this.joke = res.value.joke.replaceAll('&quot;', '"');
-      } else {
-        this.joke = 'Sei Epsilon kleiner 0.';
-      }
-    },
-      (_error => {
-        this.joke = 'Sei Epsilon kleiner 0.';
-      }));
+    // this.jokeSubscription = this.jokeResponse$.subscribe(res => {
+    //   if (res.type && res.type === 'success' && res.value && res.value.joke) {
+    //     this.joke = res.value.joke.replaceAll('&quot;', '"');
+    //   } else {
+    //     this.joke = 'Sei Epsilon kleiner 0.';
+    //   }
+    // },
+    //   (_error => {
+    //     this.joke = 'Sei Epsilon kleiner 0.';
+    //   }));
+    this.joke = 'Sei Epsilon kleiner 0.';
   }
 
   ngOnDestroy() {
