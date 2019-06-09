@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecklistenItem, ChecklisteDaten, Filterkriterium, MODUS_CONFIG, LISTE_VORSCHLAEGE } from '../../../shared/model/checkliste';
 import { findItemByName, filterChecklisteItems } from '../../../shared/utils/checkliste.utils';
+import { environment } from '../../../../environments/environment';
 import { store } from '../../../store/app-data';
 import { Observable } from 'rxjs';
 
@@ -14,16 +15,26 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
 
   checkliste$: Observable<ChecklisteDaten>;
 
-  constructor() { }
+  showFilename: boolean;
+
+  typ: string;
+
+  constructor() {
+    if (!environment.production) {
+      this.showFilename = true;
+    }
+  }
 
   ngOnInit() {
     this.checkliste$ = store.gewaehlteCheckliste$;
   }
 
-    getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
+  getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
     if (!checkliste) {
       return [];
     }
+
+    this.typ = checkliste.typ;
 
     const kriterium: Filterkriterium = {
       modus: MODUS_CONFIG,
@@ -32,8 +43,6 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
 
     return filterChecklisteItems(checkliste.items, kriterium);
   }
-
-
 
   subscribeAusgewaehlt(items: ChecklistenItem[], item: ChecklistenItem) {
     console.log('item ' + item.name + ' als bearbeitet markieren');

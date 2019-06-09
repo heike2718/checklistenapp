@@ -2,13 +2,13 @@
 
 <div *ngIf="checkliste$ | async as checkliste else loading">
 
-  <h3>{{checkliste.typ}} {{checkliste.name}} abarbeiten </h3>
-  <h4>{{checkliste | statistikCheckliste}}</h4>
+  <h4>{{checkliste.typ}} {{checkliste.name}} abarbeiten </h4>
+  <h5>{{checkliste | statistikCheckliste}}</h5>
 
 
   <chl-execute-itemliste [semantik]="'vorschlagsliste'"></chl-execute-itemliste>
 
-  <h4>Erledigte Dinge:</h4>
+  <h5>Erledigte Dinge:</h5>
 
   <chl-execute-itemliste [semantik]="'ausgewaehlt'"></chl-execute-itemliste>
 

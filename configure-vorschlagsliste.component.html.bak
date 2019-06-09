@@ -1,0 +1,15 @@
+
+configure-vorschlagsliste.component.html
+
+
+<div *ngIf="checkliste$ | async as checkliste">
+  <table>
+    <tbody>
+      <tr *ngFor="let item of getItems(checkliste)"  class="col-sm-12 col-md-4 col-lg-3">
+        <!--<td class="item-btn" chlBackgroundColor [typ]="checkliste.typ" (click)="subscribeAusgewaehlt(checkliste.items, item)">{{item.name}}</td>-->
+        <chl-configure-item></chl-configure-item>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

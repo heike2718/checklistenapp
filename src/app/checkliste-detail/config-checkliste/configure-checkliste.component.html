@@ -1,8 +1,24 @@
 <p *ngIf="showFilename()">configure-checkliste.component.ts</p>
 
-
-
 <div *ngIf="checkliste$ | async as checkliste else loading">
+
+  <!-- Dies hier soll im Dialog gezeichnet werden (Übergabe über secModalBody) -->
+  <ng-template #secModalBody>
+    <p>Weg ist weg. Trotzdem löschen?</p>
+    <div class="row btn-container">
+      <div class="col-sm-12 col-md-6">
+        <button class="col-sm-12" (click)="delete(checkliste)">Jupp</button>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <button class="col-sm-12" (click)="closeModalQuietly()">Nö</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <hewi-modal #modal [hideOnEscape]="true" [hideOnClickOutside]="false" [body]="secModalBody"
+    *hewiModalOpenOnClick="trashButton">
+    <i class="fa fa-times" (click)="modal.close()"></i>
+  </hewi-modal>
 
 
   <!-- Dialog zum Anlegen eines neuen Items -->
@@ -10,12 +26,12 @@
 
   </ng-template>
 
-  <h3>{{checkliste.typ}} erstellen </h3>
+  <h4>{{checkliste.typ}} erstellen </h4>
 
   <form id="nameForm">
     <label for="nameChecklisteInput">Name*:</label>
-    <input type="text" class="form-control" id="nameChecklisteInput" name="nameChecklisteInput" [(ngModel)]="checkliste.name"
-      required />
+    <input type="text" class="form-control" id="nameChecklisteInput" name="nameChecklisteInput"
+      [(ngModel)]="checkliste.name" required />
   </form>
 
 
@@ -23,7 +39,7 @@
 
   <div *ngIf="!formNeuesTeilVisible" class="row btn-container">
     <div class="col-md-4 btn-wrapper">
-      <button class="col-md-12 btn btn-outline-dark" (click)="toggleFormNeuesTeilVisible()" >
+      <button class="col-md-12 btn btn-outline-dark" (click)="toggleFormNeuesTeilVisible()">
         <i class="fa fa-plus"></i> neues Teil
       </button>
     </div>
@@ -34,19 +50,24 @@
       <form id="itemForm">
         <div class="group">
           <label for="inputItemName">Name*:</label>
-          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem" required aria-describedby="itemNameHelp"
-            placeholder="Name">
+          <input type="text" class="form-control" id="inputItemName" name="inputItemName" [(ngModel)]="nameItem"
+            required aria-describedby="itemNameHelp" placeholder="Name">
         </div>
         <div class="group">
           <label for="inputItemKommentar">Kommentar:</label>
-          <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar" [(ngModel)]="kommentarItem" required
-            aria-describedby="itemKommentarHelp" placeholder="Kommentar">
+          <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar"
+            [(ngModel)]="kommentarItem" required aria-describedby="itemKommentarHelp" placeholder="Kommentar">
+        </div>
+        <div class="group">
+          <input type="checkbox" class="form-check-inline" id="inputItemOptional" name="inputItemOptional"
+            [(ngModel)]="optinalItem" required aria-describedby="itemKommentarOptional">
+          <label for="inputItemOptional">optional</label>
         </div>
         <div class="row btn-container">
-          <div class="col-md-4 btn-wrapper">
+          <div class="col-sm-12 col-md-6 btn-wrapper">
             <button class="col-sm-12" [disabled]="addItemDisabled()" (click)="addItem(checkliste)">OK</button>
           </div>
-          <div class="col-md-4 btn-wrapper">
+          <div class="col-sm-12 col-md-6 btn-wrapper">
             <button class="col-sm-12" (click)="toggleFormNeuesTeilVisible()">doch nicht</button>
           </div>
         </div>
@@ -54,7 +75,7 @@
     </div>
   </div>
 
-  <h4>{{checkliste | statistikCheckliste}}*</h4>
+  <h5>*{{checkliste | statistikCheckliste}}</h5>
 
   <chl-configure-edit></chl-configure-edit>
 
@@ -65,12 +86,13 @@
       </button>
     </div>
     <div class="col-md-3 btn-wrapper">
-      <button class="col-md-12 btn btn-outline-dark" [disabled]="saveDisabled(checkliste)" (click)="saveAndClose(checkliste)">
+      <button class="col-md-12 btn btn-outline-dark" [disabled]="saveDisabled(checkliste)"
+        (click)="saveAndClose(checkliste)">
         speichern und schließen
       </button>
     </div>
     <div class="col-md-3 btn-wrapper">
-      <button class="col-md-12 btn btn-outline-dark" (click)="delete(checkliste)">
+      <button #trashButton class="col-md-12 btn btn-outline-dark">
         löschen
       </button>
     </div>

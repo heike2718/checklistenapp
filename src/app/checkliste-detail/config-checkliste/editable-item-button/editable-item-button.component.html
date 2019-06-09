@@ -1,0 +1,43 @@
+<div chlBackgroundColor [typ]="checklisteTyp" class="card mb-3">
+
+  <div class="card-header">
+    <div class="row">
+      <div (click)="editItem()" class="col-md-6 icon-left">
+        <i class="fa fa-edit"></i>
+      </div>
+      <div (click)="itemSelected()" class="col-md-6 icon-right">
+        <i class="fa fa-trash"></i>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{item.name}} <span *ngIf="item.optional" class="badge badge-dark">optional</span></p>
+    <p *ngIf="item.kommentar && item.kommentar !== ''" class="card-text kommentar">{{item.kommentar}}</p>
+    <div *ngIf="formEditVisible">
+      <div class="container-fluid dialog">
+        <form id="editItemForm">
+          <div class="group">
+            <label for="inputItemKommentar">Kommentar:</label>
+            <input type="text" class="form-control" id="inputItemKommentar" name="inputItemKommentar"
+              [(ngModel)]="kommentarItem" required aria-describedby="itemKommentarHelp" placeholder="Kommentar">
+          </div>
+          <div class="group">
+            <input type="checkbox" class="form-check-inline" id="inputItemOptional" name="inputItemOptional"
+              [(ngModel)]="optinalItem" required aria-describedby="itemKommentarOptional">
+            <label for="inputItemOptional">optional</label>
+          </div>
+          <div class="row btn-container">
+            <div class="col-sm-12 col-md-6 btn-wrapper">
+              <button class="col-sm-12" (click)="saveItem()">OK</button>
+            </div>
+            <div class="col-sm-12 col-md-6 btn-wrapper">
+              <button class="col-sm-12" (click)="cancelEdid()">doch nicht</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

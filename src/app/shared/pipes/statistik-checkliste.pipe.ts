@@ -33,12 +33,19 @@ export class StatistikChecklistePipe implements PipeTransform {
   }
 
   private getStatistikExecution(checkliste: ChecklisteDaten): string {
-    const anzahlGesamt = checkliste.items.length;
-    let anzahlErledigt = 0;
+    let anzahlMarkiert = 0, anzahlErledigt = 0;
     checkliste.items.forEach(
-      item => { if (item.erledigt) { anzahlErledigt++; } }
+      item => {
+        if (item.markiert) {
+          anzahlMarkiert++;
+        }
+        if (item.erledigt) {
+          anzahlErledigt++;
+        }
+      }
     );
-
-    return anzahlErledigt + ' von ' + anzahlGesamt + ' abgehakt';
+    return anzahlErledigt + ' von ' + anzahlMarkiert + ' abgehakt';
   }
 }
+
+

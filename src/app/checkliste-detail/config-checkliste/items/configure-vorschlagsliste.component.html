@@ -1,9 +1,10 @@
+<p *ngIf="showFilename">configure-vorschlagsliste.html</p>
+
 <div *ngIf="checkliste$ | async as checkliste">
-  <table>
-    <tbody>
-      <tr *ngFor="let item of getItems(checkliste)">
-        <td class="item-btn" chlBackgroundColor [typ]="checkliste.typ" (click)="subscribeAusgewaehlt(checkliste.items, item)">{{item.name}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div *ngFor="let item of getItems(checkliste)" class="col-sm-12 col-md-4 col-lg-2 item-btn">
+      <chl-item-button [item]="item" [checklisteTyp]="typ" (click)="subscribeAusgewaehlt(checkliste.items, item)"></chl-item-button>
+    </div>
+  </div>
 </div>
+
