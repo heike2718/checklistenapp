@@ -14,4 +14,5 @@ export const environment = {
   clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
   signinRedirectUrl: 'http://localhost:8080/checklistenapp',
   loginRedirectUrl: 'http://localhost:8080/checklistenapp#/listen',
+  jokesAPI: 'https://official-joke-api.appspot.com/jokes/random'
 };
