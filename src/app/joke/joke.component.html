@@ -1,5 +1,14 @@
 <div *ngIf="jokeResponse$ | async as jokeResponse" class="dialog">
 
-  <p>{{joke}}</p>
-
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        Q: {{setup}}
+      </div>
+      <div class="col-sm-12">
+        A: {{punchline}}
+      </div>
+    </div>
+  </div>
 </div>
+

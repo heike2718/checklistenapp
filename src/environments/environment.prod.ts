@@ -8,5 +8,6 @@ export const environment = {
   isDebugMode: false,
   clientId: '56qe22kr508u1yah2z90d8cbbn4hcb95okmntzck42kj',
   signinRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp',
-  loginRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp#/listen'
+  loginRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp#/listen',
+  jokesAPI: 'https://official-joke-api.appspot.com/jokes/random'
 };
