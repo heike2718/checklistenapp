@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
+import { JWTService } from 'hewi-ng-lib';
 import { AuthService } from './services/auth.service';
 
 
 @Component({
-    selector: 'chl-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+	selector: 'chl-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    version = environment.version;
-    envName = environment.envName;
-    showEnv = !environment.production;
-    api = environment.apiUrl;
-    logo = environment.assetsUrl + '/favicon-32x32.png';
+	version = environment.version;
+	envName = environment.envName;
+	showEnv = !environment.production;
+	api = environment.apiUrl;
+	logo = environment.assetsUrl + '/favicon-32x32.png';
 
-    constructor(private authService: AuthService) { }
+	constructor(private jwtService: JWTService, private authService: AuthService) { }
 
-    ngOnInit() {
-        // nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
-        // Daher hier redirect-URL parsen
-        this.authService.parseHash(window.location.hash);
-    }
+	ngOnInit() {
+		// nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
+		// Daher hier redirect-URL parsen
+		const authResult = this.jwtService.parseHash(window.location.hash);
+		this.authService.setSession(authResult);
+	}
 }
+

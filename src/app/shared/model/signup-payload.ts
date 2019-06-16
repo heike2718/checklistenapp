@@ -1,5 +1,5 @@
 
 export interface SignUpPayload {
-    secret: string;
-    kleber?: string;
+	secret: string;
+	kleber?: string;
 }

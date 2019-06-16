@@ -10,50 +10,48 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoggedInGuard } from './shared/logged-in.guard';
 
 export const routerConfig: Routes = [
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'signup',
-        component: SignUpComponent
-    },
-    {
-        path: 'listen',
-        component: ChecklistenListeComponent,
-        canActivate: [LoggedInGuard]
-    },
-    {
-        path: 'checkliste/configuration/:kuerzel',
-        component: ConfigureChecklisteComponent,
-        resolve: {
-            detail: ConfigureChecklisteResolver
-        },
-        canActivate: [LoggedInGuard]
+	{
+		path: 'home',
+		component: HomeComponent
+	},
+	{
+		path: 'signup',
+		component: SignUpComponent
+	},
+	{
+		path: 'listen',
+		component: ChecklistenListeComponent,
+		canActivate: [LoggedInGuard]
+	},
+	{
+		path: 'checkliste/configuration/:kuerzel',
+		component: ConfigureChecklisteComponent,
+		resolve: {
+			detail: ConfigureChecklisteResolver
+		},
+		canActivate: [LoggedInGuard]
 
-    },
-    {
-        path: 'checkliste/execution/:kuerzel',
-        component: ExecuteChecklisteComponent,
-        resolve: {
-            detail: ExecuteChecklisteResolver
-        },
-        canActivate: [LoggedInGuard]
-    },
-    {
-        path: 'error',
-        component: ErrorComponent
-    },
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/home'
-    },
-    {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: '/home'
-    }
+	},
+	{
+		path: 'checkliste/execution/:kuerzel',
+		component: ExecuteChecklisteComponent,
+		resolve: {
+			detail: ExecuteChecklisteResolver
+		},
+		canActivate: [LoggedInGuard]
+	},
+	{
+		path: 'error',
+		component: ErrorComponent
+	},
+	{
+		path: '',
+		pathMatch: 'full',
+		redirectTo: '/home'
+	},
+	{
+		path: '**',
+		pathMatch: 'full',
+		redirectTo: '/home'
+	}
 ];
-
-

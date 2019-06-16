@@ -12,7 +12,7 @@ export const environment = {
   assetsUrl: 'assets',
   isDebugMode: true,
   clientId: 'WLJLH4vsldWapZrMZi2U5HKRBVpgyUiRTWwX7aiJd8nX',
-  signinRedirectUrl: 'http://localhost:4200',
+  signupRedirectUrl: 'http://localhost:4200',
   loginRedirectUrl: 'http://localhost:4200#/listen',
   jokesAPI: 'https://official-joke-api.appspot.com/jokes/random'
 };

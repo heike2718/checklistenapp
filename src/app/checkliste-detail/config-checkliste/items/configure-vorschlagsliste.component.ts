@@ -7,50 +7,50 @@ import { Observable } from 'rxjs';
 
 
 @Component({
-  selector: 'chl-configure-vorschlagsliste',
-  templateUrl: './configure-vorschlagsliste.component.html',
-  styleUrls: ['./configure-vorschlagsliste.component.css']
+	selector: 'chl-configure-vorschlagsliste',
+	templateUrl: './configure-vorschlagsliste.component.html',
+	styleUrls: ['./configure-vorschlagsliste.component.css']
 })
 export class ConfigureVorschlagslisteComponent implements OnInit {
 
-  checkliste$: Observable<ChecklisteDaten>;
+	checkliste$: Observable<ChecklisteDaten>;
 
-  showFilename: boolean;
+	showFilename: boolean;
 
-  typ: string;
+	typ: string;
 
-  constructor() {
-    if (!environment.production) {
-      this.showFilename = true;
-    }
-  }
+	constructor() {
+		if (!environment.production) {
+			this.showFilename = true;
+		}
+	}
 
-  ngOnInit() {
-    this.checkliste$ = store.gewaehlteCheckliste$;
-  }
+	ngOnInit() {
+		this.checkliste$ = store.gewaehlteCheckliste$;
+	}
 
-  getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
-    if (!checkliste) {
-      return [];
-    }
+	getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
+		if (!checkliste) {
+			return [];
+		}
 
-    this.typ = checkliste.typ;
+		this.typ = checkliste.typ;
 
-    const kriterium: Filterkriterium = {
-      modus: MODUS_CONFIG,
-      semantik: LISTE_VORSCHLAEGE
-    };
+		const kriterium: Filterkriterium = {
+			modus: MODUS_CONFIG,
+			semantik: LISTE_VORSCHLAEGE
+		};
 
-    return filterChecklisteItems(checkliste.items, kriterium);
-  }
+		return filterChecklisteItems(checkliste.items, kriterium);
+	}
 
-  subscribeAusgewaehlt(items: ChecklistenItem[], item: ChecklistenItem) {
-    console.log('item ' + item.name + ' als bearbeitet markieren');
-    const markiertesItem = findItemByName(items, item.name);
+	subscribeAusgewaehlt(items: ChecklistenItem[], item: ChecklistenItem) {
+		console.log('item ' + item.name + ' als bearbeitet markieren');
+		const markiertesItem = findItemByName(items, item.name);
 
-    if (markiertesItem) {
-      markiertesItem.markiert = true;
-    }
-    store.updateChecklisteItems(items);
-  }
+		if (markiertesItem) {
+			markiertesItem.markiert = true;
+		}
+		store.updateChecklisteItems(items);
+	}
 }

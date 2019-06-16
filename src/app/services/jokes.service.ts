@@ -5,19 +5,18 @@ import { publishLast, refCount } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class JokesService {
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
 
-  public nextJoke(): Observable<any> {
+	public nextJoke(): Observable<any> {
 
-    return this.http.get(environment.jokesAPI).pipe(
-      publishLast(),
-      refCount()
-    );
-  }
+		return this.http.get(environment.jokesAPI).pipe(
+			publishLast(),
+			refCount()
+		);
+	}
 }
-
