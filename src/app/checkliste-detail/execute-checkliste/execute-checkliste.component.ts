@@ -7,30 +7,30 @@ import { Router } from '@angular/router';
 import { ChecklistenService } from '../../services/checklisten.service';
 
 @Component({
-  selector: 'chl-execute-checkliste',
-  templateUrl: './execute-checkliste.component.html',
-  styleUrls: ['./execute-checkliste.component.css']
+	selector: 'chl-execute-checkliste',
+	templateUrl: './execute-checkliste.component.html',
+	styleUrls: ['./execute-checkliste.component.css']
 })
 export class ExecuteChecklisteComponent implements OnInit {
 
-  checkliste$: Observable<ChecklisteDaten>;
+	checkliste$: Observable<ChecklisteDaten>;
 
-  constructor(private router: Router, private checklistenService: ChecklistenService) { }
+	constructor(private router: Router, private checklistenService: ChecklistenService) { }
 
-  ngOnInit() {
-    this.checkliste$ = store.gewaehlteCheckliste$;
-  }
+	ngOnInit() {
+		this.checkliste$ = store.gewaehlteCheckliste$;
+	}
 
-  showFilename(): boolean {
-    return !environment.production;
-  }
+	showFilename(): boolean {
+		return !environment.production;
+	}
 
-  save(checkliste: ChecklisteDaten) {
-    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, true);
-  }
+	save(checkliste: ChecklisteDaten) {
+		this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, true);
+	}
 
-  saveAndClose(checkliste: ChecklisteDaten) {
-    this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, false);
-    this.router.navigateByUrl('/listen');
-  }
+	saveAndClose(checkliste: ChecklisteDaten) {
+		this.checklistenService.saveCheckliste(checkliste, MODUS_EXEC, false);
+		this.router.navigateByUrl('/listen');
+	}
 }

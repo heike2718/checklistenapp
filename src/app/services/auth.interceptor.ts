@@ -6,23 +6,22 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        if (req.url === environment.jokesAPI) {
-            return next.handle(req);
-        }
+		if (req.url === environment.jokesAPI) {
+			return next.handle(req);
+		}
 
-        const idToken = localStorage.getItem('id_token');
-        if (idToken) {
-            const cloned = req.clone({
-                headers: req.headers.set('Authorization', 'Bearer ' + idToken)
-            });
-            return next.handle(cloned);
+		const idToken = localStorage.getItem('id_token');
+		if (idToken) {
+			const cloned = req.clone({
+				headers: req.headers.set('Authorization', 'Bearer ' + idToken)
+			});
+			return next.handle(cloned);
 
-        } else {
-            return next.handle(req);
-        }
-    }
+		} else {
+			return next.handle(req);
+		}
+	}
 }
-
 

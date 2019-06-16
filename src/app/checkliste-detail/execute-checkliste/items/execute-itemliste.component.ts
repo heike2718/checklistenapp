@@ -5,45 +5,43 @@ import { store } from '../../../store/app-data';
 import { filterChecklisteItems, findItemByName } from '../../../shared/utils/checkliste.utils';
 
 @Component({
-  selector: 'chl-execute-itemliste',
-  templateUrl: './execute-itemliste.component.html',
-  styleUrls: ['./execute-itemliste.component.css']
+	selector: 'chl-execute-itemliste',
+	templateUrl: './execute-itemliste.component.html',
+	styleUrls: ['./execute-itemliste.component.css']
 })
 export class ExecuteItemlisteComponent implements OnInit {
 
-  checkliste$: Observable<ChecklisteDaten>;
+	checkliste$: Observable<ChecklisteDaten>;
 
-  @Input()
-  semantik: string;
+	@Input()
+	semantik: string;
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-    this.checkliste$ = store.gewaehlteCheckliste$;
-  }
+	ngOnInit() {
+		this.checkliste$ = store.gewaehlteCheckliste$;
+	}
 
-  getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
-    if (!checkliste) {
-      return [];
-    }
+	getItems(checkliste: ChecklisteDaten): ChecklistenItem[] {
+		if (!checkliste) {
+			return [];
+		}
 
-    const kriterium: Filterkriterium = {
-      modus: MODUS_EXEC,
-      semantik: this.semantik
-    };
+		const kriterium: Filterkriterium = {
+			modus: MODUS_EXEC,
+			semantik: this.semantik
+		};
 
-    return filterChecklisteItems(checkliste.items, kriterium);
-  }
+		return filterChecklisteItems(checkliste.items, kriterium);
+	}
 
-  toggleErledigt(checkliste: ChecklisteDaten, item: ChecklistenItem): void {
+	toggleErledigt(checkliste: ChecklisteDaten, item: ChecklistenItem): void {
 
-    const markiertesItem = findItemByName(checkliste.items, item.name);
+		const markiertesItem = findItemByName(checkliste.items, item.name);
 
-    if (markiertesItem) {
-      item.erledigt = !item.erledigt;
-      store.updateChecklisteItems(checkliste.items);
-    }
-  }
+		if (markiertesItem) {
+			item.erledigt = !item.erledigt;
+			store.updateChecklisteItems(checkliste.items);
+		}
+	}
 }
-
-

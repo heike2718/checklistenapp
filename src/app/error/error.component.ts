@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'chl-error',
-  templateUrl: './error.component.html',
-  styleUrls: ['./error.component.css']
+	selector: 'chl-error',
+	templateUrl: './error.component.html',
+	styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }
