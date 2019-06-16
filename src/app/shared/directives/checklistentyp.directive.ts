@@ -2,18 +2,17 @@ import { Directive, Input, ElementRef, Renderer, AfterViewInit } from '@angular/
 import { getBackgroundColorByChecklistentyp } from '../utils/checkliste.utils';
 
 @Directive({
-  selector: '[chlBackgroundColor]'
+	selector: '[chlBackgroundColor]'
 })
 export class ChecklistentypBackgroundDirective implements AfterViewInit {
 
-  @Input()
-  typ: string;
+	@Input()
+	typ: string;
 
-  constructor(private el: ElementRef, private renderer: Renderer) { }
+	constructor(private el: ElementRef, private renderer: Renderer) { }
 
-  ngAfterViewInit(): void {
-    const color = getBackgroundColorByChecklistentyp(this.typ);
-    this.renderer.setElementStyle(this.el.nativeElement, 'backgroundColor', color);
-  }
+	ngAfterViewInit(): void {
+		const color = getBackgroundColorByChecklistentyp(this.typ);
+		this.renderer.setElementStyle(this.el.nativeElement, 'backgroundColor', color);
+	}
 }
-

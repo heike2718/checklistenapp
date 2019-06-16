@@ -7,78 +7,79 @@ import { store } from '../store/app-data';
 
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class HttpErrorService {
 
-  constructor(private messagesService: MessagesService, private logger: Logger, private router: Router) { }
+	constructor(private messagesService: MessagesService, private logger: Logger, private router: Router) { }
 
 
-  handleError(error: HttpErrorResponse, context: string) {
+	handleError(error: HttpErrorResponse, context: string) {
 
-    if (error instanceof ErrorEvent) {
-      this.logger.error(context + ': ErrorEvent occured - ' + JSON.stringify(error));
-      throw (error);
-    } else {
-      switch (error.status) {
-        case 0:
-          this.messagesService.error(context +
-            ': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
-          break;
-        default:
-          const msg = this.extractMessageObject(error);
-          if (msg !== null) {
-            this.showServerResponseMessage(msg);
-          } else {
-            this.messagesService.error(context + ' status=' + error.status
-              + ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
-          }
-          if (error.status === 401) {
-            this.clearSession();
-          }
-      }
-    }
-  }
+		if (error instanceof ErrorEvent) {
+			this.logger.error(context + ': ErrorEvent occured - ' + JSON.stringify(error));
+			throw (error);
+		} else {
+			switch (error.status) {
+				case 0:
+					this.messagesService.error(context +
+						': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
+					break;
+				default:
+					const msg = this.extractMessageObject(error);
+					if (msg !== null) {
+						this.showServerResponseMessage(msg);
+					} else {
+						this.messagesService.error(context + ' status=' + error.status
+							+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
+					}
+					if (error.status === 401) {
+						this.clearSession();
+					}
+			}
+		}
+	}
 
-  private clearSession() {
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    localStorage.removeItem('auth_state');
-    // TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
-    store.updateAuthSignUpOutcome(false);
-    store.updateAuthLogInOutcome(false);
-    this.router.navigateByUrl('/home');
-  }
+	private clearSession() {
+		localStorage.removeItem('refresh_token');
+		localStorage.removeItem('id_token');
+		localStorage.removeItem('expires_at');
+		localStorage.removeItem('auth_state');
+		// TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
+		store.updateAuthSignUpOutcome(false);
+		store.updateAuthLogInOutcome(false);
+		this.router.navigateByUrl('/home');
+	}
 
-  private extractMessageObject(error: HttpErrorResponse): Message {
+	private extractMessageObject(error: HttpErrorResponse): Message {
 
-    if (error['_body']) {
-      // so bekommt man den body als nettes kleines JSON-Objekt :)
-      const body = JSON.parse(error['_body']);
-      if (body['message']) {
-        return <Message>body['message'];
-      }
-    }
+		if (error['_body']) {
+			// so bekommt man den body als nettes kleines JSON-Objekt :)
+			const body = JSON.parse(error['_body']);
+			if (body['message']) {
+				return <Message>body['message'];
+			}
+		}
 
-    if (error['error']) {
-      const err = error['error'];
-      return <Message>err['message'];
-    }
+		if (error['error']) {
+			const err = error['error'];
+			return <Message>err['message'];
+		}
 
-    return null;
-  }
+		return null;
+	}
 
-  private showServerResponseMessage(msg: Message) {
-    switch (msg.level) {
-      case WARN:
-        this.messagesService.error(msg.message);
-        break;
-      case ERROR:
-        this.messagesService.error(msg.message);
-        break;
-      default:
-        this.messagesService.error('Unbekanntes message.level ' + msg.level + ' vom Server bekommen.');
-    }
-  }
+	private showServerResponseMessage(msg: Message) {
+		switch (msg.level) {
+			case WARN:
+				this.messagesService.error(msg.message);
+				break;
+			case ERROR:
+				this.messagesService.error(msg.message);
+				break;
+			default:
+				this.messagesService.error('Unbekanntes message.level ' + msg.level + ' vom Server bekommen.');
+		}
+	}
 }
+

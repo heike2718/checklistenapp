@@ -13,27 +13,25 @@ export const LISTE_AUSGEWAEHLT = 'ausgewaehlt';
 
 
 export interface ChecklistenItem {
-    name: string;
-    markiert: boolean;
-    optional: boolean;
-    erledigt: boolean;
-    kommentar?: string;
+	name: string;
+	markiert: boolean;
+	optional: boolean;
+	erledigt: boolean;
+	kommentar?: string;
 }
 
 export interface ChecklisteDaten {
-    kuerzel?: string;
-    name?: string;
-    typ: string;
-    items: ChecklistenItem[];
-    version: number;
-    modus?: string;
+	kuerzel?: string;
+	name?: string;
+	typ: string;
+	items: ChecklistenItem[];
+	version: number;
+	modus?: string;
 }
 
 export interface Filterkriterium {
-    modus: string;
-    semantik: string;
+	modus: string;
+	semantik: string;
 }
-
-
 
 

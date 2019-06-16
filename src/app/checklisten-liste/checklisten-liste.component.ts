@@ -7,54 +7,55 @@ import { store } from '../store/app-data';
 import { MessagesService } from 'hewi-ng-lib';
 
 @Component({
-  selector: 'chl-checklisten-liste',
-  templateUrl: './checklisten-liste.component.html',
-  styleUrls: ['./checklisten-liste.component.css']
+	selector: 'chl-checklisten-liste',
+	templateUrl: './checklisten-liste.component.html',
+	styleUrls: ['./checklisten-liste.component.css']
 })
 export class ChecklistenListeComponent implements OnInit {
 
-  checklisten$: Observable<ChecklisteDaten[]>;
+	checklisten$: Observable<ChecklisteDaten[]>;
 
-  nameListe: string;
+	nameListe: string;
 
-  formNeueChecklisteVisible: boolean;
+	formNeueChecklisteVisible: boolean;
 
-  constructor(private checklistenService: ChecklistenService,
-    private messagesService: MessagesService) { }
+	constructor(private checklistenService: ChecklistenService,
+		private messagesService: MessagesService) { }
 
-  ngOnInit() {
-    this.formNeueChecklisteVisible = false;
-    this.checklisten$ = store.checklisten$;
-    this.loadChecklisten();
-  }
+	ngOnInit() {
+		this.formNeueChecklisteVisible = false;
+		this.checklisten$ = store.checklisten$;
+		this.loadChecklisten();
+	}
 
-  showFilename(): boolean {
-    return !environment.production;
-  }
+	showFilename(): boolean {
+		return !environment.production;
+	}
 
-  addListeDisabled(): boolean {
-    return !this.nameListe || this.nameListe.trim().length <= 2;
-  }
+	addListeDisabled(): boolean {
+		return !this.nameListe || this.nameListe.trim().length <= 2;
+	}
 
-  toggleFormNeueCheckliste() {
-    this.formNeueChecklisteVisible = !this.formNeueChecklisteVisible;
-  }
+	toggleFormNeueCheckliste() {
+		this.formNeueChecklisteVisible = !this.formNeueChecklisteVisible;
+	}
 
-  neueCheckliste(typ: string) {
-    this.messagesService.clear();
-    this.toggleFormNeueCheckliste();
-    this.checklistenService.createNewCheckliste(typ, this.nameListe);
-    this.nameListe = '';
-  }
+	neueCheckliste(typ: string) {
+		this.messagesService.clear();
+		this.toggleFormNeueCheckliste();
+		this.checklistenService.createNewCheckliste(typ, this.nameListe);
+		this.nameListe = '';
+	}
 
-  loadChecklisten() {
-    this.messagesService.clear();
-    this.checklistenService.loadChecklisten();
-  }
+	loadChecklisten() {
+		this.messagesService.clear();
+		this.checklistenService.loadChecklisten();
+	}
 
-  closeModalQuietly() {
-    this.messagesService.clear();
-    this.nameListe = undefined;
-    this.toggleFormNeueCheckliste();
-  }
+	closeModalQuietly() {
+		this.messagesService.clear();
+		this.nameListe = undefined;
+		this.toggleFormNeueCheckliste();
+	}
 }
+

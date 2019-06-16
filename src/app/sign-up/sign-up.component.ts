@@ -8,68 +8,69 @@ import { HttpErrorService } from '../error/http-error.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'chl-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+	selector: 'chl-sign-up',
+	templateUrl: './sign-up.component.html',
+	styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
-  secret: string;
+	secret: string;
 
-  kleber: string;
+	kleber: string;
 
-  private subscription: Subscription;
-
-
-
-  constructor(private authService: AuthService
-    , private httpErrorService: HttpErrorService
-    , private router: Router
-    , private messagesService: MessagesService) { }
-
-  ngOnInit() {
-    this.secret = '';
-    this.kleber = '';
-  }
-
-  ngOnDestroy() {
-
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+	private subscription: Subscription;
 
 
-  submit(): void {
 
-    this.messagesService.clear();
+	constructor(private authService: AuthService
+		, private httpErrorService: HttpErrorService
+		, private router: Router
+		, private messagesService: MessagesService) { }
 
-    const signUpPayload: SignUpPayload = {
-      'secret': this.secret,
-      'kleber': this.kleber
-    };
+	ngOnInit() {
+		this.secret = '';
+		this.kleber = '';
+	}
 
-    const checkResponse$ = this.authService.checkMaySignUp(signUpPayload).pipe(
-      publishLast(),
-      refCount()
-    );
+	ngOnDestroy() {
 
-    this.subscription = checkResponse$.subscribe(
-      _payload => {
-        this.authService.signUp();
-      },
-      (error => {
-        this.httpErrorService.handleError(error, 'submitSecret');
-      }));
-  }
+		if (this.subscription) {
+			this.subscription.unsubscribe();
+		}
+	}
 
 
-  cancel(): void {
-    this.secret = '';
-    this.kleber = '';
-    this.messagesService.clear();
-    this.router.navigateByUrl('/home');
-  }
+	submit(): void {
+
+		this.messagesService.clear();
+
+		const signUpPayload: SignUpPayload = {
+			'secret': this.secret,
+			'kleber': this.kleber
+		};
+
+		const checkResponse$ = this.authService.checkMaySignUp(signUpPayload).pipe(
+			publishLast(),
+			refCount()
+		);
+
+		this.subscription = checkResponse$.subscribe(
+			_payload => {
+				this.authService.signUp();
+			},
+			(error => {
+				this.httpErrorService.handleError(error, 'submitSecret');
+			}));
+	}
+
+
+	cancel(): void {
+		this.secret = '';
+		this.kleber = '';
+		this.messagesService.clear();
+		this.router.navigateByUrl('/home');
+	}
 
 }
+
 

@@ -38,53 +38,53 @@ import { JokeComponent } from './joke/joke.component';
 // Set different log level depending on environment.
 let LOG_LEVEL = Level.ERROR;
 if (!environment.production) {
-  LOG_LEVEL = Level.DEBUG;
+	LOG_LEVEL = Level.DEBUG;
 }
 console.log('LOG_LEVEL=' + LOG_LEVEL);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    ChecklistenListeComponent,
-    ChecklisteComponent,
-    LoadingComponent,
-    ChecklistentypBackgroundDirective,
-    ConfigureChecklisteComponent,
-    ExecuteChecklisteComponent,
-    ConfigureVorschlagslisteComponent,
-    ConfigureEditComponent,
-    ExecuteItemlisteComponent,
-    HomeComponent,
-    StatistikChecklistePipe,
-    ErrorComponent,
-    SignUpComponent,
-    ItemButtonComponent,
-    EditableItemButtonComponent,
-    JokeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(routerConfig, {useHash: true}),
-    HttpClientModule,
-    FormsModule,
-    NgLoggerModule.forRoot(LOG_LEVEL),
-    NgbModule,
-    NgbCollapseModule,
-    HewiNgLibModule
+	declarations: [
+		AppComponent,
+		NavbarComponent,
+		ChecklistenListeComponent,
+		ChecklisteComponent,
+		LoadingComponent,
+		ChecklistentypBackgroundDirective,
+		ConfigureChecklisteComponent,
+		ExecuteChecklisteComponent,
+		ConfigureVorschlagslisteComponent,
+		ConfigureEditComponent,
+		ExecuteItemlisteComponent,
+		HomeComponent,
+		StatistikChecklistePipe,
+		ErrorComponent,
+		SignUpComponent,
+		ItemButtonComponent,
+		EditableItemButtonComponent,
+		JokeComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		RouterModule.forRoot(routerConfig, { useHash: true }),
+		HttpClientModule,
+		FormsModule,
+		NgLoggerModule.forRoot(LOG_LEVEL),
+		NgbModule,
+		NgbCollapseModule,
+		HewiNgLibModule
 
-  ],
-  providers: [
-    GlobalErrorHandler,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    },
-    LoggedInGuard
-  ],
-  bootstrap: [AppComponent]
+	],
+	providers: [
+		GlobalErrorHandler,
+		{ provide: ErrorHandler, useClass: GlobalErrorHandler },
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		},
+		LoggedInGuard
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
