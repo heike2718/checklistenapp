@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 1.2.2:__ jwt utils moved to hewi-ng-lib
 * __Release 1.2.1:__ display random joke
 * __Release 1.2.0:__ config checkliste now is responsive, issue#16 fixed
 * __Release 1.1.3:__ dialogs replaced in new checklist and new item
