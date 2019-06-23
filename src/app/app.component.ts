@@ -21,8 +21,10 @@ export class AppComponent implements OnInit {
 	ngOnInit() {
 		// nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
 		// Daher hier redirect-URL parsen
-		const authResult = this.jwtService.parseHash(window.location.hash);
-		this.authService.setSession(authResult);
+		const hash = window.location.hash;
+		if (hash && hash.indexOf('accessToken') > 0) {
+			const authResult = this.jwtService.parseHash(hash);
+			this.authService.setSession(authResult);
+		}
 	}
 }
-
