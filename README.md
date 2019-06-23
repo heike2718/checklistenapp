@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 2.0.1:__ bufix: F5 leads to logout :/
 * __Release 2.0.0:__ jwt utils moved to hewi-ng-lib
 * __Release 1.2.1:__ display random joke
 * __Release 1.2.0:__ config checkliste now is responsive, issue#16 fixed
