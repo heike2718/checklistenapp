@@ -27,14 +27,15 @@ export class HttpErrorService {
 					break;
 				default:
 					const msg = this.extractMessageObject(error);
-					if (msg !== null) {
+					if (msg) {
 						this.showServerResponseMessage(msg);
 					} else {
-						this.messagesService.error(context + ' status=' + error.status
-							+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
-					}
-					if (error.status === 401) {
-						this.clearSession();
+						if (error.status === 401) {
+							this.clearSession();
+						} else {
+							this.messagesService.error(context + ' status=' + error.status
+								+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
+						}
 					}
 			}
 		}
