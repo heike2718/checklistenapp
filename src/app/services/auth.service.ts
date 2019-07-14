@@ -6,11 +6,12 @@ import { User } from '../shared/model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 // tslint:disable-next-line:max-line-length
-import { STORAGE_KEY_REFRESH_TOKEN, STORAGE_KEY_JWT, STORAGE_KEY_AUTH_STATE, STORAGE_KEY_EXPIRES_AT, JWTService, AuthResult, AUTH_STATE_SIGNUP, AUTH_STATE_EMPTY } from 'hewi-ng-lib';
+import { STORAGE_KEY_JWT_REFRESH_TOKEN, STORAGE_KEY_JWT, STORAGE_KEY_JWT_EXPIRES_AT, JWTService, AuthResult, STORAGE_KEY_JWT_STATE } from 'hewi-ng-lib';
 import { ResponsePayload } from 'hewi-ng-lib';
 import { SignUpPayload } from '../shared/model/signup-payload';
 import { HttpErrorService } from '../error/http-error.service';
 import { store } from '../store/app-data';
+import { STORAGE_KEY_CLIENT_ACCESS_TOKEN } from '../shared/model/oauth.model';
 
 
 
@@ -31,7 +32,7 @@ export class AuthService {
 		, private router: Router
 		, private jwtService: JWTService) {
 
-		if (this.jwtService.isLoggedIn()) {
+		if (this.canLoadUserInfo()) {
 			this.loadLocalUserInfo();
 		}
 	}
@@ -42,33 +43,44 @@ export class AuthService {
 		return this.httpClient.post<ResponsePayload>(url, signUpPayload);
 	}
 
+	private canLoadUserInfo(): boolean {
+
+		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		if (authState && 'signup' === authState) {
+			return false;
+		}
+		return !this.jwtService.isJWTExpired();
+
+	}
+
 
 	logIn() {
-		const authUrl = this.jwtService.getLoginUrl(environment.authUrl, environment.clientId, environment.loginRedirectUrl);
-		window.location.href = authUrl;
+		const accessToken = localStorage.getItem(STORAGE_KEY_CLIENT_ACCESS_TOKEN);
+		if (accessToken) {
+			const authUrl = this.jwtService.getLoginUrl(environment.authUrl, accessToken, environment.loginRedirectUrl, 'login', null);
+			window.location.href = authUrl;
+		}
 	}
 
 	signUp() {
-		const authUrl = this.jwtService.getSignupUrl(environment.authUrl, environment.clientId, environment.signupRedirectUrl);
-		window.location.href = authUrl;
+		const accessToken = localStorage.getItem(STORAGE_KEY_CLIENT_ACCESS_TOKEN);
+		if (accessToken) {
+			const authUrl = this.jwtService.getSignupUrl(environment.authUrl, accessToken, environment.signupRedirectUrl, 'signup', null);
+			window.location.href = authUrl;
+		}
 	}
 
 	setSession(authResult: AuthResult) {
 
-		if (authResult.state && AUTH_STATE_EMPTY === authResult.state) {
-			this.clearSession();
-			return;
-		}
-
 		// packen authResult ins LocalStorage, damit es ein refresh überlebt!
 		if (authResult.refreshToken) {
-			localStorage.setItem(STORAGE_KEY_REFRESH_TOKEN, authResult.refreshToken);
+			localStorage.setItem(STORAGE_KEY_JWT_REFRESH_TOKEN, authResult.refreshToken);
 		}
 		localStorage.setItem(STORAGE_KEY_JWT, authResult.idToken);
-		localStorage.setItem(STORAGE_KEY_EXPIRES_AT, JSON.stringify(authResult.expiresAt));
-		localStorage.setItem(STORAGE_KEY_AUTH_STATE, authResult.state);
+		localStorage.setItem(STORAGE_KEY_JWT_EXPIRES_AT, JSON.stringify(authResult.expiresAt));
+		localStorage.setItem(STORAGE_KEY_JWT_STATE, authResult.state);
 
-		if (AUTH_STATE_SIGNUP === authResult.state) {
+		if ('signup' === authResult.state) {
 			this.createUser();
 		}
 	}
@@ -77,24 +89,12 @@ export class AuthService {
 		const url = environment.apiUrl + '/signup/user';
 		this.httpClient.post<ResponsePayload>(url, {}).
 			subscribe(() => {
-				store.updateAuthSignUpOutcome(true);
 				this.router.navigateByUrl('/home');
 			},
 				(error => {
 					this.httpErrorService.handleError(error, 'findChecklisteByKuerzel');
 				}));
 
-	}
-
-	clearSession() {
-		localStorage.removeItem(STORAGE_KEY_REFRESH_TOKEN);
-		localStorage.removeItem(STORAGE_KEY_JWT);
-		localStorage.removeItem(STORAGE_KEY_EXPIRES_AT);
-		localStorage.removeItem(STORAGE_KEY_AUTH_STATE);
-		// TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
-		store.updateAuthSignUpOutcome(false);
-		store.updateAuthLogInOutcome(false);
-		this.router.navigateByUrl('/home');
 	}
 
 	loadUserProfile(_authResult: AuthResult) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { JWTService } from 'hewi-ng-lib';
 import { AuthService } from './services/auth.service';
+import { OauthService } from './services/oauth.service';
 
 
 @Component({
@@ -16,9 +17,15 @@ export class AppComponent implements OnInit {
 	api = environment.apiUrl;
 	logo = environment.assetsUrl + '/favicon-32x32.png';
 
-	constructor(private jwtService: JWTService, private authService: AuthService) { }
+	constructor(private jwtService: JWTService
+		, private authService: AuthService
+		, private oauthService: OauthService) { }
 
 	ngOnInit() {
+		if (this.oauthService.clientTokenExpired()) {
+			this.oauthService.orderAccessToken();
+		}
+
 		// nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
 		// Daher hier redirect-URL parsen
 		const hash = window.location.hash;

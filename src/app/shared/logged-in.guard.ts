@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { JWTService } from 'hewi-ng-lib';
+import { JWTService, STORAGE_KEY_JWT_STATE } from 'hewi-ng-lib';
 
 
 @Injectable()
@@ -12,7 +12,11 @@ export class LoggedInGuard implements CanActivate {
 
 	canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-		if (this.jwtService.isLoggedIn()) {
+		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		if (authState && 'signup' === authState) {
+			return false;
+		}
+		if (!this.jwtService.isJWTExpired()) {
 			return true;
 		}
 		this.router.navigate(['/home'], {

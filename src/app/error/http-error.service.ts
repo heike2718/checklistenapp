@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Logger } from '@nsalaun/ng-logger';
 import { MessagesService, Message, WARN, ERROR } from 'hewi-ng-lib';
-import { AuthService } from '../services/auth.service';
+import { SessionService } from '../services/session.service';
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class HttpErrorService {
 
 	constructor(private messagesService: MessagesService
 		, private logger: Logger
-		, private authService: AuthService) { }
+		, private sessionService: SessionService) { }
 
 
 	handleError(error: HttpErrorResponse, context: string) {
@@ -32,7 +32,7 @@ export class HttpErrorService {
 						this.showServerResponseMessage(msg);
 					} else {
 						if (error.status === 401) {
-							this.authService.clearSession();
+							this.sessionService.clearSession();
 						} else {
 							this.messagesService.error(context + ' status=' + error.status
 								+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');

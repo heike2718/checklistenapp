@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { store } from '../store/app-data';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { Logger } from '@nsalaun/ng-logger';
-import { AUTH_STATE_SIGNUP, JWTService } from 'hewi-ng-lib/';
+import { JWTService, STORAGE_KEY_JWT_STATE } from 'hewi-ng-lib/';
+import { SessionService } from '../services/session.service';
 
 @Component({
 	selector: 'chl-home',
@@ -13,31 +10,28 @@ import { AUTH_STATE_SIGNUP, JWTService } from 'hewi-ng-lib/';
 export class HomeComponent implements OnInit {
 
 
-	authSignUpOutcome$: Observable<boolean>;
-
-	constructor(private jwtService: JWTService, private authService: AuthService, private logger: Logger) { }
+	constructor(private jwtService: JWTService, private sessionService: SessionService) { }
 
 	ngOnInit() {
-		this.authSignUpOutcome$ = store.authSignUpOutcome$;
-
-		this.authSignUpOutcome$.subscribe(val => {
-			this.logger.debug('HomeComponent: signInOutcome=' + val);
-		});
-
-
 	}
 
 	showDialog(): boolean {
-		const authState = localStorage.getItem('auth_state');
-		return authState && AUTH_STATE_SIGNUP === authState;
+		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		return authState && 'signup' === authState;
 	}
 
 	closeModal(): void {
-		this.authService.clearSession();
+		this.sessionService.clearSession();
 	}
 
 	isLoggedIn(): boolean {
-		return this.jwtService.isLoggedIn();
+
+		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		if (authState && 'signup' === authState) {
+			return false;
+		}
+
+		return !this.jwtService.isJWTExpired();
 	}
 }
 
