@@ -22,21 +22,13 @@ export class DataStore {
 
 	private checklistenSubject = new BehaviorSubject<ChecklisteDaten[]>([]);
 
-	private authSignUpOutcomeSubject = new BehaviorSubject<boolean>(false);
-
-	private authLogInOutcomeSubject = new BehaviorSubject<boolean>(false);
+	private clientAccessTokenSubject = new BehaviorSubject<string>('');
 
 	gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteChecklisteSubject.asObservable();
 
 	checklisten$: Observable<ChecklisteDaten[]> = this.checklistenSubject.asObservable();
 
-	authSignUpOutcome$: Observable<boolean> = this.authSignUpOutcomeSubject.asObservable();
-
-	authLogInOutcome$: Observable<boolean> = this.authLogInOutcomeSubject.asObservable();
-
-
-
-	constructor() { }
+	clientAccessToken$: Observable<string> = this.clientAccessTokenSubject.asObservable();
 
 	initChecklisten(alleChecklisten: ChecklisteDaten[]) {
 		this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
@@ -93,18 +85,11 @@ export class DataStore {
 		}
 
 		return undefined;
-
 	}
 
-	updateAuthSignUpOutcome(success: boolean) {
-		this.authLogInOutcomeSubject.next(success);
+	updateClientAccessToken(token: string) {
+		this.clientAccessTokenSubject.next(token);
 	}
-
-	updateAuthLogInOutcome(success: boolean) {
-		this.authLogInOutcomeSubject.next(success);
-	}
-
-
 }
 
 export const store = new DataStore();

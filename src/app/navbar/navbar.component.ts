@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service';
 import { environment } from 'src/environments/environment';
-import { JWTService } from 'hewi-ng-lib';
+import { JWTService, STORAGE_KEY_JWT_STATE } from 'hewi-ng-lib';
+import { SessionService } from '../services/session.service';
 
 @Component({
 	selector: 'chl-navbar',
@@ -17,7 +18,9 @@ export class NavbarComponent implements OnInit {
 	@ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
 
 
-	constructor(private authService: AuthService, private jwtService: JWTService) { }
+	constructor(private sessionService: SessionService
+		, private authService: AuthService
+		, private jwtService: JWTService) { }
 
 	ngOnInit() {
 	}
@@ -29,11 +32,15 @@ export class NavbarComponent implements OnInit {
 	}
 
 	isLoggedIn(): boolean {
-		return this.jwtService.isLoggedIn();
+		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		if (authState && 'signup' === authState) {
+			return false;
+		}
+		return !this.jwtService.isJWTExpired();
 	}
 
 	isLoggedOut(): boolean {
-		return !this.jwtService.isLoggedIn();
+		return !this.isLoggedIn();
 	}
 
 	login(): void {
@@ -41,7 +48,7 @@ export class NavbarComponent implements OnInit {
 	}
 
 	logout(): void {
-		this.authService.clearSession();
+		this.sessionService.clearSession();
 	}
 }
 

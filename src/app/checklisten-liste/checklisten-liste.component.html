@@ -1,4 +1,4 @@
-<p *ngIf="showFilename()">checklisten-liste.component.ts (checklisten$)</p>
+<p *ngIf="showFilename()">checklisten-liste.component.ts</p>
 
 <div *ngIf="checklisten$ | async as checklisten else loading">
 
@@ -59,4 +59,3 @@
 <ng-template #loading>
   <chl-loading></chl-loading>
 </ng-template>
-
