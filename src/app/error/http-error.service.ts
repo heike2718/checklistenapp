@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Logger } from '@nsalaun/ng-logger';
 import { MessagesService, Message, WARN, ERROR } from 'hewi-ng-lib';
-import { Router } from '@angular/router';
-import { store } from '../store/app-data';
+import { AuthService } from '../services/auth.service';
 
 
 @Injectable({
@@ -11,7 +10,9 @@ import { store } from '../store/app-data';
 })
 export class HttpErrorService {
 
-	constructor(private messagesService: MessagesService, private logger: Logger, private router: Router) { }
+	constructor(private messagesService: MessagesService
+		, private logger: Logger
+		, private authService: AuthService) { }
 
 
 	handleError(error: HttpErrorResponse, context: string) {
@@ -31,7 +32,7 @@ export class HttpErrorService {
 						this.showServerResponseMessage(msg);
 					} else {
 						if (error.status === 401) {
-							this.clearSession();
+							this.authService.clearSession();
 						} else {
 							this.messagesService.error(context + ' status=' + error.status
 								+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
@@ -39,17 +40,6 @@ export class HttpErrorService {
 					}
 			}
 		}
-	}
-
-	private clearSession() {
-		localStorage.removeItem('refresh_token');
-		localStorage.removeItem('id_token');
-		localStorage.removeItem('expires_at');
-		localStorage.removeItem('auth_state');
-		// TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
-		store.updateAuthSignUpOutcome(false);
-		store.updateAuthLogInOutcome(false);
-		this.router.navigateByUrl('/home');
 	}
 
 	private extractMessageObject(error: HttpErrorResponse): Message {

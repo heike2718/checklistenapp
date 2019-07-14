@@ -5,7 +5,6 @@ import { filter } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Logger } from '@nsalaun/ng-logger';
 // tslint:disable-next-line:max-line-length
 import { STORAGE_KEY_REFRESH_TOKEN, STORAGE_KEY_JWT, STORAGE_KEY_AUTH_STATE, STORAGE_KEY_EXPIRES_AT, JWTService, AuthResult, AUTH_STATE_SIGNUP, AUTH_STATE_EMPTY } from 'hewi-ng-lib';
 import { ResponsePayload } from 'hewi-ng-lib';
@@ -30,8 +29,7 @@ export class AuthService {
 	constructor(private httpClient: HttpClient
 		, private httpErrorService: HttpErrorService
 		, private router: Router
-		, private jwtService: JWTService
-		, private logger: Logger) {
+		, private jwtService: JWTService) {
 
 		if (this.jwtService.isLoggedIn()) {
 			this.loadLocalUserInfo();

@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Logger } from '@nsalaun/ng-logger';
 import { Message, ResponsePayload, MessagesService } from 'hewi-ng-lib';
-import { Router } from '@angular/router';
 import { HttpErrorService } from '../error/http-error.service';
 
 
@@ -19,7 +18,6 @@ export class ChecklistenService {
 	constructor(private http: HttpClient
 		, private httpErrorService: HttpErrorService
 		, private messagesService: MessagesService
-		, private router: Router
 		, private logger: Logger) { }
 
 	loadChecklisten(): void {

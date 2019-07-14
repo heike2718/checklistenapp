@@ -34,10 +34,6 @@ export class DataStore {
 
 	authLogInOutcome$: Observable<boolean> = this.authLogInOutcomeSubject.asObservable();
 
-
-
-	constructor() { }
-
 	initChecklisten(alleChecklisten: ChecklisteDaten[]) {
 		this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
 	}
@@ -97,7 +93,7 @@ export class DataStore {
 	}
 
 	updateAuthSignUpOutcome(success: boolean) {
-		this.authLogInOutcomeSubject.next(success);
+		this.authSignUpOutcomeSubject.next(success);
 	}
 
 	updateAuthLogInOutcome(success: boolean) {
