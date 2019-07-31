@@ -7,3 +7,15 @@ export interface OAuthAccessTokenPayload {
 	refreshToken: string;
 	expiresAt: number;
 }
+
+export interface RefreshAccessTokenPayload {
+	clientAccessToken: string;
+	userRefreshToken: string;
+}
+
+export interface TokenPayload {
+	jwt: string;
+	jwtExpiresAtUnixEpochSeconds: number;
+	clientAccessToken: string;
+}
+
