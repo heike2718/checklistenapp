@@ -8,6 +8,7 @@ export const environment = {
   version: '3.0.0',
   envName: 'Development',
   apiUrl: 'http://localhost:9300/checklisten-api',
+  authApiUrl: 'http://localhost:9000/authprovider',
   authUrl: 'http://localhost:4300',
   assetsUrl: 'assets',
   isDebugMode: true,
