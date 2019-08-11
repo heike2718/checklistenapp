@@ -10,7 +10,6 @@ import { STORAGE_KEY_JWT_REFRESH_TOKEN, STORAGE_KEY_JWT, STORAGE_KEY_JWT_EXPIRES
 import { ResponsePayload } from 'hewi-ng-lib';
 import { SignUpPayload } from '../shared/model/signup-payload';
 import { HttpErrorService } from '../error/http-error.service';
-import { store } from '../store/app-data';
 import { STORAGE_KEY_CLIENT_ACCESS_TOKEN } from '../shared/model/oauth.model';
 
 

@@ -21,23 +21,26 @@ export class HttpErrorService {
 			this.logger.error(context + ': ErrorEvent occured - ' + JSON.stringify(error));
 			throw (error);
 		} else {
-			switch (error.status) {
-				case 0:
-					this.messagesService.error(context +
-						': Server ist nicht erreichbar. Mögliche Ursachen: downtime oder CORS policy. Guckstu Browser- Log (F12)');
-					break;
-				default:
-					const msg = this.extractMessageObject(error);
-					if (msg) {
+
+			if (error.status === 0) {
+				this.messagesService.error('Der Server ist nicht erreichbar.');
+			} else {
+				const msg = this.extractMessageObject(error);
+				switch (error.status) {
+					case 401:
+					case 908:
 						this.showServerResponseMessage(msg);
-					} else {
-						if (error.status === 401) {
-							this.sessionService.clearSession();
+						this.sessionService.clearSession();
+						break;
+					default: {
+						if (msg) {
+							this.showServerResponseMessage(msg);
 						} else {
 							this.messagesService.error(context + ' status=' + error.status
 								+ ': OMG +++ Divide By Cucumber Error. Please Reinstall Universe And Reboot +++');
 						}
 					}
+				}
 			}
 		}
 	}
