@@ -9,7 +9,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-		if (req.url === environment.jokesAPI) {
+		// wenn es der accesstoken-request ist, sollte kein JWT hinzugefügt werden, da es sonst eine 401 gibt
+		if (req.url === environment.jokesAPI || req.url.indexOf('/accesstoken') > 0) {
 			return next.handle(req);
 		}
 
