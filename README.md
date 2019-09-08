@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 4.2.0:__ no sleep mode token refresh, serverside client error logs
 * __Release 4.1.0:__ fixed 401 when expired JWT is present at page load
 * __Release 4.0.0:__ refresh client access token and JWT automatically
 * __Release 2.0.2:__ bufix: redirect to error page on 401
