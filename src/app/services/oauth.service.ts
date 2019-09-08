@@ -20,13 +20,20 @@ export class OauthService {
 
 	constructor(private http: HttpClient
 		, private sessionService: SessionService
-		, private messagesService: MessagesService
 		, private httpErrorService: HttpErrorService
 		, private logger: Logger) { }
 
 	orderClientAccessToken() {
 
-		const url = environment.apiUrl + '/accesstoken';
+		const accessToken = localStorage.getItem(STORAGE_KEY_CLIENT_ACCESS_TOKEN);
+
+		let url = environment.apiUrl + '/accesstoken/';
+
+		if (accessToken) {
+			url += accessToken;
+		} else {
+			url += 'initial';
+		}
 
 		this.http.get<ResponsePayload>(url).pipe(
 			publishLast(),
@@ -41,7 +48,7 @@ export class OauthService {
 
 	}
 
-	refreshJWT() {
+	refreshJWT(force: boolean) {
 
 		// const url = environment.apiUrl + '/session/jwt';
 		const url = environment.authApiUrl + '/jwt';
@@ -50,7 +57,8 @@ export class OauthService {
 
 		const requestPayload: RefreshAccessTokenPayload = {
 			clientAccessToken: _accessTokens,
-			userRefreshToken: localStorage.getItem(STORAGE_KEY_JWT_REFRESH_TOKEN)
+			userRefreshToken: localStorage.getItem(STORAGE_KEY_JWT_REFRESH_TOKEN),
+			force: force
 		};
 
 		this.http.post(url, requestPayload).pipe(
@@ -73,11 +81,6 @@ export class OauthService {
 					}
 				} else {
 					this.sessionService.clearSession();
-					if (level === 'WARN') {
-						this.messagesService.warn(payload.message.message);
-					} else {
-						this.messagesService.error(payload.message.message);
-					}
 				}
 
 			},
