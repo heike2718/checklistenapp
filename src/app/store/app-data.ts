@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem } from '../shared/model/checkliste';
+import { Message } from 'hewi-ng-lib';
+
 import * as _ from 'lodash';
 
 const initialCheckliste: ChecklisteDaten = {

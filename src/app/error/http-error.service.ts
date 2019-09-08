@@ -29,7 +29,6 @@ export class HttpErrorService {
 				switch (error.status) {
 					case 401:
 					case 908:
-						this.showServerResponseMessage(msg);
 						this.sessionService.clearSession();
 						break;
 					default: {

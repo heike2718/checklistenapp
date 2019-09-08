@@ -9,5 +9,7 @@ export const environment = {
 	isDebugMode: false,
 	signupRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp',
 	loginRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp#/listen',
-	jokesAPI: 'https://official-joke-api.appspot.com/jokes/random'
+	jokesAPI: 'https://official-joke-api.appspot.com/jokes/random',
+	consoleLogActive: false,
+	serverLogActive: true
 };
