@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 	private detectSleepSubscription: Subscription;
 
 
-	@ViewChild(NgbCollapse) navbarToggler: NgbCollapse;
+	@ViewChild(NgbCollapse, { static: true }) navbarToggler: NgbCollapse;
 
 
 	constructor(private sessionService: SessionService
