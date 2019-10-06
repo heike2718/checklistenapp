@@ -4,7 +4,7 @@ Kleines Spielprojekt mit praktischem Hintergrund zum Organisieren von Dingen. Im
 authentication provider, damit nicht jeder Mensch unsere Listen sehen kann.
 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6 and upgraded to version 7.3.8
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6 and upgraded to version 8.2.8
 
 ## Dependencies
 
@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 4.3.1:__ migrated to angular 8
 * __Release 4.2.0:__ no sleep mode token refresh, serverside client error logs
 * __Release 4.1.0:__ fixed 401 when expired JWT is present at page load
 * __Release 4.0.0:__ refresh client access token and JWT automatically
