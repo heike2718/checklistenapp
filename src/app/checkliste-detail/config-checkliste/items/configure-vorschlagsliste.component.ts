@@ -4,6 +4,7 @@ import { findItemByName, filterChecklisteItems } from '../../../shared/utils/che
 import { environment } from '../../../../environments/environment';
 import { store } from '../../../store/app-data';
 import { Observable } from 'rxjs';
+import { LogService } from 'hewi-ng-lib';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
 
 	typ: string;
 
-	constructor() {
+	constructor(private logger: LogService) {
 		if (!environment.production) {
 			this.showFilename = true;
 		}
@@ -45,7 +46,7 @@ export class ConfigureVorschlagslisteComponent implements OnInit {
 	}
 
 	subscribeAusgewaehlt(items: ChecklistenItem[], item: ChecklistenItem) {
-		console.log('item ' + item.name + ' als bearbeitet markieren');
+		this.logger.debug('item ' + item.name + ' als bearbeitet markieren');
 		const markiertesItem = findItemByName(items, item.name);
 
 		if (markiertesItem) {
