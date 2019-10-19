@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
-import { JWTService, STORAGE_KEY_JWT_STATE, LogService, LogLevel } from 'hewi-ng-lib';
+import { JWTService, STORAGE_KEY_JWT_STATE, LogService } from 'hewi-ng-lib';
 import { SessionService } from '../services/session.service';
 import { OauthService } from '../services/oauth.service';
 import { Subscription, interval, timer } from 'rxjs';

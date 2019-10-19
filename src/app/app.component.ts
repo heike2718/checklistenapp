@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
-import { JWTService } from 'hewi-ng-lib';
+import { JWTService, LogService } from 'hewi-ng-lib';
 import { AuthService } from './services/auth.service';
 import { OauthService } from './services/oauth.service';
 

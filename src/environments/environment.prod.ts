@@ -11,5 +11,6 @@ export const environment = {
 	loginRedirectUrl: 'https://opa-wetterwachs.de/checklistenapp#/listen',
 	jokesAPI: 'https://official-joke-api.appspot.com/jokes/random',
 	consoleLogActive: false,
-	serverLogActive: true
+	serverLogActive: true,
+	loglevel: 4
 };
