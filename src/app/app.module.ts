@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { NgLoggerModule, Level } from '@nsalaun/ng-logger';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -10,7 +9,6 @@ import { routerConfig } from './router.config';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { environment } from '../environments/environment';
 import { ChecklistenListeComponent } from './checklisten-liste/checklisten-liste.component';
 import { ChecklisteComponent } from './checkliste/checkliste.component';
 import { LoadingComponent } from './loading/loading.component';
@@ -27,20 +25,10 @@ import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
 import { FormsModule } from '@angular/forms';
 import { GlobalErrorHandler } from './error/error-handler.service';
-import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
 import { JokeComponent } from './joke/joke.component';
-
-
-
-// Set different log level depending on environment.
-let LOG_LEVEL = Level.ERROR;
-if (!environment.production) {
-	LOG_LEVEL = Level.DEBUG;
-}
-console.log('LOG_LEVEL=' + LOG_LEVEL);
 
 @NgModule({
 	declarations: [
@@ -57,7 +45,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
 		ExecuteItemlisteComponent,
 		HomeComponent,
 		StatistikChecklistePipe,
-		ErrorComponent,
 		SignUpComponent,
 		ItemButtonComponent,
 		EditableItemButtonComponent,
@@ -69,7 +56,6 @@ console.log('LOG_LEVEL=' + LOG_LEVEL);
 		RouterModule.forRoot(routerConfig, { useHash: true }),
 		HttpClientModule,
 		FormsModule,
-		NgLoggerModule.forRoot(LOG_LEVEL),
 		NgbModule,
 		NgbCollapseModule,
 		HewiNgLibModule

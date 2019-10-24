@@ -5,8 +5,7 @@ import { map, publishLast, refCount } from 'rxjs/operators';
 import { ChecklisteDaten } from '../shared/model/checkliste';
 import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
-import { Logger } from '@nsalaun/ng-logger';
-import { Message, ResponsePayload, MessagesService } from 'hewi-ng-lib';
+import { Message, ResponsePayload, MessagesService, LogService } from 'hewi-ng-lib';
 import { HttpErrorService } from '../error/http-error.service';
 
 
@@ -18,7 +17,7 @@ export class ChecklistenService {
 	constructor(private http: HttpClient
 		, private httpErrorService: HttpErrorService
 		, private messagesService: MessagesService
-		, private logger: Logger) { }
+		, private logger: LogService) { }
 
 	loadChecklisten(): void {
 		const url = environment.apiUrl + '/checklisten';
@@ -116,7 +115,7 @@ export class ChecklistenService {
 		);
 
 		observable$.subscribe(
-			message => {
+			_message => {
 				store.deleteCheckliste(checkliste.kuerzel);
 			},
 			(error => {
