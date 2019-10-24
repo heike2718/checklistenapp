@@ -25,7 +25,6 @@ import { HomeComponent } from './home/home.component';
 import { StatistikChecklistePipe } from './shared/pipes/statistik-checkliste.pipe';
 import { FormsModule } from '@angular/forms';
 import { GlobalErrorHandler } from './error/error-handler.service';
-import { ErrorComponent } from './error/error.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
@@ -46,7 +45,6 @@ import { JokeComponent } from './joke/joke.component';
 		ExecuteItemlisteComponent,
 		HomeComponent,
 		StatistikChecklistePipe,
-		ErrorComponent,
 		SignUpComponent,
 		ItemButtonComponent,
 		EditableItemButtonComponent,

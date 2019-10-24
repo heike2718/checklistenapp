@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 
+		this.oauthService.orderClientAccessToken();
+
 		// nach dem redirect vom AuthProvider ist das die Stelle, an der die Anwendung wieder ankommt.
 		// Daher hier redirect-URL parsen
 		const hash = window.location.hash;
@@ -32,8 +34,6 @@ export class AppComponent implements OnInit {
 			if (this.oauthService.clientTokenWillExpireSoon()) {
 				this.oauthService.orderClientAccessToken();
 			}
-		} else {
-			this.oauthService.orderClientAccessToken();
 		}
 	}
 }
