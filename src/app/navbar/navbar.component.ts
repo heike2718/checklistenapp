@@ -76,6 +76,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 				if (this.isLoggedIn()) {
 					const _expMinutes = this.jwtService.jwtDurationMinutes();
 					if (_expMinutes <= 3) {
+						this.logService.debug('jwt is going to be refreshed.');
 						this.oauthService.refreshJWT(false);
 					}
 				}
