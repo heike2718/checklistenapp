@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map, publishLast, refCount } from 'rxjs/operators';
 import { User } from '../shared/model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -10,7 +10,6 @@ import { STORAGE_KEY_JWT_REFRESH_TOKEN, STORAGE_KEY_JWT, STORAGE_KEY_JWT_EXPIRES
 import { ResponsePayload } from 'hewi-ng-lib';
 import { SignUpPayload } from '../shared/model/signup-payload';
 import { HttpErrorService } from '../error/http-error.service';
-import { STORAGE_KEY_CLIENT_ACCESS_TOKEN } from '../shared/model/oauth.model';
 
 
 
@@ -54,19 +53,37 @@ export class AuthService {
 
 
 	logIn() {
-		const accessToken = localStorage.getItem(STORAGE_KEY_CLIENT_ACCESS_TOKEN);
-		if (accessToken) {
-			const authUrl = this.jwtService.getLoginUrl(environment.authUrl, accessToken, environment.loginRedirectUrl, 'login', null);
-			window.location.href = authUrl;
-		}
+
+		const url = environment.apiUrl + '/auth/login';
+
+		this.httpClient.get(url).pipe(
+			map(res => <ResponsePayload>res),
+			publishLast(),
+			refCount()
+		).subscribe(
+			payload => {
+				window.location.href = payload.message.message;
+			},
+			(error => {
+				this.httpErrorService.handleError(error, 'logIn');
+			}));
 	}
 
 	signUp() {
-		const accessToken = localStorage.getItem(STORAGE_KEY_CLIENT_ACCESS_TOKEN);
-		if (accessToken) {
-			const authUrl = this.jwtService.getSignupUrl(environment.authUrl, accessToken, environment.signupRedirectUrl, 'signup', null);
-			window.location.href = authUrl;
-		}
+
+		const url = environment.apiUrl + '/auth/signup';
+
+		this.httpClient.get(url).pipe(
+			map(res => <ResponsePayload>res),
+			publishLast(),
+			refCount()
+		).subscribe(
+			payload => {
+				window.location.href = payload.message.message;
+			},
+			(error => {
+				this.httpErrorService.handleError(error, 'logIn');
+			}));
 	}
 
 	setSession(authResult: AuthResult) {
