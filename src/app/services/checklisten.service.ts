@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Message, ResponsePayload, MessagesService, LogService } from 'hewi-ng-lib';
 import { HttpErrorService } from '../error/http-error.service';
+import { SessionService } from './session.service';
 
 
 @Injectable({
@@ -17,18 +18,18 @@ export class ChecklistenService {
 	constructor(private http: HttpClient
 		, private httpErrorService: HttpErrorService
 		, private messagesService: MessagesService
+		, private sessionService: SessionService
 		, private logger: LogService) { }
 
 	loadChecklisten(): void {
+
 		const url = environment.apiUrl + '/checklisten';
 
-		const checklisten$ = this.http.get(url).pipe(
+		this.http.get(url).pipe(
 			map(res => <ResponsePayload>res),
 			publishLast(),
 			refCount()
-		);
-
-		checklisten$.subscribe(
+		).subscribe(
 			payload => {
 				if (payload.data) {
 					const listen = payload.data;
@@ -37,7 +38,7 @@ export class ChecklistenService {
 				}
 			},
 			(error => {
-				this.httpErrorService.handleError(error, 'findAllChecklisten');
+				this.httpErrorService.handleError(error, 'loadChecklisten');
 			}));
 	}
 
@@ -77,7 +78,7 @@ export class ChecklistenService {
 
 		this.logger.debug('saveCheckliste: ' + JSON.stringify(checkliste));
 
-		const url = environment.apiUrl + '/checklisten/' + checkliste.kuerzel;
+		const url = environment.apiUrl + '/checklisten/checkliste/' + checkliste.kuerzel;
 
 		// Modus ist transient fürs Backend
 		checkliste.modus = undefined;
@@ -105,8 +106,7 @@ export class ChecklistenService {
 
 	deleteCheckliste(checkliste: ChecklisteDaten): void {
 
-		// TODO: http
-		const url = environment.apiUrl + '/checklisten/' + checkliste.kuerzel;
+		const url = environment.apiUrl + '/checklisten/checkliste/' + checkliste.kuerzel;
 
 		const observable$ = this.http.delete(url).pipe(
 			map(res => <Message>res),
@@ -149,7 +149,8 @@ export class ChecklistenService {
 	}
 
 	private loadCheckliste(kuerzel: string): Observable<ChecklisteDaten> {
-		const url = environment.apiUrl + '/checklisten/' + kuerzel;
+
+		const url = environment.apiUrl + '/checklisten/checkliste/' + kuerzel;
 
 		return this.http.get(url).pipe(
 			map(res => <ChecklisteDaten>res),

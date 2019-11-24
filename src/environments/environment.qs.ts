@@ -16,6 +16,6 @@ export const environment = {
 	loginRedirectUrl: 'http://localhost:8080/checklistenapp#/listen',
 	jokesAPI: 'https://official-joke-api.appspot.com/jokes/random',
 	consoleLogActive: true,
-	serverLogActive: true,
+	serverLogActive: false,
 	loglevel: 2
 };
