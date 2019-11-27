@@ -22,6 +22,7 @@ http://localhost:4200/#accessToken=75mdGzlDNrWD&expiresAt=1588014762&tokenType=B
 
 ## Notizen (chronologisch absteigend)
 
+* __Release 5.0.1:__ prefixed localStorage keys
 * __Release 5.0.0:__ security fixed: serverside sessions and cookies instad of client access token an jwt in localStorage
 * __Release 4.3.2:__ client access token bug fixed
 * __Release 4.3.1:__ migrated to angular 8
