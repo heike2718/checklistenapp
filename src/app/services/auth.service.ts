@@ -81,7 +81,7 @@ export class AuthService {
 				this.sessionService.clearSession();
 			}));
 
-	}	signUp() {
+	} signUp() {
 
 		const url = environment.apiUrl + '/auth/signup';
 
@@ -105,7 +105,7 @@ export class AuthService {
 		if ('login' === authResult.state) {
 			const url = environment.apiUrl + '/auth/session';
 
-			this.httpClient.post(url, authResult.idToken).pipe(
+			this.httpClient.post(url, authResult.idToken, { 'withCredentials': true }).pipe(
 				map(res => <ResponsePayload>res),
 				publishLast(),
 				refCount()

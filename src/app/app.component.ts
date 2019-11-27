@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../environments/environment';
 import { JWTService } from 'hewi-ng-lib';
 import { AuthService } from './services/auth.service';
-import { ChecklistenService } from './services/checklisten.service';
 
 
 @Component({
@@ -18,8 +17,7 @@ export class AppComponent implements OnInit {
 	logo = environment.assetsUrl + '/favicon-32x32.png';
 
 	constructor(private jwtService: JWTService
-		, private authService: AuthService
-		, private checklistenService: ChecklistenService) { }
+		, private authService: AuthService) { }
 
 	ngOnInit() {
 
@@ -32,6 +30,9 @@ export class AppComponent implements OnInit {
 		localStorage.removeItem('jwt_state');
 		localStorage.removeItem('jwt_rt');
 		localStorage.removeItem('jwt_at');
+		localStorage.removeItem('id_reference');
+		localStorage.removeItem('session_expires_at');
+		localStorage.removeItem('dev_session_id');
 
 		console.log(environment.envName);
 
