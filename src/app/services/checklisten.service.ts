@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 import { Message, ResponsePayload, MessagesService, LogService } from 'hewi-ng-lib';
 import { HttpErrorService } from '../error/http-error.service';
-import { SessionService } from './session.service';
 
 
 @Injectable({
@@ -18,7 +17,6 @@ export class ChecklistenService {
 	constructor(private http: HttpClient
 		, private httpErrorService: HttpErrorService
 		, private messagesService: MessagesService
-		, private sessionService: SessionService
 		, private logger: LogService) { }
 
 	loadChecklisten(): void {
