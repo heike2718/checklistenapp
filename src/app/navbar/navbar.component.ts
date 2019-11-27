@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgbCollapse } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
-import { SessionService } from '../services/session.service';
-import { STORAGE_KEY_SESSION_EXPIRES_AT } from '../shared/model/user';
+import { STORAGE_KEY_ID_REFERENCE } from '../shared/model/user';
 
 @Component({
 	selector: 'chl-navbar',
@@ -32,8 +31,8 @@ export class NavbarComponent {
 
 
 	isLoggedOut(): boolean {
-		const expiresAt = localStorage.getItem(STORAGE_KEY_SESSION_EXPIRES_AT);
-		return !expiresAt;
+		const idReference = localStorage.getItem(STORAGE_KEY_ID_REFERENCE);
+		return !idReference;
 	}
 
 	login(): void {
