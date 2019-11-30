@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, publishLast, refCount } from 'rxjs/operators';
-import { UserSession, STORAGE_KEY_ID_REFERENCE } from '../shared/model/user';
+import { UserSession, STORAGE_KEY_ID_REFERENCE, STORAGE_KEY_AUTH_STATE } from '../shared/model/user';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { AuthResult, LogService } from 'hewi-ng-lib';
@@ -102,38 +102,39 @@ export class AuthService {
 
 		window.location.hash = '';
 
-		if ('login' === authResult.state) {
-			const url = environment.apiUrl + '/auth/session';
+		const url = environment.apiUrl + '/auth/session';
 
-			this.httpClient.post(url, authResult.idToken, { 'withCredentials': true }).pipe(
-				map(res => <ResponsePayload>res),
-				publishLast(),
-				refCount()
-			).subscribe(
-				payload => {
-					if (payload.data) {
-						const userSession = payload.data as UserSession;
+		this.httpClient.post(url, authResult.idToken).pipe(
+			map(res => <ResponsePayload>res),
+			publishLast(),
+			refCount()
+		).subscribe(
+			payload => {
+				if (payload.data) {
+					const userSession = payload.data as UserSession;
 
-						localStorage.setItem(STORAGE_KEY_SESSION_EXPIRES_AT, JSON.stringify(userSession.expiresAt));
-						localStorage.setItem(STORAGE_KEY_ID_REFERENCE, userSession.idReference);
+					localStorage.setItem(STORAGE_KEY_SESSION_EXPIRES_AT, JSON.stringify(userSession.expiresAt));
+					localStorage.setItem(STORAGE_KEY_ID_REFERENCE, userSession.idReference);
+					localStorage.setItem(STORAGE_KEY_AUTH_STATE, authResult.state);
 
-						if (userSession.sessionId && !environment.production) {
-							localStorage.setItem(STORAGE_KEY_DEV_SESSION_ID, userSession.sessionId);
-						}
+					if (userSession.sessionId && !environment.production) {
+						localStorage.setItem(STORAGE_KEY_DEV_SESSION_ID, userSession.sessionId);
+					}
 
+					if ('login' === authResult.state) {
 						this.router.navigateByUrl('/listen');
 					}
-				},
-				(error => {
-					this.httpErrorService.handleError(error, 'createSession');
-				})
-			);
 
-		}
+					if ('signup' === authResult.state) {
+						this.createUser();
+					}
+				}
+			},
+			(error => {
+				this.httpErrorService.handleError(error, 'createSession');
+			})
+		);
 
-		if ('signup' === authResult.state) {
-			this.createUser();
-		}
 	}
 
 	private createUser() {

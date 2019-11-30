@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { JWTService, STORAGE_KEY_JWT_STATE } from 'hewi-ng-lib/';
 import { SessionService } from '../services/session.service';
+import { STORAGE_KEY_AUTH_STATE, STORAGE_KEY_ID_REFERENCE } from '../shared/model/user';
 
 @Component({
 	selector: 'chl-home',
@@ -10,13 +10,13 @@ import { SessionService } from '../services/session.service';
 export class HomeComponent implements OnInit {
 
 
-	constructor(private jwtService: JWTService, private sessionService: SessionService) { }
+	constructor(private sessionService: SessionService) { }
 
 	ngOnInit() {
 	}
 
 	showDialog(): boolean {
-		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		const authState = localStorage.getItem(STORAGE_KEY_AUTH_STATE);
 		return authState && 'signup' === authState;
 	}
 
@@ -26,12 +26,13 @@ export class HomeComponent implements OnInit {
 
 	isLoggedIn(): boolean {
 
-		const authState = localStorage.getItem(STORAGE_KEY_JWT_STATE);
+		const authState = localStorage.getItem(STORAGE_KEY_AUTH_STATE);
 		if (authState && 'signup' === authState) {
 			return false;
 		}
 
-		return !this.jwtService.isJWTExpired();
+		const idReference = localStorage.getItem(STORAGE_KEY_ID_REFERENCE);
+		return idReference !== null && idReference !== undefined;
 	}
 }
 
