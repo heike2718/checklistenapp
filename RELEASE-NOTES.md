@@ -1,5 +1,7 @@
 # checklistenserver Release Notes
 
+ __Release 5.1.0:__ personalisierte Listen
+
  __SignUpComponent:__ bis zu Release 5.0.1 vorhanden
 
  __Release 5.0.1:__ prefixed localStorage keys
