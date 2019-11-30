@@ -35,11 +35,15 @@ export class NavbarComponent {
 		return !idReference;
 	}
 
-	login(): void {
+	signUp(): void {
+		this.authService.signUp();
+	}
+
+	logIn(): void {
 		this.authService.logIn();
 	}
 
-	logout(): void {
+	logOut(): void {
 		this.authService.logOut();
 	}
 }

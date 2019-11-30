@@ -1,7 +1,8 @@
 import * as moment_ from 'moment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { STORAGE_KEY_SESSION_EXPIRES_AT, STORAGE_KEY_DEV_SESSION_ID, STORAGE_KEY_ID_REFERENCE } from '../shared/model/user';
+// tslint:disable-next-line:max-line-length
+import { STORAGE_KEY_SESSION_EXPIRES_AT, STORAGE_KEY_DEV_SESSION_ID, STORAGE_KEY_ID_REFERENCE, STORAGE_KEY_AUTH_STATE } from '../shared/model/user';
 import { LogService } from 'hewi-ng-lib';
 
 const moment = moment_;
@@ -18,6 +19,7 @@ export class SessionService {
 		localStorage.removeItem(STORAGE_KEY_SESSION_EXPIRES_AT);
 		localStorage.removeItem(STORAGE_KEY_DEV_SESSION_ID);
 		localStorage.removeItem(STORAGE_KEY_ID_REFERENCE);
+		localStorage.removeItem(STORAGE_KEY_AUTH_STATE);
 		// TODO: URL aufrufen, um beim AuthProvider das idToken zu invalidieren?
 		this.router.navigateByUrl('/home');
 	}
