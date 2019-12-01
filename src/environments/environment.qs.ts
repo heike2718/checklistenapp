@@ -11,7 +11,6 @@ export const environment = {
 	authApiUrl: 'http://localhost:9000/authprovider',
 	authUrl: 'http://localhost:8080/auth-app',
 	assetsUrl: 'checklistenapp/assets',
-	isDebugMode: true,
 	signupRedirectUrl: 'http://localhost:8080/checklistenapp',
 	loginRedirectUrl: 'http://localhost:8080/checklistenapp#/listen',
 	jokesAPI: 'https://official-joke-api.appspot.com/jokes/random',
