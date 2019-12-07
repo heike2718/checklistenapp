@@ -24,7 +24,7 @@ export class ChecklistenService {
 		const url = environment.apiUrl + '/checklisten';
 
 		this.http.get(url).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
@@ -47,9 +47,9 @@ export class ChecklistenService {
 
 		const checkliste: ChecklisteDaten = {
 			kuerzel: 'neu',
-			name: name,
+			name,
 			items: [],
-			typ: typ,
+			typ,
 			version: 0
 		};
 
@@ -57,7 +57,7 @@ export class ChecklistenService {
 
 		let neueListe: ChecklisteDaten;
 		this.http.post(url, checkliste).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
@@ -81,7 +81,7 @@ export class ChecklistenService {
 		// Modus ist transient fürs Backend
 		checkliste.modus = undefined;
 		const potentielleCheckliste$ = this.http.put(url, checkliste).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		);
@@ -107,7 +107,7 @@ export class ChecklistenService {
 		const url = environment.apiUrl + '/checklisten/checkliste/' + checkliste.kuerzel;
 
 		const observable$ = this.http.delete(url).pipe(
-			map(res => <Message>res),
+			map(res => res as Message),
 			publishLast(),
 			refCount()
 		);
@@ -151,7 +151,7 @@ export class ChecklistenService {
 		const url = environment.apiUrl + '/checklisten/checkliste/' + kuerzel;
 
 		return this.http.get(url).pipe(
-			map(res => <ChecklisteDaten>res),
+			map(res => res as ChecklisteDaten),
 			publishLast(),
 			refCount()
 		);

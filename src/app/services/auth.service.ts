@@ -37,7 +37,7 @@ export class AuthService {
 		const url = environment.apiUrl + '/auth/login';
 
 		this.httpClient.get(url).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
@@ -69,7 +69,7 @@ export class AuthService {
 		this.logger.debug('url=' + url);
 
 		this.httpClient.delete(url).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
@@ -86,7 +86,7 @@ export class AuthService {
 		const url = environment.apiUrl + '/auth/signup';
 
 		this.httpClient.get(url).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
@@ -105,7 +105,7 @@ export class AuthService {
 		const url = environment.apiUrl + '/auth/session';
 
 		this.httpClient.post(url, authResult.idToken).pipe(
-			map(res => <ResponsePayload>res),
+			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
 		).subscribe(
