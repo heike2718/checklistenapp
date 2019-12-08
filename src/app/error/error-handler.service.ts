@@ -38,12 +38,12 @@ export class GlobalErrorHandler implements ErrorHandler {
 
 		const idReference = localStorage.getItem(STORAGE_KEY_ID_REFERENCE);
 
-		this.logService.error(message, idReference);
+		this.logService.error(message + ' (idRef=' + idReference + ')');
 
 		if (error instanceof HttpErrorResponse) {
 			this.logService.debug('das sollte nicht vorkommen, da diese Errors einem der services behandelt werden');
 		} else {
-			this.logService.error('Unerwarteter Fehler: ' + error.message, idReference);
+			this.logService.error('Unerwarteter Fehler: ' + error.message + ' (idRef=' + idReference + ')');
 		}
 
 		this.injector.get(MessagesService).error(message);
