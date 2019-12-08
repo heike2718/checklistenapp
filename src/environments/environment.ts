@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  version: '5.1.0',
+  version: '5.2.0',
   envName: 'Development',
   apiUrl: 'http://localhost:9300/checklisten-api',
   authApiUrl: 'http://localhost:9000/authprovider',
@@ -13,6 +13,7 @@ export const environment = {
   assetsUrl: 'assets',
   signupRedirectUrl: 'http://localhost:4200',
   loginRedirectUrl: 'http://localhost:4200#/listen',
+  jokesAPI: 'https://official-joke-api.appspot.com/jokes/random',
   consoleLogActive: true,
   serverLogActive: true,
   loglevel: 1
