@@ -13,7 +13,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
 	version = environment.version;
 
-	apiVersion: string;
+	apiVersion$: Observable<string>;
 
 	apiVersionSubscription: Subscription;
 
@@ -23,9 +23,7 @@ export class AboutComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 
-		this.apiVersionSubscription = store.apiVersion$.subscribe(
-			version => this.apiVersion = version
-		);
+		this.apiVersion$ = store.apiVersion$;
 		this.aboutService.loadAboutInfos();
 	}
 
