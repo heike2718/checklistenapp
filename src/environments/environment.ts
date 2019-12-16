@@ -10,6 +10,7 @@ export const environment = {
   apiUrl: 'http://localhost:9300/checklisten-api',
   authApiUrl: 'http://localhost:9000/authprovider',
   authUrl: 'http://localhost:4300',
+  profileUrl: 'http://localhost:4400',
   assetsUrl: 'assets',
   signupRedirectUrl: 'http://localhost:4200',
   loginRedirectUrl: 'http://localhost:4200#/listen',

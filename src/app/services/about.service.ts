@@ -23,7 +23,7 @@ export class AboutService {
 					store.updateApiVersion(pl.message.message);
 				},
 				(_error => {
-					store.updateApiVersion('');
+					store.updateApiVersion('Der Server ist nicht erreichbar :/');
 				}));
 
 	}
