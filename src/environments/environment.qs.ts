@@ -5,11 +5,12 @@
 
 export const environment = {
 	production: false,
-	version: '5.2.0',
+	version: '5.3.0',
 	envName: 'Test',
 	apiUrl: 'http://localhost:9300/checklisten-api',
 	authApiUrl: 'http://localhost:9000/authprovider',
 	authUrl: 'http://localhost:8080/auth-app',
+	profileUrl: 'http://localhost:8090/profil-app',
 	assetsUrl: 'checklistenapp/assets',
 	signupRedirectUrl: 'http://localhost:8080/checklistenapp',
 	loginRedirectUrl: 'http://localhost:8080/checklistenapp#/listen',

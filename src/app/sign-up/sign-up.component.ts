@@ -45,8 +45,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
 		this.messagesService.clear();
 
 		const signUpPayload: SignUpPayload = {
-			'secret': this.secret,
-			'kleber': this.kleber
+			secret: this.secret,
+			kleber: this.kleber
 		};
 
 		const checkResponse$ = this.authService.checkMaySignUp(signUpPayload).pipe(

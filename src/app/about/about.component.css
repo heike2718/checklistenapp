@@ -1,0 +1,22 @@
+.box {
+	padding: 10px;
+	background-color: white;
+	border: 1pt solid;
+	border-color: #D1D5DA;
+	border-radius: 5px;
+	width: 80%
+}
+
+.category {
+	font-weight: bold;
+}
+
+/* ===== small devices ==== */
+
+@media (max-width: 768px) {
+
+	.box {
+		width: 100%;
+	}
+
+}
