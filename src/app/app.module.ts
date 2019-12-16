@@ -29,6 +29,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
 import { JokeComponent } from './joke/joke.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,8 @@ import { JokeComponent } from './joke/joke.component';
 		SignUpComponent,
 		ItemButtonComponent,
 		EditableItemButtonComponent,
-		JokeComponent
+		JokeComponent,
+		AboutComponent
 	],
 	imports: [
 		BrowserModule,

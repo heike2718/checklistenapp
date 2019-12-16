@@ -7,11 +7,16 @@ import { ExecuteChecklisteResolver } from './checkliste-detail/execute-checklist
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoggedInGuard } from './shared/logged-in.guard';
+import { AboutComponent } from './about/about.component';
 
 export const routerConfig: Routes = [
 	{
 		path: 'home',
 		component: HomeComponent
+	},
+	{
+		path: 'about',
+		component: AboutComponent
 	},
 	{
 		path: 'signup',

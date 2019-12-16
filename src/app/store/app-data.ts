@@ -25,11 +25,16 @@ export class DataStore {
 
 	private clientAccessTokenSubject = new BehaviorSubject<string>('');
 
+	private apiVersionSubject = new BehaviorSubject<string>('');
+
 	gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteChecklisteSubject.asObservable();
 
 	checklisten$: Observable<ChecklisteDaten[]> = this.checklistenSubject.asObservable();
 
 	clientAccessToken$: Observable<string> = this.clientAccessTokenSubject.asObservable();
+
+	apiVersion$: Observable<string> = this.apiVersionSubject.asObservable();
+
 
 	initChecklisten(alleChecklisten: ChecklisteDaten[]) {
 		this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
@@ -44,7 +49,8 @@ export class DataStore {
 	deleteCheckliste(kuerzel: string) {
 		const checklisten = this.checklistenSubject.value;
 
-		const restliche = _.remove(checklisten, function (chl) {
+		// tslint:disable-next-line:only-arrow-functions
+		const restliche = _.remove(checklisten, function(chl) {
 			return chl.kuerzel !== kuerzel;
 		});
 
@@ -82,7 +88,7 @@ export class DataStore {
 	findChecklisteByKuerzel(kuerzel: string): ChecklisteDaten {
 		const treffer = _.find(this.checklistenSubject.value, ['kuerzel', kuerzel]);
 		if (treffer) {
-			return <ChecklisteDaten>treffer;
+			return  treffer as ChecklisteDaten;
 		}
 
 		return undefined;
@@ -90,6 +96,10 @@ export class DataStore {
 
 	updateClientAccessToken(token: string) {
 		this.clientAccessTokenSubject.next(token);
+	}
+
+	updateApiVersion(version: string) {
+		this.apiVersionSubject.next(version);
 	}
 }
 
