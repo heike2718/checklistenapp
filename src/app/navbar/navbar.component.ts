@@ -46,5 +46,12 @@ export class NavbarComponent {
 	logOut(): void {
 		this.authService.logOut();
 	}
+
+	profile(): void {
+		if (this.isLoggedIn()) {
+			this.authService.logOut();
+		}
+		window.location.href = environment.profileUrl;
+	}
 }
 
