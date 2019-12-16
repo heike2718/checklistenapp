@@ -11,7 +11,7 @@ body {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 footer {
@@ -84,6 +84,26 @@ td, th {
 }
 
 
+/* ===== small devices ==== */
+
+@media (max-width: 768px) {
+
+	.h4,
+	body {
+		font-size: 1rem;
+	}
+
+  h2
+	.header-3,
+	.hinweis {
+		font-size: 1.2rem;
+  }
+
+	.dialog {
+		width: 100%;
+	}
+
+}
 
 
 
