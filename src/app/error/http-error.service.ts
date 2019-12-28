@@ -45,17 +45,8 @@ export class HttpErrorService {
 
 	private extractMessageObject(error: HttpErrorResponse): Message {
 
-		if (error['_body']) {
-			// so bekommt man den body als nettes kleines JSON-Objekt :)
-			const body = JSON.parse(error['_body']);
-			if (body['message']) {
-				return <Message>body['message'];
-			}
-		}
-
-		if (error['error']) {
-			const err = error['error'];
-			return <Message>err['message'];
+		if (error.error && error.error.message) {
+			return error.error.message as Message;
 		}
 
 		return null;

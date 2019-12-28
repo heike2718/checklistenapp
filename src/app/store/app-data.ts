@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem } from '../shared/model/checkliste';
+import { ChecklisteDaten, MODUS_SCHROEDINGER, ChecklistenItem
+	, ChecklisteTemplate, ChecklisteTemplateItem } from '../shared/model/checkliste';
 
 import * as _ from 'lodash';
 
@@ -12,6 +13,11 @@ const initialCheckliste: ChecklisteDaten = {
 	version: 0
 };
 
+const initialTemplate: ChecklisteTemplate = {
+	typ: undefined,
+	items: [],
+	readTime: 0
+};
 
 
 @Injectable({
@@ -27,9 +33,17 @@ export class DataStore {
 
 	private apiVersionSubject = new BehaviorSubject<string>('');
 
+	private gewaehltesTemplateSubject = new BehaviorSubject<ChecklisteTemplate>(initialTemplate);
+
+	private checklistenTemplatesSubject = new BehaviorSubject<ChecklisteTemplate[]>([]);
+
 	gewaehlteCheckliste$: Observable<ChecklisteDaten> = this.gewaehlteChecklisteSubject.asObservable();
 
+	gewaehltesTemplate$: Observable<ChecklisteTemplate> = this.gewaehltesTemplateSubject.asObservable();
+
 	checklisten$: Observable<ChecklisteDaten[]> = this.checklistenSubject.asObservable();
+
+	templates$: Observable<ChecklisteTemplate[]> = this.checklistenTemplatesSubject.asObservable();
 
 	clientAccessToken$: Observable<string> = this.clientAccessTokenSubject.asObservable();
 
@@ -38,6 +52,10 @@ export class DataStore {
 
 	initChecklisten(alleChecklisten: ChecklisteDaten[]) {
 		this.checklistenSubject.next(_.cloneDeep(alleChecklisten));
+	}
+
+	initTemplates(alleTemplates: ChecklisteTemplate[]) {
+		this.checklistenTemplatesSubject.next(_.cloneDeep(alleTemplates));
 	}
 
 	addCheckliste(checkliste: ChecklisteDaten) {
@@ -58,17 +76,17 @@ export class DataStore {
 	}
 
 	updateCheckliste(checkliste: ChecklisteDaten) {
-		const kopie: ChecklisteDaten = _.cloneDeep(checkliste);
-		this.gewaehlteChecklisteSubject.next(kopie);
 
+		const kopie: ChecklisteDaten = _.cloneDeep(checkliste);
 		const geaenderteChecklisten = [];
 		this.checklistenSubject.value.forEach(element => {
 			if (element.kuerzel !== checkliste.kuerzel) {
 				geaenderteChecklisten.push(element);
 			} else {
-				geaenderteChecklisten.push(checkliste);
+				geaenderteChecklisten.push(kopie);
 			}
 		});
+		this.gewaehlteChecklisteSubject.next(kopie);
 		this.checklistenSubject.next(geaenderteChecklisten);
 	}
 
@@ -80,6 +98,33 @@ export class DataStore {
 		}
 	}
 
+	updateTemplateItems(items: ChecklisteTemplateItem[]) {
+
+		const template = this.gewaehltesTemplateSubject.value;
+		const kopie: ChecklisteTemplate = _.cloneDeep(template);
+		kopie.items = items;
+		this.updateTemplate(kopie);
+
+	}
+
+	updateTemplate(template: ChecklisteTemplate) {
+
+		const kopie: ChecklisteTemplate = _.cloneDeep(template);
+
+		const geaenderteTemplates = [];
+		this.checklistenTemplatesSubject.value.forEach(element => {
+			if (element.typ !== kopie.typ) {
+				geaenderteTemplates.push(element);
+			} else {
+				geaenderteTemplates.push(kopie);
+			}
+		});
+
+		this.gewaehltesTemplateSubject.next(kopie);
+		this.checklistenTemplatesSubject.next(geaenderteTemplates);
+
+	}
+
 	getKuerzelGewaehlteCheckliste(): string {
 		const checkliste: ChecklisteDaten = this.gewaehlteChecklisteSubject.value;
 		return checkliste ? checkliste.kuerzel : undefined;
@@ -88,7 +133,17 @@ export class DataStore {
 	findChecklisteByKuerzel(kuerzel: string): ChecklisteDaten {
 		const treffer = _.find(this.checklistenSubject.value, ['kuerzel', kuerzel]);
 		if (treffer) {
-			return  treffer as ChecklisteDaten;
+			return treffer as ChecklisteDaten;
+		}
+
+		return undefined;
+	}
+
+	findTemplateByTyp(typ: string): ChecklisteTemplate {
+		const treffer = _.find(this.checklistenTemplatesSubject.value, ['typ', typ]);
+		if (treffer) {
+			this.gewaehltesTemplateSubject.next(treffer);
+			return treffer as ChecklisteTemplate;
 		}
 
 		return undefined;
@@ -100,6 +155,10 @@ export class DataStore {
 
 	updateApiVersion(version: string) {
 		this.apiVersionSubject.next(version);
+	}
+
+	updateGewaehltesTemplate(template: ChecklisteTemplate) {
+		this.gewaehltesTemplateSubject.next(template);
 	}
 }
 

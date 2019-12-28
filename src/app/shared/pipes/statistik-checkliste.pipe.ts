@@ -33,7 +33,8 @@ export class StatistikChecklistePipe implements PipeTransform {
 	}
 
 	private getStatistikExecution(checkliste: ChecklisteDaten): string {
-		let anzahlMarkiert = 0, anzahlErledigt = 0;
+		let anzahlMarkiert = 0;
+		let anzahlErledigt = 0;
 		checkliste.items.forEach(
 			item => {
 				if (item.markiert) {

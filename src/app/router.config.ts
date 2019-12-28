@@ -8,6 +8,9 @@ import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoggedInGuard } from './shared/logged-in.guard';
 import { AboutComponent } from './about/about.component';
+import { TemplateDetailComponent } from './template-detail/template-detail.component';
+import { TemplateListeComponent } from './template-liste/template-liste.component';
+import { EditTemplateResolver } from './template-detail/edit-template.resolver';
 
 export const routerConfig: Routes = [
 	{
@@ -43,6 +46,20 @@ export const routerConfig: Routes = [
 			detail: ExecuteChecklisteResolver
 		},
 		canActivate: [LoggedInGuard]
+	},
+	{
+		path: 'templates',
+		component: TemplateListeComponent,
+		canActivate: [LoggedInGuard]
+	},
+	{
+		path: 'template/:typ',
+		component: TemplateDetailComponent,
+		resolve: {
+			detail: EditTemplateResolver
+		},
+		canActivate: [LoggedInGuard]
+
 	},
 	{
 		path: '',
