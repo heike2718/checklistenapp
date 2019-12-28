@@ -1,0 +1,18 @@
+<p *ngIf="showFilename()">template-liste.component.ts</p>
+
+<h1>Listenvorlagen</h1>
+<p>Hier kannst Du Vorschläge für Deine Checklisten pflegen. Wähle ein Template aus und trage dort Dinge ein, die Du
+  häufig benötigst.</p>
+<p>Immer wenn Du eine neue Checkliste erstellst, werden ab dann diese Dinge zum Auswählen angezeigt.</p>
+<div *ngIf="templates$ | async as templates else loading">
+  <div class="row">
+    <div *ngFor="let template of templates" class="col-sm-12 col-md-6">
+      <chl-template [template]="template"></chl-template>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loading>
+  <chl-loading></chl-loading>
+</ng-template>

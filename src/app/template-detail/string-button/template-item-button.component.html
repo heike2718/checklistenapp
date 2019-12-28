@@ -1,0 +1,10 @@
+<div chlBackgroundColor [typ]="item.typ" class="card mb-3">
+  <div class="card-header">
+    <div (click)="itemSelected()" class="trash">
+      <i class="fa fa-trash"></i>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text"> {{item.name}}</p>
+  </div>
+</div>

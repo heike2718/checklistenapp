@@ -15,7 +15,7 @@ export class ConfigureChecklisteResolver implements Resolve<ChecklisteDaten> {
 
 	resolve(route: ActivatedRouteSnapshot,
 		_state: RouterStateSnapshot): Observable<ChecklisteDaten> {
-		const kuerzel = route.params['kuerzel'];
+		const kuerzel = route.params.kuerzel;
 		return this.checklistenService.findChecklisteByKuerzel(kuerzel, MODUS_CONFIG);
 	}
 }

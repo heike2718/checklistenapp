@@ -1,0 +1,19 @@
+
+<div chlBackgroundColor [typ]="template.typ" class="card mb-3">
+    <div class="card-body">
+      <h4 class="card-title">Vorlage
+        <span class="badge badge-dark">{{template.items.length}}</span>
+      </h4>
+      <p class="card-text">
+        {{template.typ}}</p>
+      <p *ngIf="showFilename">template.component.ts (Input: template)</p>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-6">
+          <button class="btn-default btn-block" (click)="edit()">bearbeiten</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

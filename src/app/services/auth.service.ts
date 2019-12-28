@@ -81,7 +81,9 @@ export class AuthService {
 				this.sessionService.clearSession();
 			}));
 
-	} signUp() {
+	}
+
+	signUp() {
 
 		const url = environment.apiUrl + '/auth/signup';
 

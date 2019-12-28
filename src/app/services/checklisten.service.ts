@@ -80,13 +80,11 @@ export class ChecklistenService {
 
 		// Modus ist transient fürs Backend
 		checkliste.modus = undefined;
-		const potentielleCheckliste$ = this.http.put(url, checkliste).pipe(
+		this.http.put(url, checkliste).pipe(
 			map(res => res as ResponsePayload),
 			publishLast(),
 			refCount()
-		);
-
-		potentielleCheckliste$.subscribe(
+		).subscribe(
 			resp => {
 				if (resp.data) {
 					const persistierte = resp.data;
@@ -137,6 +135,7 @@ export class ChecklistenService {
 				cl => {
 					cl.modus = modus;
 					store.updateCheckliste(cl);
+					return of(cl);
 				},
 				(error => {
 					this.httpErrorService.handleError(error, 'findChecklisteByKuerzel');
