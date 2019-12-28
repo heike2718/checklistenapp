@@ -30,6 +30,11 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HewiNgLibModule } from 'hewi-ng-lib';
 import { JokeComponent } from './joke/joke.component';
 import { AboutComponent } from './about/about.component';
+import { TemplateListeComponent } from './template-liste/template-liste.component';
+import { TemplateDetailComponent } from './template-detail/template-detail.component';
+import { TemplateComponent } from './template/template.component';
+import { StatistikTemplatePipe } from './shared/pipes/statistik-template.pipe';
+import { TemplateItemButtonComponent } from './template-detail/string-button/template-item-button.component';
 
 @NgModule({
 	declarations: [
@@ -50,7 +55,12 @@ import { AboutComponent } from './about/about.component';
 		ItemButtonComponent,
 		EditableItemButtonComponent,
 		JokeComponent,
-		AboutComponent
+		AboutComponent,
+		TemplateListeComponent,
+		TemplateDetailComponent,
+		TemplateComponent,
+		StatistikTemplatePipe,
+		TemplateItemButtonComponent
 	],
 	imports: [
 		BrowserModule,

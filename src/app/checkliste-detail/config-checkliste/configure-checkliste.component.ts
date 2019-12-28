@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ChecklisteDaten, Filterkriterium, MODUS_CONFIG, LISTE_AUSGEWAEHLT, ChecklistenItem } from '../../shared/model/checkliste';
 import { store } from '../../store/app-data';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ChecklistenService } from '../../services/checklisten.service';
 import { filterChecklisteItems } from '../../shared/utils/checkliste.utils';
 import { ModalService } from 'hewi-ng-lib';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
 	selector: 'chl-configure-checkliste',
@@ -25,7 +26,11 @@ export class ConfigureChecklisteComponent implements OnInit {
 
 	formNeuesTeilVisible: boolean;
 
-	constructor(private router: Router, private checklistenService: ChecklistenService, private modalService: ModalService) { }
+	constructor(private router: Router
+		, private checklistenService: ChecklistenService
+		, private modalService: ModalService
+		, @Inject(DOCUMENT) private document: Document
+		) { }
 
 	ngOnInit() {
 		this.formNeuesTeilVisible = false;
@@ -81,6 +86,7 @@ export class ConfigureChecklisteComponent implements OnInit {
 	save(checkliste: ChecklisteDaten) {
 		this.formNeuesTeilVisible = false;
 		this.checklistenService.saveCheckliste(checkliste, MODUS_CONFIG, true);
+		this.document.body.scrollTop = 0;
 	}
 
 	saveAndClose(checkliste: ChecklisteDaten) {

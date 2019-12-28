@@ -1,5 +1,9 @@
 # checklistenserver Release Notes
 
+__Release 5.4.0__
+
+[Frontend für Templates](https://github.com/heike2718/checklistenapp/issues/31)
+
 __Release 5.3.0__
 
 [Server version in app anzeigen](https://github.com/heike2718/checklistenapp/issues/17)
