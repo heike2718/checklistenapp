@@ -1,5 +1,9 @@
 # checklistenserver Release Notes
 
+__Release 6.0.0__
+
+update to angular 9
+
 __Release 5.4.0__
 
 [Frontend für Templates](https://github.com/heike2718/checklistenapp/issues/31)
