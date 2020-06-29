@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorService } from '../error/http-error.service';
 import { LogService, ResponsePayload, MessagesService } from 'hewi-ng-lib';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { map, publishLast, refCount } from 'rxjs/operators';
 import { store } from '../store/app-data';
 import { ChecklisteTemplate } from '../shared/model/checkliste';

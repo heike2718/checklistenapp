@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ChecklisteTemplate, ChecklisteTemplateItem } from '../shared/model/checkliste';
 import { store } from '../store/app-data';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 import * as _ from 'lodash';
 import { TemplateService } from '../services/template.service';

@@ -3,7 +3,7 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessagesService, LogService } from 'hewi-ng-lib';
 import { LogPublishersService } from '../logger/log-publishers.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { STORAGE_KEY_ID_REFERENCE } from '../shared/model/user';
 
 

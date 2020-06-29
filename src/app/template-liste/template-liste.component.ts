@@ -4,7 +4,7 @@ import { ChecklisteTemplate } from '../shared/model/checkliste';
 import { TemplateService } from '../services/template.service';
 import { store } from '../store/app-data';
 import { MessagesService } from 'hewi-ng-lib';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 @Component({
 	selector: 'chl-template-liste',
