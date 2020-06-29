@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChecklisteTemplate } from '../shared/model/checkliste';
 import { Router } from '@angular/router';
 import { TemplateService } from '../services/template.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { store } from '../store/app-data';
 
 @Component({
