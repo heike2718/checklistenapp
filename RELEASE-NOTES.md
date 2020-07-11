@@ -1,5 +1,9 @@
 # checklistenserver Release Notes
 
+__Release 6.0.1__
+
+npm audit hints fixed
+
 __Release 6.0.0__
 
 update to angular 9
