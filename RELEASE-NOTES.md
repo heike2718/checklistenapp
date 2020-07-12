@@ -1,5 +1,9 @@
 # checklistenserver Release Notes
 
+__Release 6.1.0:__
+
+jwt auf authorization token grant umgestellt, damit kein JWT im Browser landet.
+
 __Release 6.0.1__
 
 npm audit hints fixed
