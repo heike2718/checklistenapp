@@ -2,6 +2,10 @@
 
 __Release 6.1.0:__
 
+[Autofokus in Dialogen](https://github.com/heike2718/checklistenapp/issues/41)
+
+__Release 6.1.0:__
+
 jwt auf authorization token grant umgestellt, damit kein JWT im Browser landet.
 
 __Release 6.0.1__
