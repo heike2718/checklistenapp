@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ChecklisteDaten, Filterkriterium, MODUS_CONFIG, LISTE_AUSGEWAEHLT, ChecklistenItem } from '../../shared/model/checkliste';
 import { store } from '../../store/app-data';
 import { Observable } from 'rxjs';

@@ -35,6 +35,7 @@ import { TemplateDetailComponent } from './template-detail/template-detail.compo
 import { TemplateComponent } from './template/template.component';
 import { StatistikTemplatePipe } from './shared/pipes/statistik-template.pipe';
 import { TemplateItemButtonComponent } from './template-detail/string-button/template-item-button.component';
+import { AutoFokusDirective } from './shared/directives/auto-fokus.directive';
 
 @NgModule({
 	declarations: [
@@ -60,7 +61,8 @@ import { TemplateItemButtonComponent } from './template-detail/string-button/tem
 		TemplateDetailComponent,
 		TemplateComponent,
 		StatistikTemplatePipe,
-		TemplateItemButtonComponent
+		TemplateItemButtonComponent,
+		AutoFokusDirective
 	],
 	imports: [
 		BrowserModule,
