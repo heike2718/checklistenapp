@@ -1,6 +1,6 @@
 export const environment = {
 	production: true,
-	version: '6.1.0',
+	version: '6.1.1',
 	envName: 'Production',
 	apiUrl: 'https://opa-wetterwachs.de/checklisten-api',
 	authApiUrl: 'https://opa-wetterwachs.de/authprovider',
