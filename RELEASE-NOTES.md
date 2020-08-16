@@ -1,6 +1,10 @@
 # checklistenserver Release Notes
 
-__Release 6.1.0:__
+__Release 6.1.2:__
+
+bump elliptic to newer version because of security alert
+
+__Release 6.1.1:__
 
 [Autofokus in Dialogen](https://github.com/heike2718/checklistenapp/issues/41)
 
