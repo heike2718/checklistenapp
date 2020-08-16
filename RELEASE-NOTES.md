@@ -1,5 +1,10 @@
 # checklistenserver Release Notes
 
+__Release 6.1.3:__
+
+hewi-ng-lib@5.1.1
+
+
 __Release 6.1.2:__
 
 bump elliptic to newer version because of security alert
